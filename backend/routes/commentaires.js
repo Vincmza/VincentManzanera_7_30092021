@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const ctrlComments = require('../controllers/commentaires');
 
-router.get('/:id/commentaires', ctrlComments.getAllComments);
-router.get('/:id/commentaires/:id', ctrlComments.getOneComment);
-router.post('/:id/commentaires', ctrlComments.createComment);
-router.put('/:id/commentaires/:id', ctrlComments.modifyComment);
-router.delete('/:id/commentaires/:id', ctrlComments.deleteComment);
+//All routes using table posts to reach commentaires table
+router.get('/', ctrlComments.getAllComments);
+router.get('/:commentId', ctrlComments.getOneComment);
+router.post('/', ctrlComments.createComment);
+router.put('/:commentId', ctrlComments.modifyComment);
+router.delete('/:commentId', ctrlComments.deleteComment);
 
 module.exports = router;

@@ -22,8 +22,9 @@ exports.getAllComments =(req, res) => {
 }
 
 exports.getOneComment = (req, res) => {
+    console.log(req.params['commentId'])
     connection
-        .query("SELECT * FROM commentaires WHERE id = ?", [req.params.id])
+        .query("SELECT * FROM commentaires WHERE id = ?", req.params['commentId'])
         .then((comment) => {
             res.json(comment[0]);
         })
@@ -46,7 +47,7 @@ exports.createComment = (req, res) => {
 
 exports.modifyComment = (req, res) => {
     connection
-        .query("UPDATE commentaires SET ? WHERE id = ?", [req.body, req.params.id])
+        .query("UPDATE commentaires SET ? WHERE id = ?", [req.body, req.params['commentId']])
         .then((comment) => {
             res.json(comment);
         })
@@ -57,7 +58,7 @@ exports.modifyComment = (req, res) => {
 
 exports.deleteComment = (req, res) => {
     connection
-        .query("DELETE FROM commentaires WHERE id = ?", [req.params.id])
+        .query("DELETE FROM commentaires WHERE id = ?", req.params['commentId'])
         .then((comment) => {
             res.json(comment);
         })

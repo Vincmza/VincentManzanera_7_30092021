@@ -23,7 +23,7 @@ exports.getAllUsers =(req, res) => {
 
 exports.getOneUser = (req, res) => {
     connection
-        .query("SELECT * FROM users WHERE id = ?", [req.params.id])
+        .query("SELECT * FROM users WHERE id = ?", req.params['userId'])
         .then((user) => {
             res.json(user[0]);
         })
@@ -45,7 +45,7 @@ exports.createUser = (req, res) => {
 
 exports.modifyUser = (req, res) => {
     connection
-        .query("UPDATE users SET ? WHERE id = ?", [req.body, req.params.id])
+        .query("UPDATE users SET ? WHERE id = ?", [req.body, req.params['userId']])
         .then((user) => {
             res.json(user);
         })
@@ -56,7 +56,7 @@ exports.modifyUser = (req, res) => {
 
 exports.deleteUser = (req, res) => {
     connection
-        .query("DELETE FROM users WHERE id = ?", [req.params.id])
+        .query("DELETE FROM users WHERE id = ?", req.params['userId'])
         .then((user) => {
             res.json(user);
         })

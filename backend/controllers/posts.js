@@ -23,7 +23,7 @@ exports.getAllPosts = (req, res) => {
 
 exports.getOnePost = (req, res) => {
     connection
-        .query("SELECT * FROM posts WHERE id = ?", [req.params.id])
+        .query("SELECT * FROM posts WHERE id = ?", req.params['postId'])
         .then((post) => {
             res.json(post[0]);
         })
@@ -45,7 +45,7 @@ exports.createPost = (req, res) => {
 
 exports.modifyPost = (req, res) => {
     connection
-        .query("UPDATE posts SET ? WHERE id = ?", [req.body, req.params.id])
+        .query("UPDATE posts SET ? WHERE id = ?", [req.body, req.params['postId']])
         .then((post) => {
             res.json(post);
         })
@@ -56,7 +56,7 @@ exports.modifyPost = (req, res) => {
 
 exports.deletePost = (req, res) => {
     connection
-        .query("DELETE FROM posts WHERE id = ?", [req.params.id])
+        .query("DELETE FROM posts WHERE id = ?", req.params['postId'])
         .then((post) => {
             res.json(post);
         })
