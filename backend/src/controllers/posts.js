@@ -14,9 +14,9 @@ exports.getAllPosts = (req, res) => {
 //Get one post and all comments about it
 exports.getOnePost = (req, res) => {
     connection
-        .query("SELECT posts.id FROM posts JOIN commentaires ON commentaires.commentaire_id = posts.id", req.params['postId'])
+        .query("SELECT * FROM posts JOIN commentaires ON commentaires.post_id = posts.id", req.params['postId'])
         .then((post) => {
-            res.json(post[0]);
+            res.json(post);
         })
         .catch((err) => {
             console.log(err);

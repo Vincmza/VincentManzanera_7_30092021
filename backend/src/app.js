@@ -19,7 +19,6 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/api/users", userInfosRoutes);
 app.use("/api/posts", postsRelatedRoutes);
 app.use("/api/commentaires", commentsRoutes);
 app.use("/api/likes", likesRoutes);
