@@ -1,16 +1,6 @@
-const mysql = require("mysql");
-const { promisify } = require("util");
-require('dotenv').config()
+const connection = require('../service/database');
 
-const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: process.env.dbPassword,
-    database: process.env.dbName,
-});
-
-connection.query = promisify(connection.query);
-
+//Get all posts on timeline
 exports.getAllPosts = (req, res) => {
     connection
         .query("SELECT * FROM posts")
@@ -21,10 +11,10 @@ exports.getAllPosts = (req, res) => {
             console.log(err);
         });
 }
-
+//Get one post and all comments about it
 exports.getOnePost = (req, res) => {
     connection
-        .query("SELECT * FROM posts WHERE id = ?", req.params['postId'])
+        .query("SELECT * FROM commentaires JOIN posts ON commentaires.post_id = posts.id", req.params['postId'])
         .then((post) => {
             res.json(post[0]);
         })

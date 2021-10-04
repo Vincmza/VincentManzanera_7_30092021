@@ -1,16 +1,4 @@
-//Database related
-const mysql = require("mysql");
-const { promisify } = require("util");
-require('dotenv').config()
-
-const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: process.env.dbPassword,
-    database: process.env.dbName,
-});
-
-connection.query = promisify(connection.query);
+const connection = require('../service/database');
 
 //Security and authentification
 const bcrypt = require("bcrypt");

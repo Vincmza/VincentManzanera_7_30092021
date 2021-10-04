@@ -1,10 +1,9 @@
 const express = require("express");
-const userInfosRoutes = require("../routes/userInfos");
-const postsRelatedRoutes = require("../routes/posts");
-const commentsRoutes = require("../routes/commentaires");
-const likesRoutes = require("../routes/likes");
-const connectionRoutes = require("../routes/userConnection");
-const auth = require("../middlewares/auth");
+const postsRelatedRoutes = require("./routes/posts");
+const commentsRoutes = require("./routes/commentaires");
+const likesRoutes = require("./routes/likes");
+const connectionRoutes = require("./routes/userConnection");
+const auth = require("./middlewares/auth");
 
 // app.use((req, res, next) => {
 //     res.setHeader("Access-Control-Allow-Origin", "*");
