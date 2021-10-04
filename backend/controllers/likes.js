@@ -44,7 +44,7 @@ exports.addLikeOrDislike = (req, res) => {
 
 exports.removeLikeOrDislike = (req, res) => {
     connection
-        .query("UPDATE likes SET liked = ? WHERE id = ?", [req.body], req.params['likeId'])
+        .query("UPDATE likes SET liked = ? WHERE id = ?", [req.body, req.params['likeId']])
         .then((likeOrDislike) => {
             res.json(likeOrDislike);
         })
