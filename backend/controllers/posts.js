@@ -1,11 +1,12 @@
 const mysql = require("mysql");
 const { promisify } = require("util");
+require('dotenv').config()
 
 const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "Nehemah@1987",
-    database: "db_groupomania",
+    password: process.env.dbPassword,
+    database: process.env.dbName,
 });
 
 connection.query = promisify(connection.query);
