@@ -24,7 +24,7 @@
 }
 /*User button*/
 .head__nav-user{
-    font-size: 2em;
+    font-size: 2.5em;
     width:100%;
     height:50%;
     border: none;
@@ -38,3 +38,10 @@
 .userIcon :hover{
     color:sandybrown;
 }
+
+@media screen and (max-width:600px){
+    .head__logo {
+        margin-left:5%;
+        width:60%;
+    };   
+};
