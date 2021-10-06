@@ -4,7 +4,6 @@ import React, {useEffect} from 'react';
 import './header.css';
 import logo from '../../images/header_logo.png';
 
-
 function Header (props){
     return(
         <header className="head">
