@@ -9,11 +9,11 @@ function Login (props){
             <div className="userLogo"><FaUserCircle/></div>
             <div className="loginEmailRelated">
                 <label for="emailAdress" className="formLabel"></label>
-                <input type="email" id="emailAdress" placeholder="Adresse e-mail"></input>
+                <input type="email" id="emailAdress" placeholder="Adresse e-mail" required></input>
             </div>
             <div className="passwordRelated">
                 <label for="password" className="formLabel"></label>
-                <input type="password" id="password" placeholder="Mot de passe"></input>
+                <input type="password" id="password" placeholder="Mot de passe" required></input>
             </div>
             <button type="submit" className="loginButton">Connexion</button>
             
