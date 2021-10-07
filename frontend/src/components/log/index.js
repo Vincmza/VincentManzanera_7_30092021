@@ -20,8 +20,8 @@ const Log = () => {
     return (
         <div className="connection_form">
             <div className="connection_buttons">
-                <div className="login_button" id="login" onClick={handleModals}>Se connecter</div>
-                <div className="signUp_button" id="register" onClick={handleModals}>S'inscrire</div>
+                <div id="login" onClick={handleModals}>Se connecter</div>
+                <div id="register" onClick={handleModals}>S'inscrire</div>
             </div>                      
                 {signUpModal && <SignUp/>}
                 {loginModal && <Login/>}      
