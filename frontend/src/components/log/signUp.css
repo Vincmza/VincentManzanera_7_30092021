@@ -82,6 +82,11 @@ input:focus {
         width:95%;
     }
 }
+@media screen and (max-width: 400px) {
+    form {
+        margin-top:15px;
+    }  
+}
 @media screen and (max-width: 300px){
     input {
         width:75%;
