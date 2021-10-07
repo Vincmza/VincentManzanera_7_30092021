@@ -4,8 +4,7 @@ import "./signUp.css";
 
 const signUp = (props) => {
     return (
-        <div>
-            <form>
+            <form className="signUpForm">
                 <div className="userLogo"><FaUserCircle/></div>
                 {/*email*/}
                 <div className="emailRelated">
@@ -26,15 +25,9 @@ const signUp = (props) => {
                     <label for="password" className="formLabel"></label>
                     <input type="password" id="password" placeholder="Confirmer mot de passe" required></input>
                 </div>                    
-                <button type="submit" className="signupButton">S'enregistrer</button>  
-
-                <p className="loginSentence">Vous déjà un compte ?</p>
-
-                <button type="submit" className="loginButton">Connexion</button>
-
+                <button type="submit" className="signUpButton">S'enregistrer</button>  
             </form>
-        </div>
-    );
+    )
 };
 
 export default signUp;

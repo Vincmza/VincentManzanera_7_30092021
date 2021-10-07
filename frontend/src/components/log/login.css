@@ -1,13 +1,13 @@
 /*! minireset.css v0.0.6 | MIT License | github.com/jgthms/minireset.css */html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,iframe,hr,h1,h2,h3,h4,h5,h6{margin:0;padding:0}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}ul{list-style:none}button,input,select{margin:0}html{box-sizing:border-box}*,*::before,*::after{box-sizing:inherit}img,video{height:auto;max-width:100%}iframe{border:0}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}
 
-form {
+.loginForm {
     border:1px solid rgb(253, 45, 1);
     border-radius: 30px;
     box-shadow: 10px 5px 5px rgb(219, 217, 211);
     background-color: rgb(245, 244, 240);
     width:30%;
     margin:auto;
-    margin-top: 90px;
+    margin-top: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,50 +33,39 @@ input:focus {
     margin-top: 20px;
 }
 /*email*/
-.emailRelated {
+.loginEmailRelated {
     margin-top: 10px;
 }
 /*password*/
 .passwordRelated {
     margin-top: 20px;
 }
-.signupSentence {
-    text-align: center;
-    margin-top: 20px;
-}
 .loginButton {
     margin-top: 20px;
-    font-size: 1.1em;
+    margin-bottom: 20px;
+    font-size: 1.3em;
 }
 .loginButton:hover {
     color: rgb(253, 45, 1);  
 }
-.signupButton {
-    font-size: 0.8em;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-.signupButton:hover {
-    color: rgb(253, 45, 1); 
-}
 
 @media screen and (max-width: 1000px){
-    form {
+    .loginForm {
         width:50%;
     }
 }
 @media screen and (max-width: 600px){
-    form {
+    .loginForm  {
         width:70%;
     }
 }
 @media screen and (max-width: 450px){
-    form {
+    .loginForm  {
         width:95%;
     }
 }
 @media screen and (max-width: 400px) {
-    form {
+    .loginForm {
         margin-top: 70px;
     }
     
@@ -85,7 +74,7 @@ input:focus {
     input {
         width:75%;
     }
-    .emailRelated, .passwordRelated {
+    .loginEmailRelated, .passwordRelated {
         margin-left:55px;
     }
 }

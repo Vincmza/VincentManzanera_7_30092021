@@ -5,9 +5,9 @@ import './login.css';
 function Login (props){
      return (
 
-        <form>
+        <form className="loginForm">
             <div className="userLogo"><FaUserCircle/></div>
-            <div className="emailRelated">
+            <div className="loginEmailRelated">
                 <label for="emailAdress" className="formLabel"></label>
                 <input type="email" id="emailAdress" placeholder="Adresse e-mail"></input>
             </div>
@@ -16,10 +16,6 @@ function Login (props){
                 <input type="password" id="password" placeholder="Mot de passe"></input>
             </div>
             <button type="submit" className="loginButton">Connexion</button>
-
-            <p className="signupSentence">Toujours pas inscrit ?<br/> Cliquez sur le bouton en dessous</p>
-        
-            <button type="submit" className="signupButton">S'enregistrer</button>
             
         </form>
 
