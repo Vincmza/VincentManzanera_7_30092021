@@ -7,25 +7,36 @@ form {
     background-color: rgb(245, 244, 240);
     width:30%;
     margin:auto;
-    margin-top: 100px;
+    margin-top: 90px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+::placeholder {
+    font-size: 0.8em;
 }
 /*inputs email & password*/
 input {
     font-size: 1.2em;
     border-radius: 10px;
     border: 1px solid grey;
-    height:30px;
+    height:40px;
 }
 input:focus {
     outline: none;
-    border-color: rgb(253, 45, 1)!important;
+    border:2px solid rgb(253, 45, 1)!important;
 }
+/*logo*/
+.userLogo {
+    color: rgb(253, 45, 1);
+    font-size: 3.5em;
+    margin-top: 20px;
+}
+/*email*/
 .emailRelated {
     margin-top: 10px;
 }
+/*password*/
 .passwordRelated {
     margin-top: 20px;
 }
@@ -37,7 +48,7 @@ input:focus {
     margin-top: 20px;
     font-size: 1.1em;
 }
- .loginButton:hover {
+.loginButton:hover {
     color: rgb(253, 45, 1);  
 }
 .signupButton {
@@ -47,11 +58,6 @@ input:focus {
 }
 .signupButton:hover {
     color: rgb(253, 45, 1); 
-}
-.userLogo {
-    color: rgb(253, 45, 1);
-    font-size: 3.5em;
-    margin-top: 20px;
 }
 
 @media screen and (max-width: 1000px){
@@ -66,6 +72,14 @@ input:focus {
 }
 @media screen and (max-width: 450px){
     form {
-        width:90%;
+        width:95%;
+    }
+}
+@media screen and (max-width: 300px){
+    input {
+        width:75%;
+    }
+    .emailRelated, .passwordRelated {
+        margin-left:55px;
     }
 }

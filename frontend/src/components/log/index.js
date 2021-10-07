@@ -1,11 +1,12 @@
 import React from 'react';
 
-const index = () => {
+const Log = () => {
     return (
         <div>
+            
             
         </div>
     );
 };
 
-export default index;
+export default Log;

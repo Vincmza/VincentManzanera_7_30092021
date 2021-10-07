@@ -13,7 +13,7 @@ function Login (props){
             </div>
             <div className="passwordRelated">
                 <label for="password" className="formLabel"></label>
-                <input type="password" id="password" placeholder="Tapez votre mot de passe"></input>
+                <input type="password" id="password" placeholder="Mot de passe"></input>
             </div>
             <button type="submit" className="loginButton">Connexion</button>
 

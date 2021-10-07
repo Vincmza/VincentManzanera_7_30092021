@@ -1,9 +1,10 @@
 import React from 'react';
+import Header from "../components/header/header"
 
 const Post = () => {
     return (
         <div>
-            un post précis
+            <Header></Header>
         </div>
     );
 };
