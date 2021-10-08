@@ -1,4 +1,5 @@
-const connection = require('../service/database');
+const connection = require("../service/database");
+require('dotenv').config()
 
 //Security and authentification
 const bcrypt = require("bcrypt");
@@ -28,13 +29,13 @@ schema
 /*User create an account using an email and a password*/
 exports.signup = (req, res, next) => {
     const data = { ...req.body };
-    if (schema.validate(req.body.password)) {
+    if (schema.validate(data.password)) {
         bcrypt
-            .hash(req.body.password, 10)
+            .hash(data.password, 10)
             .then((hash) => {
                 data.password = hash;
                 connection
-                    .query("INSERT INTO users SET ?", [data])
+                    .query("INSERT INTO users (email, password, username, role_id) VALUES (?, ?, ?, '1')", [data.email, data.password, data.username])
                     .then((user) => {
                         res.json(user);
                     })
@@ -50,10 +51,11 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
     const data = { ...req.body };
+    console.log(data);
     connection
-        .query("SELECT * FROM users", [data])
-        .then((user) => {
-            console.log(user);
+        .query("SELECT * FROM users WHERE email = ?", [data.email])
+        .then((userData) => {
+            const user = userData[0];
             if (!user) {
                 return res.status(401).json({ error: "Utilisateur ou mot de passe inconnu !" });
             }
@@ -66,14 +68,21 @@ exports.login = (req, res, next) => {
                             .status(401)
                             .json({ error: "Utilisateur ou mot de passe inconnu !" });
                     }
+                    console.log(process.env.tokenExpiration)
                     res.status(200).json({
-                        userId: user._id,
+                        userId: user.id,
                         token: jwt.sign({ userId: user.id }, process.env.secretToken, {
-                            expiresIn: process.env.tokenExpiration,
+                            expiresIn: process.env.tokenExpiration
                         }),
                     });
                 })
-                .catch((error) => res.status(500).json({ error }));
+                .catch((error) => {
+                    console.log(error)
+                    res.status(500).json({ error });
+                });
         })
-        .catch((error) => res.status(500).json({ error }));
+        .catch((error) => {
+            console.log(error)
+            res.status(500).json({ error });
+        });
 };
