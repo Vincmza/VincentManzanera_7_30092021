@@ -19,9 +19,9 @@ app.use(cors({ origin: true }));
 
 app.use(express.json());
 
-app.use("/api/posts", postsRelatedRoutes);
-app.use("/api/commentaires", commentsRoutes);
-app.use("/api/likes", likesRoutes);
+app.use("/api/posts", auth, postsRelatedRoutes);
+app.use("/api/commentaires", auth, commentsRoutes);
+app.use("/api/likes", auth, likesRoutes);
 app.use("/api/auth", connectionRoutes);
 
 app.listen(8081, () => {
