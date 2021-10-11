@@ -1,12 +1,14 @@
 import { FaUserCircle } from "react-icons/fa";
 import React, { useState } from "react";
 import env from "react-dotenv";
-import "./login.css";
 import axios from "axios";
+import "./login.css";
 
 function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [uid, setUid] = useState();
+    
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -24,6 +26,7 @@ function Login(props) {
             }
         })
         .then((userData)=>{
+            localStorage.setItem("userData", JSON.stringify(userData.data));
             console.log(userData)
             window.location = "/";
         })
