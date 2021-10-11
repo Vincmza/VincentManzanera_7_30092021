@@ -36,9 +36,17 @@ input:focus {
 .loginEmailRelated {
     margin-top: 10px;
 }
+.email_error {
+    font-size:0.8em;
+    color:red;
+}
 /*password*/
 .passwordRelated {
     margin-top: 20px;
+}
+.password_error {
+    font-size:0.8em;
+    color:red;
 }
 .loginButton {
     margin-top: 20px;

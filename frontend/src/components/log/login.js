@@ -10,11 +10,12 @@ function Login(props) {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        const emailError = document.querySelector(".email.error")
-        const passwordError = document.querySelector(".password.error")
+        const emailError = document.querySelector(".email_error")
+        const passwordError = document.querySelector(".password_error")
 
         axios({
             method: "post",
+            headers: { 'Content-Type': 'application/json'},
             url: `http://localhost:8081/api/auth/login`,
             withCredentials: true,
             data: {
@@ -22,16 +23,14 @@ function Login(props) {
                 password 
             }
         })
-        .then((res)=>{
-            if(!res.data){
-                emailError.innerHTML = `<p>email ou mot de passe incorrecte</p>`;
-                passwordError.innerHTML = `<p>email ou mot de passe incorrecte</p>`;
-            }else{
-                alert('Authentification réussie !');
-            }
+        .then((userData)=>{
+            console.log(userData)
+            window.location = "/";
         })
         .catch((err)=>{
             console.log(err)
+            emailError.innerHTML = `<p>email ou mot de passe incorrecte</p>`;
+            passwordError.innerHTML = `<p>email ou mot de passe incorrecte</p>`;
         })
     }
     return (
@@ -50,7 +49,7 @@ function Login(props) {
                     required
                 />
             </div>
-            <div className="email error"></div>
+            <div className="email_error"></div>
             <div className="passwordRelated">
                 <label for="password" className="formLabel"></label>
                 <input 
@@ -62,7 +61,7 @@ function Login(props) {
                     required
                 />
             </div>
-            <div className="password error"></div>
+            <div className="password_error"></div>
             <button type="submit" className="loginButton">
                 Connexion
             </button>

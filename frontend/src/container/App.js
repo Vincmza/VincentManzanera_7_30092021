@@ -4,12 +4,17 @@ import React, {useEffect, useState} from 'react';
 
 //Components
 import Routes from "../components/routes/index"
+import {UidContext} from "../components/app.Context"
 
 function App() {
+  const [uid, setUid] = useState(null);
+
   return (
-    <div className="App">
-      <Routes/>
-    </div>  
+    <UidContext.Provider value={uid}>
+      <div className="App">
+        <Routes/>
+      </div>
+    </UidContext.Provider> 
   );
 }
 

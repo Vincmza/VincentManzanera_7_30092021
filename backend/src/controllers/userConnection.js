@@ -55,6 +55,7 @@ exports.login = (req, res, next) => {
     connection
         .query("SELECT * FROM users WHERE email = ?", [data.email])
         .then((userData) => {
+            console.log(userData);
             const user = userData[0];
             if (!user) {
                 return res.status(401).json({ error: "Utilisateur ou mot de passe inconnu !" });
