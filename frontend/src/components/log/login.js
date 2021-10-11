@@ -7,13 +7,14 @@ import "./login.css";
 function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [uid, setUid] = useState();
     
-
     const handleLogin = (e) => {
         e.preventDefault();
         const emailError = document.querySelector(".email_error")
         const passwordError = document.querySelector(".password_error")
+
+        emailError.innerHTML = "";
+        passwordError.innerHTML = "";
 
         axios({
             method: "post",

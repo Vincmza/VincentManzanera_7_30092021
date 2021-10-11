@@ -37,10 +37,10 @@ exports.signup = (req, res, next) => {
                 connection
                     .query("INSERT INTO users (email, password, username, role_id) VALUES (?, ?, ?, '1')", [data.email, data.password, data.username])
                     .then((user) => {
-                        res.json(user);
+                        res.status(201).json(user);
                     })
                     .catch((error) => {
-                        console.log(error);
+                        res.status(500).json({ error });
                     });
             })
             .catch((error) => res.status(500).json({ error }));

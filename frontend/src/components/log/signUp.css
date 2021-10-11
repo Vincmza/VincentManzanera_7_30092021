@@ -36,6 +36,10 @@ input:focus {
 .emailRelated {
     margin-top: 10px;
 }
+.signUp_email_error{
+    font-size: 0.8em;
+    color:red;
+}
 /*pseudo*/
 .userName {
     margin-top: 20px;
@@ -46,6 +50,10 @@ input:focus {
 }
 .passwordConfirmation{
     margin-top: 20px;
+}
+.signUp_password_error, .signUp_password_confirmation_error {
+    font-size: 0.8em;
+    color:red;
 }
 .signUpButton {
     margin-top: 20px;
