@@ -1,19 +1,23 @@
 //Libraries
 import {FaUserCircle} from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 import React, {useEffect} from 'react';
-import './header.css';
 import logo from '../../images/header_logo.png';
+import './header.css';
 
 function Header (props){
     return(
         <header className="head">
             <div className="head__logo">
-                <img src={logo} alt="logo"/>
+                <NavLink exact to="/">
+                    <img src={logo} alt="logo"/>
+                </NavLink>
             </div>
             <nav className="head__nav">
                 <button className="head__nav-user">
                     <span className="userIcon"><FaUserCircle/></span>             
-                </button>            
+                </button>
+                <div className="userInfos"></div>          
             </nav>      
         </header>
     )
