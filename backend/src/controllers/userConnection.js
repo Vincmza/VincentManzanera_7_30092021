@@ -39,13 +39,13 @@ exports.signup = (req, res, next) => {
                     .then((user) => {
                         res.status(201).json(user);
                     })
-                    .catch((error) => {
-                        res.status(500).json({ error });
+                    .catch(() => {
+                       res.status(500).json({ message: "Email incorrect"});
                     });
             })
             .catch((error) => res.status(500).json({ error }));
     } else {
-        return res.json({ message: "Votre mot de passe ou votre identifiant est invalide" });
+        return res.status(400).json({ message: "Mot de passe faible" });
     }
 };
 
@@ -57,7 +57,7 @@ exports.login = (req, res, next) => {
         .then((userData) => {
             const user = userData[0];
             if (!user) {
-                return res.status(401).json({ error: "Utilisateur ou mot de passe inconnu !" });
+                return res.status(401).json({ error: "Utilisateur inconnu" });
             }
             bcrypt
                 .compare(data.password, user.password)
@@ -66,7 +66,7 @@ exports.login = (req, res, next) => {
                     if (!valid) {
                         return res
                             .status(401)
-                            .json({ error: "Utilisateur ou mot de passe inconnu !" });
+                            .json({ error: "Mot de passe incorrect" });
                     }
                     console.log(process.env.tokenExpiration)
                     res.status(200).json({

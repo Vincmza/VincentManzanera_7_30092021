@@ -31,10 +31,14 @@ function Login(props) {
             console.log(userData)
             window.location = "/";
         })
-        .catch((err)=>{
-            console.log(err)
-            emailError.innerHTML = `<p>email ou mot de passe incorrecte</p>`;
-            passwordError.innerHTML = `<p>email ou mot de passe incorrecte</p>`;
+        .catch((error)=>{
+            console.log(error.response.data.error)
+            if(error.response.data.error === "Utilisateur inconnu"){
+                emailError.innerHTML = `<p>Email incorrect</p>`;
+            }
+            if(error.response.data.error === "Mot de passe incorrect"){
+                passwordError.innerHTML = `<p>Mot de passe incorrect</p>`;
+            }
         })
     }
     return (

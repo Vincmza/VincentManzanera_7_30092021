@@ -41,10 +41,14 @@ const SignUp = (props) => {
                 console.log(res)
 
             })
-            .catch((err)=> {
-                console.log(err)
-                emailError.innerHTML = `<p>Email incorrect</p>`;
-                passwordError.innerHTML = `<p>Utilisez un mot de passe plus complexe</p>`;
+            .catch((error)=> {
+                console.log(error.response.data.message)
+                if(error.response.data.message === "Email incorrect"){
+                    emailError.innerHTML = `<p>Email incorrect</p>`;
+                }
+                if(error.response.data.message === "Mot de passe faible"){
+                    passwordError.innerHTML = `<p>Utilisez un mot de passe plus complexe</p>`;
+                }                
             })
         }
     }
