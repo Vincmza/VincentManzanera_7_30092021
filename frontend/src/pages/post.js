@@ -4,7 +4,6 @@ import Header from "../components/header/header"
 const Post = () => {
     return (
         <div>
-            <Header></Header>
         </div>
     );
 };
