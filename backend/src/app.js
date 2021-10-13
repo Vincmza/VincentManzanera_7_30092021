@@ -3,6 +3,7 @@ const postsRelatedRoutes = require("./routes/posts");
 const commentsRoutes = require("./routes/commentaires");
 const likesRoutes = require("./routes/likes");
 const connectionRoutes = require("./routes/userConnection");
+const userRoute = require("./routes/user");
 const cors = require("cors");
 const auth = require("./middlewares/auth");
 
@@ -23,6 +24,8 @@ app.use("/api/posts", auth, postsRelatedRoutes);
 app.use("/api/commentaires", auth, commentsRoutes);
 app.use("/api/likes", auth, likesRoutes);
 app.use("/api/auth", connectionRoutes);
+app.use("/api/user", userRoute);
+
 
 app.listen(8081, () => {
     console.log("Server is running on port 8081");

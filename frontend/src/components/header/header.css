@@ -21,6 +21,7 @@
     margin-right: 5%;
     display: flex;
     align-items: center;
+    position: relative;
 }
 /*User button*/
 .head__nav-user{
@@ -30,6 +31,7 @@
     border: none;
     background-color: white;
 }
+/*icon*/
 .userIcon {
     display: flex;
     align-items: center;
@@ -37,6 +39,43 @@
 }
 .userIcon :hover{
     color: rgb(253, 45, 1);
+    cursor: pointer;
+}
+/*user infos pannel*/
+.set_username {
+    font-size: 1.3em;
+    margin-right: 10px;
+}
+.userInfos {
+    border: 1px solid rgb(253, 45, 1);
+    border-radius: 30px;
+    box-shadow: 10px 5px 5px rgb(219, 217, 211);
+    background-color: rgb(245, 244, 240);
+    padding: 10px;
+    position: absolute;
+    top : 100px;
+    right:0px;
+    text-align: center;
+    color:rgb(253, 45, 1);
+    font-size: 1.1em;
+    
+}
+.user_infos_title {
+    font-size: 1.2em;
+    color: black;
+}
+.user_username, .used_email, .logout {
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+.logout_logo {
+    font-size: 1.6em;
+    display: block;
+    margin-top: 10px;
+    color:black;
+}
+.logout_logo:hover {
+    color:rgb(253, 45, 1);
     cursor: pointer;
 }
 

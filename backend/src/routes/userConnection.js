@@ -4,6 +4,5 @@ const ctrlUserConnection = require('../controllers/userConnection');
 
 router.post('/signup', ctrlUserConnection.signup);
 router.post('/login', ctrlUserConnection.login);
-router.get('/login', ctrlUserConnection.login);
 
 module.exports = router;
