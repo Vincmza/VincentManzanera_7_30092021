@@ -2,7 +2,6 @@
 import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import logo from "../../images/header_logo.png";
 import axios from "axios";
 import "./header.css";
@@ -10,39 +9,35 @@ import "./header.css";
 function Header(props) {
     const [iconClicked, setIconClicked] = useState(false);
     const [userData, setUserData] = useState("");
-    const history = useHistory();
+    const userInfosPannel = document.querySelector(".head__nav");
 
     const handleIcon = () => {
         setIconClicked(!iconClicked);
     };
     const logOut = () => {
         localStorage.clear();
+        userInfosPannel.innerHTML = "";
     };
 
     /*Get user data from API*/
-
     useEffect(() => {
-        if (localStorage.getItem("userData") == null) {
-            history.push("/profile");
-        } else {
-            const user = JSON.parse(localStorage.getItem("userData"));
-            const getInfos = async () => {
-                axios({
-                    method: "get",
-                    headers: { "Content-Type": "application/json" },
-                    url: `http://localhost:8081/api/user/${user.userId}`,
-                    withCredentials: true,
+        const user = JSON.parse(localStorage.getItem("userData"));
+        const getInfos = async () => {
+            axios({
+                method: "get",
+                headers: { "Content-Type": "application/json" },
+                url: `http://localhost:8081/api/user/${user.userId}`,
+                withCredentials: true,
+            })
+                .then((userData) => {
+                    console.log(userData);
+                    setUserData(userData.data);
                 })
-                    .then((userData) => {
-                        console.log(userData);
-                        setUserData(userData.data);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            };
-            getInfos();
-        }
+                .catch((error) => {
+                    console.log(error);
+                });               
+        };
+        getInfos();
     }, []);
 
     /*Return Header including user data inside*/
