@@ -21,8 +21,9 @@ function Header(props) {
 
     /*Get user data from API*/
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("userData"));
-        const getInfos = async () => {
+        if(localStorage.getItem("userData")!=null){
+            const user = JSON.parse(localStorage.getItem("userData"));
+            const getInfos = async () => {
             axios({
                 method: "get",
                 headers: { "Content-Type": "application/json" },
@@ -38,6 +39,7 @@ function Header(props) {
                 });               
         };
         getInfos();
+        }       
     }, []);
 
     /*Return Header including user data inside*/
