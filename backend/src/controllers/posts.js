@@ -3,12 +3,12 @@ const connection = require('../service/database');
 //Get all posts on timeline
 exports.getAllPosts = (req, res) => {
     connection
-        .query("SELECT * FROM posts")
+        .query("SELECT * FROM posts ORDER BY id DESC")
         .then((posts) => {
-            res.json(posts);
+            res.status(200).json(posts);
         })
-        .catch((err) => {
-            console.log(err);
+        .catch(() => {
+            console.log({error : "Requête échouée"});
         });
 }
 //Get one post and all comments about it

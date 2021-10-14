@@ -1,7 +1,7 @@
 const connection = require("../service/database");
 
 exports.getUserInfos =(req, res) => {
-    console.log(req.params["userId"])
+    console.log(req.params["userId"], "COUCOU")
     connection
         .query("SELECT * FROM users WHERE id = ?", req.params["userId"])
         .then((user)=>{

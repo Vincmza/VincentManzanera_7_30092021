@@ -21,25 +21,26 @@ function Header(props) {
 
     /*Get user data from API*/
     useEffect(() => {
-        if(localStorage.getItem("userData")!=null){
+        if (localStorage.getItem("userData") != null) {
+            console.log("coucou")
             const user = JSON.parse(localStorage.getItem("userData"));
             const getInfos = async () => {
-            axios({
-                method: "get",
-                headers: { "Content-Type": "application/json" },
-                url: `http://localhost:8081/api/user/${user.userId}`,
-                withCredentials: true,
-            })
-                .then((userData) => {
-                    console.log(userData);
-                    setUserData(userData.data);
+                axios({
+                    method: "get",
+                    headers: { "Content-Type": "application/json" },
+                    url: `http://localhost:8081/api/user/${user.userId}`,
+                    withCredentials: true,
                 })
-                .catch((error) => {
-                    console.log(error);
-                });               
-        };
-        getInfos();
-        }       
+                    .then((userData) => {
+                        console.log(userData);
+                        setUserData(userData.data);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            };
+            getInfos();
+        }
     }, []);
 
     /*Return Header including user data inside*/

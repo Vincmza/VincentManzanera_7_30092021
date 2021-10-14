@@ -1,9 +1,9 @@
 import React from 'react';
-
+import Timeline from "../components/timeline"
 const Home = () => {
     return (
-        <div>
-            Hello depuis home !
+        <div className="main">
+            <Timeline/>
         </div>
     );
 };
