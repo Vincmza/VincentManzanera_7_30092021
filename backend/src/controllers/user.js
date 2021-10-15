@@ -14,3 +14,14 @@ exports.getUserInfos =(req, res) => {
             
         })
 }
+exports.getAllUsers = (req, res)=>{
+    connection
+        .query("SELECT * from users")
+        .then((users)=>{
+            const allUsers = {...users}
+            res.status(200).json(allUsers)
+        })
+        .catch(()=>{
+            res.status(400).json({erreur: "Aucun utilisateur"})
+        })
+}
