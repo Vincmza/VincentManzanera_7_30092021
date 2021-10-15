@@ -24,7 +24,7 @@ app.use("/api/posts", auth, postsRelatedRoutes);
 app.use("/api/commentaires", auth, commentsRoutes);
 app.use("/api/likes", auth, likesRoutes);
 app.use("/api/auth", connectionRoutes);
-app.use("/api/user", userRoute);
+app.use("/api/user", auth, userRoute);
 
 
 app.listen(8081, () => {

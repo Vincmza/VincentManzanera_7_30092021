@@ -3,7 +3,7 @@ const connection = require('../service/database');
 //Get all posts on timeline
 exports.getAllPosts = (req, res) => {
     connection
-        .query("SELECT * FROM posts ORDER BY id DESC")
+        .query("SELECT * FROM posts INNER JOIN commentaires ON posts.id = commentaires.post_id ORDER BY posts.id DESC")
         .then((posts) => {
             res.status(200).json(posts);
         })

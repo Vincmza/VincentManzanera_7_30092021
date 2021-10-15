@@ -24,10 +24,11 @@ function Header(props) {
         if (localStorage.getItem("userData") != null) {
             console.log("coucou")
             const user = JSON.parse(localStorage.getItem("userData"));
+            const token = user.token
             const getInfos = async () => {
                 axios({
                     method: "get",
-                    headers: { "Content-Type": "application/json" },
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`},
                     url: `http://localhost:8081/api/user/${user.userId}`,
                     withCredentials: true,
                 })

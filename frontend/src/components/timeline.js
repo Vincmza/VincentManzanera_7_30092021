@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
+import Card from './posts/card';
 
 
 const Timeline = () => {
-    const [allPosts, setAllposts] = useState("");
+    const [allPosts, setAllposts] = useState([]);
     const user = JSON.parse(localStorage.getItem("userData"));
     const token = user.token
     console.log('salut !')
@@ -24,12 +25,18 @@ const Timeline = () => {
         })
     }, [])
     console.log(allPosts);
-    
+
     return (
-        <div>
-            Timeline
+        <div className="timeline_container">
+            <ul>
+                {allPosts.map((posts)=>{
+                    return <Card post={posts} key={posts.post_id}/>
+                })}
+            </ul>
         </div>
-    );
+    )
+            
+        
 };
 
 export default Timeline;
