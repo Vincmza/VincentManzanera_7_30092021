@@ -5,6 +5,9 @@ exports.getAllPosts = (req, res) => {
     connection
         .query("SELECT * FROM posts INNER JOIN commentaires ON posts.id = commentaires.post_id ORDER BY posts.id DESC")
         .then((posts) => {
+            array.forEach(post => {
+                
+            });
             res.status(200).json(posts);
         })
         .catch(() => {

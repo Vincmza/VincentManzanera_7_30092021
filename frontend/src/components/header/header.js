@@ -7,8 +7,10 @@ import axios from "axios";
 import "./header.css";
 
 function Header(props) {
+    /*if top right icon clicked so display user infos pannel*/
     const [iconClicked, setIconClicked] = useState(false);
-    const [userData, setUserData] = useState("");
+    /*Storing connected user infos*/
+    const [userData, setUserData] = useState([]);
     const userInfosPannel = document.querySelector(".head__nav");
 
     const handleIcon = () => {
@@ -17,14 +19,16 @@ function Header(props) {
     const logOut = () => {
         localStorage.clear();
         userInfosPannel.innerHTML = "";
-    };
-
-    /*Get user data from API*/
+    };  
     useEffect(() => {
-        if (localStorage.getItem("userData") != null) {
-            console.log("coucou")
-            const user = JSON.parse(localStorage.getItem("userData"));
+
+        /*Get data about connected user*/
+
+        if (localStorage.getItem("connectedUser") != null) {
+            const user = JSON.parse(localStorage.getItem("connectedUser"));
             const token = user.token
+
+             /*Get user data from API*/
             const getInfos = async () => {
                 axios({
                     method: "get",
@@ -33,7 +37,6 @@ function Header(props) {
                     withCredentials: true,
                 })
                     .then((userData) => {
-                        console.log(userData);
                         setUserData(userData.data);
                     })
                     .catch((error) => {
@@ -43,8 +46,9 @@ function Header(props) {
             getInfos();
         }
     }, []);
+    console.log(userData)
 
-    /*Return Header including user data inside*/
+    /*Return Header including connected user infos*/
 
     return (
         <header className="head">

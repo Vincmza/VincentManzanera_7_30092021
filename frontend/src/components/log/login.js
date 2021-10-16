@@ -1,6 +1,5 @@
 import { FaUserCircle } from "react-icons/fa";
 import React, { useState } from "react";
-import env from "react-dotenv";
 import axios from "axios";
 import "./login.css";
 
@@ -16,6 +15,8 @@ function Login(props) {
         emailError.innerHTML = "";
         passwordError.innerHTML = "";
 
+        /*Sending user data to connect the user's account*/
+
         axios({
             method: "post",
             headers: { 'Content-Type': 'application/json'},
@@ -26,8 +27,11 @@ function Login(props) {
                 password 
             }
         })
+
+        /*Storing userId and token in local storage*/
+
         .then((userData)=>{
-            localStorage.setItem("userData", JSON.stringify(userData.data));
+            localStorage.setItem("connectedUser", JSON.stringify(userData.data));
             console.log(userData)
             window.location = "/";
         })
@@ -41,6 +45,9 @@ function Login(props) {
             }
         })
     }
+
+    /*Login form*/
+
     return (
         <form className="loginForm" onSubmit={handleLogin} id="login_form">
             <div className="userLogo">
