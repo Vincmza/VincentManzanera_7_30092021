@@ -1,19 +1,41 @@
 const connection = require('../service/database');
 
-//Get all posts on timeline
 exports.getAllPosts = (req, res) => {
     connection
-        .query("SELECT * FROM posts INNER JOIN commentaires ON posts.id = commentaires.post_id ORDER BY posts.id DESC")
-        .then((posts) => {
-            array.forEach(post => {
-                
+        .query("SELECT posts.id, posts.title, posts.content_post, posts.user_id, commentaires.id as commentaires_id, commentaires.content_comment, commentaires.user_id, user_post.username, user_comment.username as comment_username FROM posts INNER JOIN commentaires ON posts.id = commentaires.post_id INNER JOIN users as user_post ON user_post.id = posts.user_id INNER JOIN users as user_comment ON user_comment.id = commentaires.user_id ORDER BY posts.id DESC")
+        .then((postList) => {
+            const listOfAllPosts = []
+            postList.forEach(postData => {
+                const post = {
+                    post_id : postData.id,
+                    post_title : postData.title,
+                    post_content : postData.content_post,
+                    user_id : postData.user_id,
+                    username : postData.username,
+                    listComment : []
+                }
+                if(!listOfAllPosts.find(postElement => post.post_id == postElement.post_id)){
+                    listOfAllPosts.push(post)
+                }
             });
-            res.status(200).json(posts);
+            postList.forEach(rowData =>{
+                const comment = {
+                    comment_id : rowData.commentaires_id,
+                    comment_content : rowData.content_comment,
+                    comment_username : rowData.comment_username
+                }
+                const post = listOfAllPosts.find(postElement => rowData.id == postElement.post_id)
+                post.listComment.push(comment)
+            })
+            console.log(listOfAllPosts)
+            res.status(200).json(listOfAllPosts);           
         })
-        .catch(() => {
-            console.log({error : "Requête échouée"});
+        .catch((error) => {
+            console.log(error)
+            res.status(401).json({message : "Requête des posts échouée !"})
         });
 }
+
 //Get one post and all comments about it
 exports.getOnePost = (req, res) => {
     connection
