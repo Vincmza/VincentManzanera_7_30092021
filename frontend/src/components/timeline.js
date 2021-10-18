@@ -8,12 +8,9 @@ const Timeline = () => {
     /*Getting back userId and token*/
     const user = JSON.parse(localStorage.getItem("connectedUser"));
     const token = user.token;
-    console.log("salut !");
 
     useEffect(async () => {
-
         /*Getting back all posts and related comments*/
-
         axios({
             method: "get",
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },

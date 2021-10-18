@@ -2,7 +2,75 @@
 
 .card_container {
     border:1px solid rgb(47, 1, 120);
-    width:70%;
+    width:50%;
     margin: auto;
     margin-top:30px;
+    padding: 15px;
+    border-radius: 30px;
+    background-color: rgb(245, 244, 240);
+    box-shadow: 10px 5px 5px rgb(219, 217, 211);
+}
+.post_header {
+    display: flex;
+}
+.user_pseudo {
+    margin-left: 15px;
+    font-weight:600;
+}
+.user_icon {
+    color: rgb(253, 45, 1);
+    font-size: 1.2em;
+}
+/*post_body includes title and content of the post*/
+.post_body {
+    padding:15px;
+}
+.post_title {
+    margin-bottom: 15px;
+}
+.post_content {
+    border-radius: 30px;
+    padding:15px;
+    background-color: rgb(232, 223, 197);
+}
+.like_and_dislike_buttons {
+    display: flex;
+    justify-content: space-around;
+}
+.like_post, .dislike_post {
+    font-size: 1.2em;
+}
+.like_post:active {
+    color:rgb(84, 219, 77)
+}
+.dislike_post:active {
+    color:rgb(232, 35, 51);
+}
+.like_post:hover, .dislike_post:hover {
+    cursor: pointer;
+}
+@media screen and (max-width:1000px){
+    .card_container {
+        width:60%;
+    }
+}
+@media screen and (max-width:700px){
+    .card_container {
+        width:70%;
+    }
+}
+@media screen and (max-width:550px){
+    .card_container {
+        width:75%;
+    }
+}
+@media screen and (max-width:450px){
+    .card_container {
+        width:80%;
+    }
+}
+@media screen and (max-width:350px){
+    .card_container {
+        width:90%;
+    }
 }

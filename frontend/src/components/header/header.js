@@ -22,7 +22,7 @@ function Header(props) {
     };  
     useEffect(() => {
 
-        /*Get data about connected user*/
+        /*Get data from localstorage about connected user*/
 
         if (localStorage.getItem("connectedUser") != null) {
             const user = JSON.parse(localStorage.getItem("connectedUser"));
