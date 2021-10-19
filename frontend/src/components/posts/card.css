@@ -5,6 +5,7 @@
     width:50%;
     margin: auto;
     margin-top:30px;
+    margin-bottom: 30px;
     padding: 15px;
     border-radius: 30px;
     background-color: rgb(245, 244, 240);
@@ -27,27 +28,52 @@
 }
 .post_title {
     margin-bottom: 15px;
+    border-radius: 30px;
+    background-color: rgb(235, 211, 240);
+    text-align: center;
 }
 .post_content {
     border-radius: 30px;
     padding:15px;
     background-color: rgb(232, 223, 197);
 }
+/*settings about like and dislike*/
 .like_and_dislike_buttons {
     display: flex;
     justify-content: space-around;
 }
 .like_post, .dislike_post {
     font-size: 1.2em;
+    border-radius: 20px;
+    border: 1px solid grey;
+    color:grey;
 }
 .like_post:active {
-    color:rgb(84, 219, 77)
+    color:black;
 }
 .dislike_post:active {
-    color:rgb(232, 35, 51);
+    color:black;
 }
-.like_post:hover, .dislike_post:hover {
+.like_post:hover {
     cursor: pointer;
+    background-color: rgb(84, 219, 77);
+    border: 1px solid rgb(84, 219, 77);
+}
+.dislike_post:hover{
+    cursor: pointer;
+    background-color: rgb(232, 35, 51);
+    border: 1px solid rgb(232, 35, 51);
+}
+/*settings about comment icon*/
+.comment_section {
+    padding:0px 15px;
+    display: flex;
+}
+.comment_icon {
+    font-size: 1.2em;
+}
+.comment_numbers {
+    margin-left: 10px;
 }
 @media screen and (max-width:1000px){
     .card_container {

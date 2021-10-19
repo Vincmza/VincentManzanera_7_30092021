@@ -1,7 +1,7 @@
 import {BiUser, BiLike, BiDislike} from "react-icons/bi";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaSpinner } from "react-icons/fa";
+import { FaSpinner, FaRegComment } from "react-icons/fa";
+import Like from "./likeButton";
 import "./card.css";
 
 const Card = (posts) => {
@@ -39,12 +39,23 @@ const Card = (posts) => {
             </div>
             <div className="like_and_dislike_buttons">
                 <button className="like_post" type="submit">
+                    <Like post={posts}/>
                     <BiLike/>
                 </button>
                 <button className="dislike_post" type="submit">
                     <BiDislike/>
                 </button>
             </div>
+            <div className="comment_section">
+                <div className="comment_icon">
+                    <FaRegComment/>
+                </div>
+                <span className="comment_numbers">
+                    {posts.post.listComment.length}
+                </span>
+
+            </div>
+            
                         
             </>}
         </li>
