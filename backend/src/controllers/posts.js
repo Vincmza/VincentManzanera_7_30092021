@@ -24,16 +24,14 @@ exports.getAllPosts = (req, res) => {
                     comment_id : rowData.commentaires_id,
                     comment_content : rowData.content_comment,
                     comment_username : rowData.comment_username
-                }
-       
+                }     
                 const post = listOfAllPosts.find(postElement => rowData.id == postElement.post_id)
     
                 /*VERIFICATION DE DOUBLON*/
                 if(!post.listComment.find(commentElement => comment.comment_id == commentElement.comment_id)){
                     if(rowData.commentaires_id != null){
                         post.listComment.push(comment)
-                    }
-                    
+                    }                    
                 }    
             });    
             postList.forEach (rowData => {

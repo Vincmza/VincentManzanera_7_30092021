@@ -4,7 +4,6 @@ const Like = (posts) => {
 
     const [liked, setLiked] =useState(false)
     useEffect(()=>{
-        // if() setLiked(true)
     })
 
     return (

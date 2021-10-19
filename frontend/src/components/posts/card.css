@@ -15,8 +15,11 @@
     display: flex;
 }
 .user_pseudo {
-    margin-left: 15px;
+    margin-left: 10px;
     font-weight:600;
+    border-radius: 30px;
+    background-color: rgb(203, 240, 187);
+    padding: 5px 10px;
 }
 .user_icon {
     color: rgb(253, 45, 1);
@@ -61,12 +64,12 @@
 }
 .dislike_post:hover{
     cursor: pointer;
-    background-color: rgb(232, 35, 51);
-    border: 1px solid rgb(232, 35, 51);
+    background-color: rgb(242, 55, 41);
+    border: 1px solid rgb(242, 55, 41);
 }
 /*settings about comment icon*/
 .comment_section {
-    padding:0px 15px;
+    padding:10px 15px 0px 15px;
     display: flex;
 }
 .comment_icon {

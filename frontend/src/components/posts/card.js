@@ -53,10 +53,7 @@ const Card = (posts) => {
                 <span className="comment_numbers">
                     {posts.post.listComment.length}
                 </span>
-
-            </div>
-            
-                        
+            </div>                       
             </>}
         </li>
     );
