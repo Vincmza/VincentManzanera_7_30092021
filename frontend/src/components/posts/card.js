@@ -13,9 +13,6 @@ const Card = (posts) => {
             setIsLoading(false);
         }
     }, []);
-
-    console.log(posts)
-
     return (
         <li className="card_container" key={posts.post.post_id}>
             {isLoading ? <FaSpinner /> : 
@@ -40,7 +37,6 @@ const Card = (posts) => {
             <div className="like_and_dislike_buttons">
                 <button className="like_post" type="submit">
                     <Like post={posts}/>
-                    <BiLike/>
                 </button>
                 <button className="dislike_post" type="submit">
                     <BiDislike/>

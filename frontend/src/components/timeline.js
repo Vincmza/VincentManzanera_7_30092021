@@ -13,7 +13,7 @@ const Timeline = () => {
         /*Getting back all posts and related comments*/
         axios({
             method: "get",
-            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+            headers: { "Content-Type": "application/json", "authorization": `Bearer ${token}` },
             url: "http://localhost:8081/api/posts",
             withCredentials: true,
         })
@@ -24,8 +24,6 @@ const Timeline = () => {
                 console.log(error);
             });
     }, []);
-    console.log(allPosts);
-
     return (
         <div className="timeline_container">
             <ul>
