@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BiLike, BiDislike } from "react-icons/bi";
+import { AiOutlineLike, AiFillLike} from "react-icons/ai";
 import axios from "axios";
 
 const Like = (posts) => {
@@ -14,7 +14,7 @@ const Like = (posts) => {
         }
     }, []);
 
-    const like = () => {
+    const like_post = () => {
         axios({
             method: "post",
             headers: { "Content-Type": "application/json", "authorization": `Bearer ${token}` },
@@ -27,7 +27,7 @@ const Like = (posts) => {
         })
             .then((res) => {
                 setLiked(true)
-                res.status(200).json("Requête post réussie !")
+                res.status(200).json("Requête like-post réussie !")
                 console.log(res)
             })
             .catch((error) => {
@@ -35,11 +35,32 @@ const Like = (posts) => {
             });
     };
 
-    const unlike = () => {};
+    const unlike_post = () => {
+
+        axios({
+            method: "put",
+            headers: { "Content-Type": "application/json", "authorization": `Bearer ${token}` },
+            url: `http://localhost:8081/api/likes/unlike-post/${posts.post.post.post_id}`,
+            withCredentials: true,
+            data: {
+                id: user.userId,
+                liked_post: false
+            }
+        })
+            .then((res) => {
+                setLiked(false)
+                res.status(200).json("Requête unlike-post réussie !")
+                console.log(res)
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+   
+    };
     return (
         <div className="like_container">
-            {user && liked == false && <BiLike onClick={like} />}
-            {user && liked && <BiLike onClick={unlike} />}
+            {user && liked == false && <AiOutlineLike onClick={like_post} />}
+            {user && liked && <AiFillLike onClick={unlike_post} />}
         </div>
     );
 };
