@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { AiOutlineLike, AiFillLike} from "react-icons/ai";
+import {React, useEffect, useState } from "react";
+import {AiOutlineDislike, AiFillDislike} from "react-icons/ai";
 import axios from "axios";
 
-const Like = (posts) => {
-    /*Get connected user data from local storage*/
+const Dislike = (posts) => {
+    /*get connected user data from local storage*/
     const user = JSON.parse(localStorage.getItem("connectedUser"));
     const token = user.token;
-    /*if user likes = true*/
-    const [liked, setLiked] = useState(false);
-    
+    /*if user dislikes = true*/
+    const [disliked, setLiked] = useState(false);
+
     useEffect(() => {
         if (posts.post.post.listLikes.likes_user_id == user.userId) {
             setLiked(true);
         }
     }, []);
-    
-    const like_post = () => {
+
+    const dislike_post = () => {
         axios({
             method: "post",
             headers: { "Content-Type": "application/json", "authorization": `Bearer ${token}` },
@@ -23,7 +23,7 @@ const Like = (posts) => {
             withCredentials: true,
             data: {
                 id: user.userId,
-                liked_post: true
+                disliked_post: true
             }
         })
             .then((res) => {
@@ -36,7 +36,7 @@ const Like = (posts) => {
             });
     };
 
-    const unlike_post = () => {
+    const undislike_post = () => {
 
         axios({
             method: "put",
@@ -45,7 +45,7 @@ const Like = (posts) => {
             withCredentials: true,
             data: {
                 id: user.userId,
-                liked_post: false
+                disliked_post: false
             }
         })
             .then((res) => {
@@ -59,17 +59,18 @@ const Like = (posts) => {
    
     };
 
+    
     return (
-        <div className="like_container">
-            <div className="like_and_unlike">
-            {user && liked == false && <AiOutlineLike onClick={like_post} />}
-            {user && liked && <AiFillLike onClick={unlike_post} />}
-            </div>
-            <span></span>
-            
+        <div>
+            <div className="dislike_container">
+                <div className="dislike_and_undislike">
+                {user && disliked == false && <AiOutlineDislike onClick={dislike_post} />}
+                {user && disliked && <AiFillDislike onClick={undislike_post} />}
+                </div>
+                <span></span>          
+            </div>           
         </div>
-
     );
 };
 
-export default Like;
+export default Dislike;

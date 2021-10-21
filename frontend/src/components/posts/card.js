@@ -2,6 +2,7 @@ import {BiUser, BiLike, BiDislike} from "react-icons/bi";
 import React, { useEffect, useState } from "react";
 import { FaSpinner, FaRegComment } from "react-icons/fa";
 import Like from "./likeButton";
+import Dislike from "./dislikeButton"
 import "./card.css";
 
 const Card = (posts) => {
@@ -39,7 +40,7 @@ const Card = (posts) => {
                     <Like post={posts}/>
                 </button>
                 <button className="dislike_post" type="submit">
-                    <BiDislike/>
+                    <Dislike post={posts}/>
                 </button>
             </div>
             <div className="comment_section">
