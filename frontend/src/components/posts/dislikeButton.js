@@ -7,33 +7,38 @@ const Dislike = (posts) => {
     const user = JSON.parse(localStorage.getItem("connectedUser"));
     const token = user.token;
     /*if user dislikes = true*/
-    const [disliked, setLiked] = useState(false);
+    const [disliked, setDisliked] = useState(false);
 
     useEffect(() => {
         if (posts.post.post.listLikes.likes_user_id == user.userId) {
-            setLiked(true);
+            setDisliked(true);
         }
     }, []);
 
     const dislike_post = () => {
-        axios({
-            method: "post",
-            headers: { "Content-Type": "application/json", "authorization": `Bearer ${token}` },
-            url: `http://localhost:8081/api/likes/like-post/${posts.post.post.post_id}`,
-            withCredentials: true,
-            data: {
-                id: user.userId,
-                disliked_post: true
-            }
-        })
-            .then((res) => {
-                setLiked(true)
-                res.status(200).json("Requête like-post réussie !")
-                console.log(res)
+
+        if(posts.post.post.listLikes.liked_post == null){
+
+            axios({
+                method: "post",
+                headers: { "Content-Type": "application/json", "authorization": `Bearer ${token}` },
+                url: `http://localhost:8081/api/likes/like-post/${posts.post.post.post_id}`,
+                withCredentials: true,
+                data: {
+                    id: user.userId,
+                    disliked_post: true
+                }
             })
-            .catch((error) => {
-                console.log(error)
-            });
+                .then((res) => {
+                    setDisliked(true)
+                    res.status(200).json("Requête like-post réussie !")
+                    console.log(res)
+                })
+                .catch((error) => {
+                    console.log(error)
+                });
+
+        }      
     };
 
     const undislike_post = () => {
@@ -49,7 +54,7 @@ const Dislike = (posts) => {
             }
         })
             .then((res) => {
-                setLiked(false)
+                setDisliked(false)
                 res.status(200).json("Requête unlike-post réussie !")
                 console.log(res)
             })
@@ -57,9 +62,7 @@ const Dislike = (posts) => {
                 console.log(error)
             });
    
-    };
-
-    
+    };    
     return (
         <div>
             <div className="dislike_container">

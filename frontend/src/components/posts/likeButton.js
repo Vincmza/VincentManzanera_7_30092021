@@ -1,74 +1,73 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlineLike, AiFillLike} from "react-icons/ai";
+import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import axios from "axios";
 
 const Like = (posts) => {
+    console.log(posts);
     /*Get connected user data from local storage*/
     const user = JSON.parse(localStorage.getItem("connectedUser"));
     const token = user.token;
     /*if user likes = true*/
     const [liked, setLiked] = useState(false);
-    
+
     useEffect(() => {
         if (posts.post.post.listLikes.likes_user_id == user.userId) {
             setLiked(true);
         }
     }, []);
-    
+
     const like_post = () => {
-        axios({
-            method: "post",
-            headers: { "Content-Type": "application/json", "authorization": `Bearer ${token}` },
-            url: `http://localhost:8081/api/likes/like-post/${posts.post.post.post_id}`,
-            withCredentials: true,
-            data: {
-                id: user.userId,
-                liked_post: true
-            }
-        })
-            .then((res) => {
-                setLiked(true)
-                res.status(200).json("Requête like-post réussie !")
-                console.log(res)
+        if (posts.post.post.listLikes.disliked_post == null) {
+            axios({
+                method: "post",
+                headers: { "Content-Type": "application/json", authorization: `Bearer ${token}` },
+                url: `http://localhost:8081/api/likes/like-post/${posts.post.post.post_id}`,
+                withCredentials: true,
+                data: {
+                    id: user.userId,
+                    liked_post: true,
+                },
             })
-            .catch((error) => {
-                console.log(error)
-            });
+                .then((res) => {
+                    setLiked(true);
+                    res.status(200).json("Requête like-post réussie !");
+                    console.log(res);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
     };
 
     const unlike_post = () => {
-
         axios({
             method: "put",
-            headers: { "Content-Type": "application/json", "authorization": `Bearer ${token}` },
+            headers: { "Content-Type": "application/json", authorization: `Bearer ${token}` },
             url: `http://localhost:8081/api/likes/unlike-post/${posts.post.post.post_id}`,
             withCredentials: true,
             data: {
                 id: user.userId,
-                liked_post: false
-            }
+                liked_post: false,
+            },
         })
             .then((res) => {
-                setLiked(false)
-                res.status(200).json("Requête unlike-post réussie !")
-                console.log(res)
+                setLiked(false);
+                res.status(200).json("Requête unlike-post réussie !");
+                console.log(res);
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error);
             });
-   
     };
 
     return (
         <div className="like_container">
             <div className="like_and_unlike">
-            {user && liked == false && <AiOutlineLike onClick={like_post} />}
-            {user && liked && <AiFillLike onClick={unlike_post} />}
+                {user && liked == false && <AiOutlineLike onClick={like_post} />}
+                {user && liked && <AiFillLike onClick={unlike_post} />}
             </div>
             <span></span>
-            
         </div>
-
     );
 };
 

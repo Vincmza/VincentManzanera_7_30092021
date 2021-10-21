@@ -8,5 +8,6 @@ router.put('/unlike-post/:postId', ctrlLikes.unlike_post);
 
 /*dislike and undislike*/
 router.post('/dislike-post/:postId',ctrlLikes.dislike_post);
+router.put('/unlike-post/:postId', ctrlLikes.undislike_post);
 
 module.exports = router;
