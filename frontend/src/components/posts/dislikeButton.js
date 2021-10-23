@@ -10,19 +10,19 @@ const Dislike = (posts) => {
     const [disliked, setDisliked] = useState(false);
 
     useEffect(() => {
-        if (posts.post.post.listLikes.likes_user_id == user.userId) {
+        if (posts.post.listLikes.likes_user_id == user.userId) {
             setDisliked(true);
         }
     }, []);
 
     const dislike_post = () => {
 
-        if(posts.post.post.listLikes.liked_post == null){
+        if(posts.post.listLikes.liked_post == null){
 
             axios({
                 method: "post",
                 headers: { "Content-Type": "application/json", "authorization": `Bearer ${token}` },
-                url: `http://localhost:8081/api/likes/like-post/${posts.post.post.post_id}`,
+                url: `http://localhost:8081/api/likes/like-post/${posts.post.post_id}`,
                 withCredentials: true,
                 data: {
                     id: user.userId,
@@ -46,7 +46,7 @@ const Dislike = (posts) => {
         axios({
             method: "put",
             headers: { "Content-Type": "application/json", "authorization": `Bearer ${token}` },
-            url: `http://localhost:8081/api/likes/unlike-post/${posts.post.post.post_id}`,
+            url: `http://localhost:8081/api/likes/unlike-post/${posts.post.post_id}`,
             withCredentials: true,
             data: {
                 id: user.userId,

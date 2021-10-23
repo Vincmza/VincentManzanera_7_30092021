@@ -5,17 +5,17 @@ import Like from "./likeButton";
 import Dislike from "./dislikeButton"
 import "./card.css";
 
-const Card = (posts) => {
+const Card = (props) => {
     /*Hook displaying loading logo if data retrieve is too long*/
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (posts != null) {
+        if (props != null) {
             setIsLoading(false);
         }
     }, []);
     return (
-        <li className="card_container" key={posts.post.post_id}>
+        <li className="card_container" key={props.post.post_id}>
             {isLoading ? <FaSpinner /> : 
             
             <>
@@ -24,23 +24,23 @@ const Card = (posts) => {
                     <BiUser/>
                 </div>
                 <div className="user_pseudo">
-                    {posts.post.username}
+                    {props.post.username}
                 </div>
             </div>
             <div className="post_body">
                 <div className="post_title">
-                    {posts.post.post_title}
+                    {props.post.post_title}
                 </div>
                 <div className="post_content">
-                    {posts.post.post_content}
+                    {props.post.post_content}
                 </div>
             </div>
             <div className="like_and_dislike_buttons">
                 <button className="like_post" type="submit">
-                    <Like post={posts}/>
+                    <Like post={props.post}/>
                 </button>
                 <button className="dislike_post" type="submit">
-                    <Dislike post={posts}/>
+                    <Dislike post={props.post}/>
                 </button>
             </div>
             <div className="comment_section">
@@ -48,7 +48,7 @@ const Card = (posts) => {
                     <FaRegComment/>
                 </div>
                 <span className="comment_numbers">
-                    {posts.post.listComment.length}
+                    {props.post.listComment.length}
                 </span>
             </div>                       
             </>}

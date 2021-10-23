@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import axios from "axios";
 
-const Like = (posts) => {
-    console.log(posts);
+const Like = (props) => {
+    console.log(props);
     /*Get connected user data from local storage*/
     const user = JSON.parse(localStorage.getItem("connectedUser"));
     const token = user.token;
@@ -11,17 +11,17 @@ const Like = (posts) => {
     const [liked, setLiked] = useState(false);
 
     useEffect(() => {
-        if (posts.post.post.listLikes.likes_user_id == user.userId) {
+        if (props.post.listLikes.likes_user_id == user.userId) {
             setLiked(true);
         }
     }, []);
 
     const like_post = () => {
-        if (posts.post.post.listLikes.disliked_post == null) {
+        if (props.post.listLikes.disliked_post == null) {
             axios({
                 method: "post",
                 headers: { "Content-Type": "application/json", authorization: `Bearer ${token}` },
-                url: `http://localhost:8081/api/likes/like-post/${posts.post.post.post_id}`,
+                url: `http://localhost:8081/api/likes/like-post/${props.post.post_id}`,
                 withCredentials: true,
                 data: {
                     id: user.userId,
@@ -43,7 +43,7 @@ const Like = (posts) => {
         axios({
             method: "put",
             headers: { "Content-Type": "application/json", authorization: `Bearer ${token}` },
-            url: `http://localhost:8081/api/likes/unlike-post/${posts.post.post.post_id}`,
+            url: `http://localhost:8081/api/likes/unlike-post/${props.post.post_id}`,
             withCredentials: true,
             data: {
                 id: user.userId,

@@ -27,8 +27,8 @@ const Timeline = () => {
     return (
         <div className="timeline_container">
             <ul>
-                {allPosts.map((posts) => {
-                    return <Card post={posts} key={posts.post_id} />;
+                {allPosts.map((post) => {
+                    return <Card post={post} key={post.post_id} />;
                 })}
             </ul>
         </div>
