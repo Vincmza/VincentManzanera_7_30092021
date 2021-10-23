@@ -61,11 +61,10 @@ exports.getAllPosts = (req, res) => {
             res.status(401).json({message : "Requête des posts échouée !"})
         });
 }
-
-//Get one post and all comments about it
-exports.getOnePost = (req, res) => {
+/*Create a post*/
+exports.createPost = (req, res) => {
     connection
-        .query("SELECT * FROM posts JOIN commentaires ON commentaires.post_id = posts.id WHERE posts.id = ?", req.params['postId'])
+        .query("INSERT INTO posts SET ?", [req.body])
         .then((post) => {
             res.json(post);
         })
@@ -74,9 +73,10 @@ exports.getOnePost = (req, res) => {
         });
 }
 
-exports.createPost = (req, res) => {
+//Get one post and all comments about it
+exports.getOnePost = (req, res) => {
     connection
-        .query("INSERT INTO posts SET ?", [req.body])
+        .query("SELECT * FROM posts JOIN commentaires ON commentaires.post_id = posts.id WHERE posts.id = ?", req.params['postId'])
         .then((post) => {
             res.json(post);
         })

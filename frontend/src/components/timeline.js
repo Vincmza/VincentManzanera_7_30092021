@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Card from "./posts/card";
+import UserPost from "./posts/userPost.js";
+
 
 const Timeline = () => {
     /*Storing all posts and related comments*/
@@ -26,6 +28,9 @@ const Timeline = () => {
     }, []);
     return (
         <div className="timeline_container">
+            <div className="user_post_container">
+                <UserPost/>
+            </div>
             <ul>
                 {allPosts.map((post) => {
                     return <Card post={post} key={post.post_id} />;

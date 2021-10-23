@@ -61,6 +61,7 @@
     border: 1px solid rgb(6, 161, 14);
 }
 .like_number {
+    font-weight: 600;
     margin-left: 5px;
     font-size: 0.7em;
     color: rgb(6, 161, 14);

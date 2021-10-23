@@ -1,4 +1,4 @@
-import {BiUser, BiLike, BiDislike} from "react-icons/bi";
+import {BiUser} from "react-icons/bi";
 import React, { useEffect, useState } from "react";
 import { FaSpinner, FaRegComment } from "react-icons/fa";
 import Like from "./likeButton";
