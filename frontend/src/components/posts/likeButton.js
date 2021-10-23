@@ -17,10 +17,10 @@ const Like = (props) => {
     }, []);
 
     const like_post = () => {
-        if (props.post.listLikes.disliked_post == null) {
+        if (props.post.listLikes.likes_user_id != user.userId) {
             axios({
                 method: "post",
-                headers: { "Content-Type": "application/json", authorization: `Bearer ${token}` },
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
                 url: `http://localhost:8081/api/likes/like-post/${props.post.post_id}`,
                 withCredentials: true,
                 data: {
@@ -40,24 +40,26 @@ const Like = (props) => {
     };
 
     const unlike_post = () => {
-        axios({
-            method: "put",
-            headers: { "Content-Type": "application/json", authorization: `Bearer ${token}` },
-            url: `http://localhost:8081/api/likes/unlike-post/${props.post.post_id}`,
-            withCredentials: true,
-            data: {
-                id: user.userId,
-                liked_post: false,
-            },
-        })
-            .then((res) => {
-                setLiked(false);
-                res.status(200).json("Requête unlike-post réussie !");
-                console.log(res);
+        if(props.post.listLikes.likes_user_id == user.userId){
+            axios({
+                method: "delete",
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                url: `http://localhost:8081/api/likes/unlike-post/${props.post.listLikes.id}`,
+                withCredentials: true,
+                data: {
+                    id: user.userId                
+                },
             })
-            .catch((error) => {
-                console.log(error);
-            });
+                .then((res) => {
+                    setLiked(false);
+                    res.status(200).json("Requête unlike-post réussie !");
+                    console.log(res);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+        
     };
 
     return (
@@ -66,7 +68,6 @@ const Like = (props) => {
                 {user && liked == false && <AiOutlineLike onClick={like_post} />}
                 {user && liked && <AiFillLike onClick={unlike_post} />}
             </div>
-            <span></span>
         </div>
     );
 };

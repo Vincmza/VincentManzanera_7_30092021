@@ -41,11 +41,11 @@
     background-color: rgb(232, 223, 197);
 }
 /*settings about like and dislike*/
-.like_and_dislike_buttons {
+.like_tab__button {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
-.like_post, .dislike_post {
+.like_post {
     font-size: 1.2em;
     border-radius: 20px;
     border: 1px solid grey;
@@ -54,22 +54,23 @@
 .like_post:active {
     color:black;
 }
-.dislike_post:active {
-    color:black;
-}
 .like_post:hover {
     cursor: pointer;
-    background-color: rgb(84, 219, 77);
-    border: 1px solid rgb(84, 219, 77);
+    background-color: rgb(6, 161, 14);
+    color:white;
+    border: 1px solid rgb(6, 161, 14);
 }
-.dislike_post:hover{
-    cursor: pointer;
-    background-color: rgb(242, 55, 41);
-    border: 1px solid rgb(242, 55, 41);
+.like_number {
+    margin-left: 5px;
+    font-size: 0.7em;
+    color: rgb(6, 161, 14);
+    display: flex;
+    align-items: center;
 }
+
 /*settings about comment icon*/
 .comment_section {
-    padding:10px 15px 0px 15px;
+    padding:0px 15px;
     display: flex;
 }
 .comment_icon {

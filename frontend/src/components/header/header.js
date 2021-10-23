@@ -46,10 +46,7 @@ function Header(props) {
             getInfos();
         }
     }, []);
-    console.log(userData)
-
     /*Return Header including connected user infos*/
-
     return (
         <header className="head">
             <div className="head__logo">

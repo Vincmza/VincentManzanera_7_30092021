@@ -40,7 +40,7 @@ exports.signup = (req, res, next) => {
                         res.status(201).json(user);
                     })
                     .catch(() => {
-                       res.status(500).json({ message: "Email incorrect"});
+                       res.status(400).json({ message: "Email incorrect"});
                     });
             })
             .catch((error) => res.status(500).json({ error }));
@@ -79,12 +79,12 @@ exports.login = (req, res, next) => {
                 })
                 .catch((error) => {
                     console.log(error)
-                    res.status(500).json({ error });
+                    res.status(500).json(error);
                 });
         })
         .catch((error) => {
             console.log(error)
-            res.status(500).json({ error });
+            res.status(500).json(error);
         });
 };
 
