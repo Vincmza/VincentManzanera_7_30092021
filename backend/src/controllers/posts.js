@@ -57,19 +57,21 @@ exports.getAllPosts = (req, res) => {
             res.status(200).json(listOfAllPosts);
         })
         .catch((error) => {
-            console.log(error)
-            res.status(401).json({message : "Requête des posts échouée !"})
+            res.status(401).json(error)
         });
 }
 /*Create a post*/
 exports.createPost = (req, res) => {
+    console.log(req.body)
     connection
-        .query("INSERT INTO posts SET ?", [req.body])
-        .then((post) => {
-            res.json(post);
+        .query("INSERT INTO posts (title, content_post, user_id) VALUES (?, ?, ?)", [req.body.newPostTitle, req.body.newPostContent, req.params["userId"]])
+        .then((newPost) => {
+            res.status(201).json(newPost);
+            // console.log(newPost)
         })
-        .catch((err) => {
-            console.log(err);
+        .catch((error) => {
+            res.status(400).json(error);
+            // console.log(error)
         });
 }
 

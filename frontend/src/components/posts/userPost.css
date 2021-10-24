@@ -10,18 +10,6 @@
     background-color: rgb(252, 232, 172);
     box-shadow: 10px 5px 5px rgb(219, 217, 211);
 }
-/*input for title of the post*/
-.user_post_title {
-    margin-bottom: 0;
-    margin-top: 10px;
-    background-color: rgb(252, 232, 172);
-    display: flex;
-    justify-content: flex-start;
-}
-#user_post_title{
-    padding:0px 8px;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
 /*user pseudo*/
 .connected_user_pseudo {
     display: flex;
@@ -29,12 +17,30 @@
     align-items: center;
     font-size: 1.3em;
 }
-.form_post_user_pseudo{
+.new_post_user_pseudo{
     margin-left:10px;
 }
-
+/*error*/
+.new_post_error {
+    color:red;
+    font-size: 1.2em;
+}
+/*input for title of the post*/
+.new_post_title {
+    margin-bottom: 0;
+    margin-top: 10px;
+    background-color: rgb(252, 232, 172);
+    display: flex;
+    justify-content: flex-start;
+}
+#new_post_title{
+    padding:0px 8px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 0.9em;
+    width:50%;
+}
 /*settings of the textarea*/
-.text_post { 
+.new_post_content { 
     text-align: center;
 }
 .create_post textarea {
@@ -44,27 +50,31 @@
     margin-top: 10px;
     border-radius: 10px;
     padding:8px;
-    font-size: 1.3em;
+    font-size: 0.9em;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-/*general form footer settings*/
+textarea:focus {
+    outline: none;
+    border:2px solid rgb(253, 45, 1);
+}
+/*footer settings*/
 .form_footer {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
 }
-/*button to provide image*/
-.img_post {
+/*button to add an image*/
+.add_img_button {
     font-size: 1.4em;
     display: flex;
     align-items: center;
     border:none;
     background-color: rgb(252, 232, 172);
 }
-.img_post > a {
+.add_img_button > a {
     color:black;
 }
-.img_post > a:hover {
+.add_img_button > a:hover {
     cursor: pointer;
     color:rgb(253, 45, 1);
 }
