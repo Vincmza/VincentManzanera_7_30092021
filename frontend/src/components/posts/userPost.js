@@ -1,10 +1,12 @@
-import React, { useState, useEffect, Redirect} from "react";
+import React, { useState, useEffect} from "react";
+import {useHistory} from "react-router-dom";
 import { BiUser } from "react-icons/bi";
 import { MdOutlineImage } from "react-icons/md";
 import axios from "axios";
 import "./userPost.css";
 
 const UserPost = (props) => {
+    const history = useHistory()
     /*Getting back userId and token*/
     const user = JSON.parse(localStorage.getItem("connectedUser"));
     const token = user.token;
@@ -13,13 +15,11 @@ const UserPost = (props) => {
     /*Required informations to add a new post*/
     const [newPostTitle, setNewPostTitle] = useState("");
     const [newPostContent, setNewPostContent] = useState("");
+   
     // const [newPostImage, setNewPostImage]=useState(false);
 
     /*In case an error occurs*/
     const newPostError = document.querySelector(".new_post-error")
-
-    /*If true timeline is refreshed*/
-    const [newPostSubmit, setNewPostSubmit] = useState(false);
 
     useEffect(async () => {
         /*user connected pseudo*/
@@ -37,6 +37,7 @@ const UserPost = (props) => {
                 console.log(error);
             });
     }, []);
+
     /*Function to add a new post*/
     const handleNewPost = async (e) => {
         e.preventDefault();
@@ -52,16 +53,11 @@ const UserPost = (props) => {
         })
             .then((newPost) => {
                 console.log(newPost);
-                setNewPostSubmit(true);
-                <Redirect to="../../pages/home" />
+                history.push("/");
             })
             .catch((error) => {
                 console.log(error);
-                newPostError.innerHTML= `<p>Une erreur est survenue, veuillez réessayer</p>`
             });
-            // if(newPostSubmit==true){
-                
-            // }
     };
     return (
         <div>

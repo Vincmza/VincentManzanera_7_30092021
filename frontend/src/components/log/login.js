@@ -38,10 +38,12 @@ function Login(props) {
         .catch((error)=>{
             console.log(error.response.data.error)
             if(error.response.data.error === "Utilisateur inconnu"){
-                emailError.innerHTML = `<p>Email incorrect</p>`;
+                emailError.innerHTML = `<p>Identifiant incorrect ou mot de passe inccorect</p>`;
+                passwordError.innerHTML = `<p>Identifiant incorrect ou mot de passe inccorect</p>`;
             }
             if(error.response.data.error === "Mot de passe incorrect"){
-                passwordError.innerHTML = `<p>Mot de passe incorrect</p>`;
+                emailError.innerHTML = `<p>Identifiant incorrect ou mot de passe inccorect</p>`;
+                passwordError.innerHTML = `<p>Identifiant incorrect ou mot de passe inccorect</p>`;
             }
         })
     }

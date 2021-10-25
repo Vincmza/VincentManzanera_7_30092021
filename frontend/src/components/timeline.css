@@ -1,0 +1,23 @@
+.create_post_direction{
+    display: flex;
+    justify-content: center;
+    width:20%;
+    margin: auto;
+    margin-top: 30px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    background-color: rgb(252, 232, 172);
+    box-shadow: 10px 5px 5px rgb(219, 217, 211);
+    padding: 5px;  
+}
+.create_post_direction a {
+    text-decoration: none;
+    color:black;
+    width: 100%;
+    text-align: center;
+}
+.create_post_direction:hover, .create_post_direction > a:hover {
+    background-color: rgb(253, 45, 1);
+    color:white;
+    cursor: pointer;
+}

@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Card from "./posts/card";
-import UserPost from "./posts/userPost.js";
+import "./timeline.css"
+
 
 
 const Timeline = () => {
@@ -28,9 +30,7 @@ const Timeline = () => {
     }, []);
     return (
         <div className="timeline_container">
-            <div className="user_post_container">
-                <UserPost/>
-            </div>
+           <span className="create_post_direction"><Link to="/new-post">Créer un post</Link></span>
             <ul>
                 {allPosts.map((post) => {
                     return <Card post={post} key={post.post_id} />;
