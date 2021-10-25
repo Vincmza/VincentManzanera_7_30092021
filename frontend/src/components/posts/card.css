@@ -30,6 +30,7 @@
     padding:15px;
 }
 .post_title {
+    padding: 5px 0px;
     margin-bottom: 15px;
     border-radius: 30px;
     background-color: rgb(235, 211, 240);
