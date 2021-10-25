@@ -1,8 +1,9 @@
+const { default: OnePost } = require('../../../frontend/src/pages/onePost');
 const connection = require('../service/database');
 
 exports.getAllPosts = (req, res) => {
     connection
-        .query("SELECT posts.id, posts.title, posts.content_post, posts.user_id, commentaires.id as commentaires_id, commentaires.content_comment, commentaires.user_id, user_post.username, user_comment.username as comment_username, likes.id as likes_id, likes.user_id as likes_user_id, likes.post_id as likes_post_id, likes.liked, likes.disliked FROM posts LEFT JOIN commentaires ON posts.id = commentaires.post_id LEFT JOIN users as user_post ON user_post.id = posts.user_id LEFT JOIN users as user_comment ON user_comment.id = commentaires.user_id LEFT JOIN likes ON likes.post_id = posts.id ORDER BY posts.id DESC")
+        .query("SELECT posts.id, posts.title, posts.content_post, posts.user_id, commentaires.id as commentaires_id, commentaires.content_comment, commentaires.user_id, user_post.username, user_comment.username as comment_username, likes.id as likes_id, likes.user_id as likes_user_id, likes.post_id as likes_post_id, likes.liked FROM posts LEFT JOIN commentaires ON posts.id = commentaires.post_id LEFT JOIN users as user_post ON user_post.id = posts.user_id LEFT JOIN users as user_comment ON user_comment.id = commentaires.user_id LEFT JOIN likes ON likes.post_id = posts.id ORDER BY posts.id DESC")
         .then((postList) => {
             const listOfAllPosts = []
             postList.forEach(postData => {
@@ -48,8 +49,7 @@ exports.getAllPosts = (req, res) => {
                 if(!post.listLikes.find(likeElement => likes.id == likeElement.id)){
                     if(rowData.likes_post_id != null){
                         post.listLikes.push(likes)
-                    }
-                    
+                    }                    
                 }
                 
             });
@@ -78,12 +78,38 @@ exports.createPost = (req, res) => {
 //Get one post and all comments about it
 exports.getOnePost = (req, res) => {
     connection
-        .query("SELECT * FROM posts JOIN commentaires ON commentaires.post_id = posts.id WHERE posts.id = ?", req.params['postId'])
+        .query("SELECT posts.id, posts.title, posts.content_post, posts.user_id as post_user_id, commentaires.id AS comment_id, commentaires.user_id as comment_user_id, commentaires.content_comment AS comment_content, users.username, likes.id as like_id, likes.user_id AS like_user_id, likes.liked FROM posts LEFT JOIN users ON posts.user_id = users.id LEFT JOIN commentaires ON posts.id = commentaires.post_id LEFT JOIN likes ON posts.id = likes.post_id WHERE posts.id = ?", req.params['postId'])
         .then((post) => {
-            res.json(post);
+            // console.log(post)
+            const getOnePost = [];
+            post.forEach(rowData => {
+                const onePost = {
+                    post_id : rowData.id,
+                    post_user_id : rowData.post_user_id,
+                    post_user_username : rowData.username,
+                    post_title : rowData.title,
+                    post_content : rowData.content_post,
+                    comments : [allComments = {
+                        comment_id : rowData.comment_id,
+                        comment_user_id : rowData.comment_user_id,
+                        comment_content : rowData.comment_content                    
+                    }],
+                    likes : [onePostLikes = {
+                        like_id : rowData.like_id,
+                        like_user_id : rowData.like_user_id,
+                        liked : rowData.liked
+                    }]
+                }               
+                getOnePost.push(onePost)            
+            })
+            
+            res.status(200).json(getOnePost);
+            console.log(getOnePost)
+            
         })
-        .catch((err) => {
-            console.log(err);
+        .catch((error) => {
+            res.status(400).json(error)
+            console.log(error)
         });
 }
 

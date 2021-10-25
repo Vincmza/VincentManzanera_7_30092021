@@ -33,7 +33,7 @@ const Timeline = () => {
            <span className="create_post_direction"><Link to="/new-post">Créer un post</Link></span>
             <ul>
                 {allPosts.map((post) => {
-                    return <Card post={post} key={post.post_id} />;
+                    return <Link to={`/posts/${post.post_id}`}><Card post={post} key={post.post_id} /></Link>;
                 })}
             </ul>
         </div>

@@ -3,7 +3,6 @@ import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import axios from "axios";
 
 const Like = (props) => {
-    console.log(props);
     /*Get connected user data from local storage*/
     const user = JSON.parse(localStorage.getItem("connectedUser"));
     const token = user.token;
@@ -31,7 +30,7 @@ const Like = (props) => {
                 .then((res) => {
                     setLiked(true);
                     res.status(200).json("Requête like-post réussie !");
-                    console.log(res);
+                    
                 })
                 .catch((error) => {
                     console.log(error);

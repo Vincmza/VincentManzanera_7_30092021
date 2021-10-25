@@ -1,3 +1,13 @@
+.timeline_container a {
+    text-decoration: none;
+    color:black;
+}
+.create_post_direction a {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+}
 .create_post_direction{
     display: flex;
     justify-content: center;
@@ -8,14 +18,6 @@
     border-radius: 10px;
     background-color: rgb(252, 232, 172);
     box-shadow: 10px 5px 5px rgb(219, 217, 211);  
-}
-.create_post_direction a {
-    text-decoration: none;
-    color:black;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    border-radius: 10px;
 }
 .create_post_direction:hover, .create_post_direction > a:hover {
     background-color: rgb(253, 45, 1);
