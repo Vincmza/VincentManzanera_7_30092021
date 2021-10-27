@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import Card from "./posts/card";
 import "./timeline.css"
 
-
-
 const Timeline = () => {
     /*Storing all posts and related comments*/
     const [allPosts, setAllposts] = useState([]);

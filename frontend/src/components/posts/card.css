@@ -81,6 +81,16 @@
 .comment_numbers {
     margin-left: 10px;
 }
+/*trash icon */
+.post_delete_icon {
+    display: flex;
+    align-items: center;
+    margin-left:auto;  
+}
+.post_delete_icon:hover {
+    color:red;
+    cursor:pointer;
+}
 @media screen and (max-width:1000px){
     .card_container {
         width:60%;

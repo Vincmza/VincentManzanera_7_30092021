@@ -1,6 +1,6 @@
 import { BiUser } from "react-icons/bi";
 import React, { useEffect, useState } from "react";
-import { FaSpinner, FaRegComment } from "react-icons/fa";
+import { FaSpinner, FaRegComment, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Like from "./likeButton";
 import "./card.css";
@@ -33,7 +33,7 @@ const Card = (props) => {
                         </div>
                         <div className="like_tab__button">
                             <button className="like_post" type="submit">
-                                <Like post={props.post} />
+                                <Like/>
                             </button>
                             <span className="like_number">{props.post.listLikes.length}</span>
                         </div>
@@ -42,6 +42,9 @@ const Card = (props) => {
                                 <FaRegComment />
                             </div>
                             <span className="comment_numbers">{props.post.listComment.length}</span>
+                            <div className="post_delete_icon">
+                                <FaTrashAlt/>
+                            </div>
                         </div>
                     </Link>
                 </>
