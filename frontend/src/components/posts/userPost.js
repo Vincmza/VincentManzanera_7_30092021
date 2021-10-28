@@ -105,7 +105,7 @@ const UserPost = (props) => {
                         </a>
                     </button>                   
                         <button className="send_user_post" type="submit" onClick={handleNewPost}>
-                            Envoyer
+                            Publier
                         </button>                 
                 </div>
             </form>

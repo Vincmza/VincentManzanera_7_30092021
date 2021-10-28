@@ -105,6 +105,10 @@
     margin-bottom: 15px;
     background-color: rgb(202, 219, 219)
 }
+.comment_content {
+    font-size: 0.9em;
+    padding:0px 5px;
+}
 .comment_delete_icon:hover {
     color:red;
     cursor:pointer;
@@ -119,6 +123,38 @@
     margin-bottom: 5px;
     position: relative;
     left:20px;
+}
+/*comment creation*/
+.create_new_comment {
+    margin-top: 10px;
+    background-color: rgb(252, 232, 172);
+    border-radius: 10px;
+    padding: 0px 10px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.create_comment {
+    text-align: center;
+}
+#comment_content{
+    width:100%;
+    height:120px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.9em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#comment_content:hover {
+    resize: none;
+}
+.send_user_comment{
+    margin-top: 10px;
+}
+.send_user_comment:hover {
+    cursor:pointer;
+    color: rgb(253, 45, 1);
 }
 
 @media screen and (max-width:1000px){

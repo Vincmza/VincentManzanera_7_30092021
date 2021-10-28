@@ -2,12 +2,12 @@ const connection = require('../service/database');
 
 exports.createComment = (req, res) => {
     connection
-        .query("INSERT INTO commentaires SET ?", [req.body])
+        .query("INSERT INTO commentaires (content_comment, user_id, post_id) VALUES (?,?,?)", [req.body.newCommentContent, req.body.user_id, req.params["postId"]])
         .then((comment) => {
-            res.json(comment);
+            res.status(201).json(comment);
         })
-        .catch((err) => {
-            console.log(err);
+        .catch((error) => {
+            res.status(400).json(error);
         });
 }
 
