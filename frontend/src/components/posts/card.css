@@ -69,7 +69,6 @@
     display: flex;
     align-items: center;
 }
-
 /*settings about comment icon*/
 .comment_section {
     padding:0px 20px;
@@ -95,6 +94,9 @@
 .display_comments{
     padding: 10px;
 }
+.comment_container {
+    position:absolute;
+}
 .oneComment {
     display: flex;
     justify-content: space-between;
@@ -106,6 +108,17 @@
 .comment_delete_icon:hover {
     color:red;
     cursor:pointer;
+}
+.comment_username {
+    width:30%;
+    border-radius: 30px;
+    font-size: 0.8em;
+    font-weight:600;
+    color: rgb(253, 45, 1);
+    padding: 5px 0px;
+    margin-bottom: 5px;
+    position: relative;
+    left:20px;
 }
 
 @media screen and (max-width:1000px){

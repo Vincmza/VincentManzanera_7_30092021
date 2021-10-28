@@ -24,3 +24,23 @@
     color:white;
     cursor: pointer;
 }
+@media screen and (max-width: 700px){
+    .create_post_direction {
+        width:30%;
+    }
+}
+@media screen and (max-width: 500px){
+    .create_post_direction {
+        width:40%;
+    }
+}
+@media screen and (max-width: 350px){
+    .create_post_direction {
+        width:50%;
+    }
+}
+@media screen and (max-width: 280px){
+    .create_post_direction {
+        width:70%;
+    }
+}

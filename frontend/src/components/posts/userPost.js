@@ -23,7 +23,7 @@ const UserPost = (props) => {
         axios({
             method: "get",
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-            url: `http://localhost:8081/api/user/${user.userId}`,
+            url: `http://localhost:8081/api/users/${user.userId}`,
             withCredentials: true,
         })
             .then((userInfos) => {
@@ -34,13 +34,14 @@ const UserPost = (props) => {
                 console.log(error);
             });
     }, []);
+    console.log(connectedUserInfos)
 
     /*Function to add a new post*/
     const handleNewPost = async (e) => {
         e.preventDefault();
         axios({
             method: "post",
-            headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
             url: `http://localhost:8081/api/posts/${user.userId}`,
             withCredentials: true,
             data: {

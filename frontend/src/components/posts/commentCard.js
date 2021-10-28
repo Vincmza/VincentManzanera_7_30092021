@@ -4,8 +4,8 @@ import {FaTrashAlt} from "react-icons/fa"
 const CommentCard = (props) => {
     
     return (
-        <li>
-            <div>{props.comment.comment_username}</div>
+        <li className="comment-container">
+            <div className="comment_username">{props.comment.comment_username}</div>
             <div className="oneComment">
                 <div>{props.comment.comment_content}</div>
                 <span className="comment_delete_icon"><FaTrashAlt/></span>
