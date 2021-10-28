@@ -7,6 +7,7 @@ import axios from "axios";
 /*Components*/
 import Like from "../components/posts/likeButton"
 import CommentCard from "../components/posts/commentCard";
+import NewComment from "./new-comment";
 
 const OnePost = (props) => {
     /*Getting back userId and token*/
@@ -63,6 +64,9 @@ const OnePost = (props) => {
                 <div className="post_delete_icon">
                     <FaTrashAlt />
                 </div>
+            </div>
+            <div className="create_new_comment">
+                <NewComment/>
             </div>
             <ul className="display_comments">
                 {commentsData.map((comment)=>{

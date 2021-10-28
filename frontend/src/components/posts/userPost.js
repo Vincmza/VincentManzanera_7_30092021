@@ -18,9 +18,6 @@ const UserPost = (props) => {
    
     // const [newPostImage, setNewPostImage]=useState(false);
 
-    /*In case an error occurs*/
-    const newPostError = document.querySelector(".new_post-error")
-
     useEffect(async () => {
         /*user connected pseudo*/
         axios({

@@ -77,9 +77,9 @@ exports.createPost = (req, res) => {
 //Get one post and all comments about it
 exports.getOnePost = (req, res) => {
     connection
-        .query("SELECT posts.id, posts.title, posts.content_post, posts.user_id as post_user_id, commentaires.id AS comment_id, commentaires.user_id as comment_user_id, commentaires.content_comment AS comment_content, users.username, likes.id as like_id, likes.user_id AS like_user_id, likes.liked FROM posts LEFT JOIN users ON posts.user_id = users.id LEFT JOIN commentaires ON posts.id = commentaires.post_id LEFT JOIN likes ON posts.id = likes.post_id WHERE posts.id = ?", req.params['postId'])
+        .query("SELECT posts.id, posts.title, posts.content_post, posts.user_id as post_user_id, commentaires.id AS comment_id, commentaires.user_id as comment_user_id, commentaires.content_comment AS comment_content, users.username, likes.id as like_id, likes.user_id AS like_user_id, likes.liked, comment_user.username AS comment_username FROM posts LEFT JOIN users ON posts.user_id = users.id LEFT JOIN commentaires ON posts.id = commentaires.post_id LEFT JOIN likes ON posts.id = likes.post_id LEFT JOIN users AS comment_user ON commentaires.user_id = comment_user.id WHERE posts.id = ?", req.params['postId'])
         .then((post) => {
-            // console.log(post)          
+            console.log(post)          
                 const onePost = {
                     post_id : post[0].id,
                     post_user_id : post[0].post_user_id,
@@ -93,7 +93,8 @@ exports.getOnePost = (req, res) => {
                 const oneComment = {
                     comment_id : rowData.comment_id,
                     comment_user_id : rowData.comment_user_id,
-                    comment_content : rowData.comment_content                    
+                    comment_content : rowData.comment_content,
+                    comment_username : rowData.comment_username                  
                 }
                 if(!onePost.comments.find(comment => comment.comment_id == oneComment.comment_id)){
                     onePost.comments.push(oneComment)

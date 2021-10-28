@@ -33,7 +33,7 @@ function Header(props) {
                 axios({
                     method: "get",
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`},
-                    url: `http://localhost:8081/api/user/${user.userId}`,
+                    url: `http://localhost:8081/api/users/${user.userId}`,
                     withCredentials: true,
                 })
                     .then((userData) => {
