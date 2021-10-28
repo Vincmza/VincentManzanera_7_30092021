@@ -1,4 +1,3 @@
-const { default: OnePost } = require('../../../frontend/src/pages/onePost');
 const connection = require('../service/database');
 
 exports.getAllPosts = (req, res) => {

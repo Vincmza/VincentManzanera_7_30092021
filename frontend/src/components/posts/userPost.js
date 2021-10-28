@@ -25,7 +25,7 @@ const UserPost = (props) => {
         /*user connected pseudo*/
         axios({
             method: "get",
-            headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
             url: `http://localhost:8081/api/user/${user.userId}`,
             withCredentials: true,
         })

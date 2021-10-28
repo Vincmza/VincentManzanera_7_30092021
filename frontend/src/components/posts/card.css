@@ -72,7 +72,7 @@
 
 /*settings about comment icon*/
 .comment_section {
-    padding:0px 15px;
+    padding:0px 20px;
     display: flex;
 }
 .comment_icon {
@@ -91,6 +91,23 @@
     color:red;
     cursor:pointer;
 }
+/*Display comments*/
+.display_comments{
+    padding: 10px;
+}
+.oneComment {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    background-color: rgb(202, 219, 219)
+}
+.comment_delete_icon:hover {
+    color:red;
+    cursor:pointer;
+}
+
 @media screen and (max-width:1000px){
     .card_container {
         width:60%;

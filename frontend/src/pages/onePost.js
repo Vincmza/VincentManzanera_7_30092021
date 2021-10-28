@@ -6,8 +6,9 @@ import axios from "axios";
 
 /*Components*/
 import Like from "../components/posts/likeButton"
+import CommentCard from "../components/posts/commentCard";
 
-const OnePost = () => {
+const OnePost = (props) => {
     /*Getting back userId and token*/
     const user = JSON.parse(localStorage.getItem("connectedUser"));
     const token = user.token;
@@ -26,10 +27,10 @@ const OnePost = () => {
             withCredentials: true,
         })
             .then((post) => {
-                console.log(post)
                 setPostData(post.data);
-                setLikesData(post.data.likes.length);
-                setCommentsData(post.data.comments.length)                             
+                setLikesData(post.data.likes);
+                setCommentsData(post.data.comments)
+                console.log(commentsData)                          
             })
             .catch((error) => {
                 console.log(error);
@@ -52,17 +53,22 @@ const OnePost = () => {
                 <button className="like_post" type="submit">
                     <Like />
                 </button>
-                <span className="like_number">{likesData}</span>
+                <span className="like_number">{likesData.length}</span>
             </div>
             <div className="comment_section">
                 <div className="comment_icon">
                     <FaRegComment />
                 </div>
-                <span className="comment_numbers">{commentsData}</span>
+                <span className="comment_numbers">{commentsData.length}</span>
                 <div className="post_delete_icon">
                     <FaTrashAlt />
                 </div>
             </div>
+            <ul className="display_comments">
+                {commentsData.map((comment)=>{
+                    return <CommentCard comment={comment} key={comment.comment_id}/>;
+                })}
+            </ul>
         </div>
     );
 };
