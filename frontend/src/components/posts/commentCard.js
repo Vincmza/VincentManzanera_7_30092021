@@ -14,7 +14,6 @@ const CommentCard = (props) => {
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
             url: `http://localhost:8081/api/commentaires/${props.comment.comment_id}`,
             withCredentials: true,
-            data : {userId : user.userId}
         })
         .then((res)=>{
             window.location.reload()

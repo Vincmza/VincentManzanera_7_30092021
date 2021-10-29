@@ -19,7 +19,6 @@ const NewComment = () => {
             withCredentials: true,
             data: {
                 newCommentContent,
-                userId : user.userId
             }
          })
          .then((newComment)=>{
