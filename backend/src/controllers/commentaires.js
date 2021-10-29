@@ -25,10 +25,10 @@ exports.modifyComment = (req, res) => {
 exports.deleteComment = (req, res) => {
     connection
         .query("DELETE FROM commentaires WHERE id = ?", req.params['commentId'])
-        .then((comment) => {
-            res.json(comment);
+        .then((commentDeleted) => {
+            res.status(200).json(commentDeleted);
         })
-        .catch((err) => {
-            console.log(err);
+        .catch((error) => {
+            res.status(400).json(error);
         });
 }

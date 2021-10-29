@@ -8,6 +8,7 @@ import Home from "../../pages/home"
 import Profile from '../../pages/profile';
 import NewPost from '../../pages/new-post';
 import OnePost from '../../pages/onePost';
+import CommentCard from '../posts/commentCard';
 
 const index = () => {
     return (
@@ -19,6 +20,7 @@ const index = () => {
                     <Route path="/profile" exact component={Profile}></Route>
                     <Route exact path="/new-post" component={NewPost} />
                     <Route exact path="/posts/:postId" component={OnePost}/>
+                    <Route exact path="/commentaires/:commentId" component={CommentCard}/>
                     <Redirect to="/profile"></Redirect>
                 </Switch>
             </Router>
