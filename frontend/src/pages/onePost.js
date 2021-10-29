@@ -51,13 +51,19 @@ const OnePost = (props) => {
             .then((post) => {
                 setPostData(post.data);
                 setLikesData(post.data.likes);
-                setCommentsData(post.data.comments)
-                console.log(commentsData)                          
+                setCommentsData(post.data.comments)                         
             })
             .catch((error) => {
                 console.log(error);
             });
     }, []);
+    
+
+    const userVerify = ()=>{
+        if(user.userId == postData.post_user_id){
+            return <FaTrashAlt onClick={handleDeletePost}/>
+        }
+    }
 
     return (
         <div className="card_container" key={postData.post_id}>
@@ -83,7 +89,7 @@ const OnePost = (props) => {
                 </div>
                 <span className="comment_numbers">{commentsData.length}</span>
                 <div className="post_delete_icon">
-                    <FaTrashAlt onClick={handleDeletePost}/>
+                   {userVerify()}
                 </div>
             </div>
             <div className="create_new_comment">

@@ -2,7 +2,7 @@ const connection = require('../service/database');
 
 exports.getAllPosts = (req, res) => {
     connection
-        .query("SELECT posts.id, posts.title, posts.content_post, posts.user_id, commentaires.id as commentaires_id, commentaires.content_comment, commentaires.user_id, user_post.username, user_comment.username as comment_username, likes.id as likes_id, likes.user_id as likes_user_id, likes.post_id as likes_post_id, likes.liked FROM posts LEFT JOIN commentaires ON posts.id = commentaires.post_id LEFT JOIN users as user_post ON user_post.id = posts.user_id LEFT JOIN users as user_comment ON user_comment.id = commentaires.user_id LEFT JOIN likes ON likes.post_id = posts.id ORDER BY posts.id DESC")
+        .query("SELECT posts.id, posts.title, posts.content_post, posts.user_id as post_user_id, commentaires.id as commentaires_id, commentaires.content_comment, commentaires.user_id, user_post.username, user_comment.username as comment_username, likes.id as likes_id, likes.user_id as likes_user_id, likes.post_id as likes_post_id, likes.liked FROM posts LEFT JOIN commentaires ON posts.id = commentaires.post_id LEFT JOIN users as user_post ON user_post.id = posts.user_id LEFT JOIN users as user_comment ON user_comment.id = commentaires.user_id LEFT JOIN likes ON likes.post_id = posts.id ORDER BY posts.id DESC")
         .then((postList) => {
             const listOfAllPosts = []
             postList.forEach(postData => {
@@ -10,7 +10,7 @@ exports.getAllPosts = (req, res) => {
                     post_id : postData.id,
                     post_title : postData.title,
                     post_content : postData.content_post,
-                    user_id : postData.user_id,
+                    user_id : postData.post_user_id,
                     username : postData.username,
                     listComment : [],
                     listLikes : []
@@ -139,7 +139,7 @@ exports.modifyPost = (req, res) => {
 
 exports.deletePost = (req, res) => {
     connection
-        .query("DELETE FROM posts WHERE id = ?", [req.params["postId"]])
+        .query("DELETE FROM posts WHERE id = ? AND user_id = ?", [req.params["postId"], req.body.userId])
         .then((postDeleted) => {
             console.log(postDeleted)
             res.status(200).json(postDeleted);

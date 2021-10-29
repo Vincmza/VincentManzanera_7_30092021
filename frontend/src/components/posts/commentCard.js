@@ -9,7 +9,6 @@ const CommentCard = (props) => {
 
     const handleDeleteComment = ((e)=>{
         e.preventDefault()
-
         axios({
             method: "delete",
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
@@ -25,14 +24,18 @@ const CommentCard = (props) => {
             
             console.log(error)
         })
-
     })
+    const userVerify = ()=>{
+        if(user.userId == props.comment.comment_user_id){
+            return <FaTrashAlt onClick={handleDeleteComment}/>
+        }
+    }
     return (
         <li className="comment-container">
             <div className="comment_username">{props.comment.comment_username}</div>
             <div className="oneComment">
                 <div className="comment_content">{props.comment.comment_content}</div>
-                <span className="comment_delete_icon"><FaTrashAlt onClick={handleDeleteComment}/></span>
+                <span className="comment_delete_icon">{userVerify()}</span>
             </div>
         </li>
     );

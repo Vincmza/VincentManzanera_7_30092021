@@ -37,6 +37,12 @@ const Card = (props) => {
             setIsLoading(false);
         }
     }, []);
+    const userVerify = ()=>{
+        if(user.userId == props.post.user_id){
+            return <FaTrashAlt onClick={handleDeletePost}/>
+        }
+    }
+    
     return (
         <li className="card_container" key={props.post.post_id}>
             {isLoading ? (
@@ -66,7 +72,7 @@ const Card = (props) => {
                             </div>
                             <span className="comment_numbers">{props.post.listComment.length}</span>
                             <div className="post_delete_icon">
-                                <FaTrashAlt onClick={handleDeletePost}/>
+                                {userVerify()}
                             </div>
                         </div>
                     </Link>
