@@ -139,11 +139,13 @@ exports.modifyPost = (req, res) => {
 
 exports.deletePost = (req, res) => {
     connection
-        .query("DELETE FROM posts WHERE id = ?", req.params['postId'])
-        .then((post) => {
-            res.json(post);
+        .query("DELETE FROM posts WHERE id = ?", [req.params["postId"]])
+        .then((postDeleted) => {
+            console.log(postDeleted)
+            res.status(200).json(postDeleted);
         })
-        .catch((err) => {
-            console.log(err);
+        .catch((error) => {
+            console.log(error)
+            res.status(400).json(error);
         });
 }

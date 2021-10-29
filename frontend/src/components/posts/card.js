@@ -4,11 +4,34 @@ import { FaSpinner, FaRegComment, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Like from "./likeButton";
 import "./card.css";
+import axios from "axios";
 
 const Card = (props) => {
+    /*Getting back userId and token*/
+    const user = JSON.parse(localStorage.getItem("connectedUser"));
+    const token = user.token;
     /*Hook displaying loading logo if data retrieve is too long*/
     const [isLoading, setIsLoading] = useState(true);
 
+    /*function to delete a post*/
+    const handleDeletePost =((e)=>{
+        e.preventDefault()
+        axios({
+            method: "delete",
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+            url: `http://localhost:8081/api/posts/${props.post.post_id}`,
+            withCredentials: true,
+            data : {userId : user.userId}
+        })
+        .then((res)=>{
+            window.location.reload()
+            console.log(res)
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+    })
+    /*if data takes too long to come loading icon is displayed*/
     useEffect(() => {
         if (props != null) {
             setIsLoading(false);
@@ -43,7 +66,7 @@ const Card = (props) => {
                             </div>
                             <span className="comment_numbers">{props.post.listComment.length}</span>
                             <div className="post_delete_icon">
-                                <FaTrashAlt/>
+                                <FaTrashAlt onClick={handleDeletePost}/>
                             </div>
                         </div>
                     </Link>

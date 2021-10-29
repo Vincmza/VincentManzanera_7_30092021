@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {useHistory} from "react-router-dom";
 import { BiUser } from "react-icons/bi";
 import { FaRegComment, FaTrashAlt } from "react-icons/fa";
 import { useParams } from "react-router";
@@ -10,6 +11,7 @@ import CommentCard from "../components/posts/commentCard";
 import NewComment from "./new-comment";
 
 const OnePost = (props) => {
+    const history = useHistory()
     /*Getting back userId and token*/
     const user = JSON.parse(localStorage.getItem("connectedUser"));
     const token = user.token;
@@ -19,6 +21,25 @@ const OnePost = (props) => {
     const [postData, setPostData] = useState([]);
     const [likesData, setLikesData] = useState([]);
     const [commentsData, setCommentsData] = useState([]);
+
+    /*function to delete a post*/
+    const handleDeletePost =((e)=>{
+        e.preventDefault()
+        axios({
+            method: "delete",
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+            url: `http://localhost:8081/api/posts/${postData.post_id}`,
+            withCredentials: true,
+            data : {userId : user.userId}
+        })
+        .then((res)=>{
+            history.push("/");
+            console.log(res)
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+    })
 
     useEffect(async() => {
         axios({
@@ -62,7 +83,7 @@ const OnePost = (props) => {
                 </div>
                 <span className="comment_numbers">{commentsData.length}</span>
                 <div className="post_delete_icon">
-                    <FaTrashAlt />
+                    <FaTrashAlt onClick={handleDeletePost}/>
                 </div>
             </div>
             <div className="create_new_comment">

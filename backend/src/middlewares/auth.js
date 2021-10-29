@@ -3,7 +3,6 @@ require("dotenv").config();
 
 /*Check if user is authentified because of the token*/
 module.exports = (req, res, next) => {
-    console.log("voilà :", req.body)
     try {
         const token = req.headers.authorization.split(" ")[1];
         const decodedToken = jwt.verify(token, process.env.secretToken);
