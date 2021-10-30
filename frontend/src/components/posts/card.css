@@ -39,6 +39,7 @@
 }
 .update_post_icon:hover{
     color:rgb(253, 45, 1);
+    cursor: pointer;
 }
 /*post_body includes title and content of the post*/
 .post_body {
@@ -110,8 +111,10 @@
 .display_comments{
     padding: 10px;
 }
-.comment_container {
-    position:absolute;
+.comment-container_settings {
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
 }
 .oneComment {
     display: flex;
@@ -129,6 +132,16 @@
     color:red;
     cursor:pointer;
 }
+/*About update comment icon*/
+.comment_update_icon {
+    display: flex;
+    align-items: center;
+    font-size:0.8em;
+}
+.comment_update_icon:hover {
+    color:rgb(253, 45, 1);
+    cursor: pointer;
+}
 .comment_username {
     width:30%;
     border-radius: 30px;
@@ -137,8 +150,6 @@
     color: rgb(253, 45, 1);
     padding: 5px 0px;
     margin-bottom: 5px;
-    position: relative;
-    left:20px;
 }
 /*comment creation*/
 .create_new_comment {
@@ -177,24 +188,39 @@
     .card_container {
         width:60%;
     }
+    .comment-container_settings {
+        width:25%;
+    }
 }
 @media screen and (max-width:700px){
     .card_container {
         width:70%;
+    }
+    .comment-container_settings {
+        width:30%;
     }
 }
 @media screen and (max-width:550px){
     .card_container {
         width:75%;
     }
+    .comment-container_settings {
+        width:35%;
+    }
 }
 @media screen and (max-width:450px){
     .card_container {
         width:80%;
     }
+    .comment-container_settings {
+        width:40%;
+    }
 }
 @media screen and (max-width:350px){
     .card_container {
         width:90%;
+    }
+    .comment-container_settings {
+        width:45%;
     }
 }

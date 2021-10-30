@@ -14,40 +14,40 @@ const Card = (props) => {
     const [isLoading, setIsLoading] = useState(true);
 
     /*function to delete a post*/
-    const handleDeletePost =((e)=>{
-        e.preventDefault()
+    const handleDeletePost = (e) => {
+        e.preventDefault();
         axios({
             method: "delete",
-            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+            headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
             url: `http://localhost:8081/api/posts/${props.post.post_id}`,
             withCredentials: true,
-            data : {userId : user.userId}
+            data: { userId: user.userId },
         })
-        .then((res)=>{
-            window.location.reload()
-            console.log(res)
-        })
-        .catch((error)=>{
-            console.log(error)
-        })
-    })
+            .then((res) => {
+                window.location.reload();
+                console.log(res);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
     /*if data takes too long to come loading icon is displayed*/
     useEffect(() => {
         if (props != null) {
             setIsLoading(false);
         }
     }, []);
-    const userVerifyDelete = ()=>{
-        if(user.userId == props.post.user_id){
-            return <FaTrashAlt onClick={handleDeletePost}/>
+    const userVerifyDelete = () => {
+        if (user.userId == props.post.user_id) {
+            return <FaTrashAlt onClick={handleDeletePost} />;
         }
-    }
-    const userVerifyUpdate = ()=>{
-        if(user.userId == props.post.user_id){
-            return <FaPencilAlt/>
+    };
+    const userVerifyUpdate = () => {
+        if (user.userId == props.post.user_id) {
+            return <FaPencilAlt />;
         }
-    }
-    
+    };
+
     return (
         <li className="card_container" key={props.post.post_id}>
             {isLoading ? (
@@ -55,31 +55,37 @@ const Card = (props) => {
             ) : (
                 <>
                     <Link to={`/posts/${props.post.post_id}`}>
+                        {/*header of the post*/}
                         <div className="post_header">
                             <div className="user_icon">
                                 <BiUser />
                             </div>
                             <div className="user_pseudo">{props.post.username}</div>
-                            <div className="update_post_container"><span className="update_post_icon">{userVerifyUpdate()}</span></div>
+                            {/*icon to update post if connected user is the writer of the post*/}
+                            <div className="update_post_container">
+                                <span className="update_post_icon">{userVerifyUpdate()}</span>
+                            </div>
                         </div>
+                        {/*body of the post*/}
                         <div className="post_body">
                             <div className="post_title">{props.post.post_title}</div>
                             <div className="post_content">{props.post.post_content}</div>
                         </div>
+                        {/*like button and number of likes*/}
                         <div className="like_tab__button">
                             <button className="like_post" type="submit">
-                                <Like/>
+                                <Like />
                             </button>
                             <span className="like_number">{props.post.listLikes.length}</span>
                         </div>
+                        {/*comment icon and number of comments*/}
                         <div className="comment_section">
                             <div className="comment_icon">
                                 <FaRegComment />
                             </div>
                             <span className="comment_numbers">{props.post.listComment.length}</span>
-                            <div className="post_delete_icon">
-                                {userVerifyDelete()}
-                            </div>
+                            {/*icon to delete post if connected user is the writer of this post*/}
+                            <div className="post_delete_icon">{userVerifyDelete()}</div>
                         </div>
                     </Link>
                 </>
