@@ -42,7 +42,7 @@ const UserPost = (props) => {
         axios({
             method: "post",
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-            url: `http://localhost:8081/api/posts/${user.userId}`,
+            url: `http://localhost:8081/api/posts/create-post`,
             withCredentials: true,
             data: {
                 newPostTitle,

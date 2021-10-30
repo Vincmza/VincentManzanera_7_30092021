@@ -63,14 +63,12 @@ exports.getAllPosts = (req, res) => {
 exports.createPost = (req, res) => {
     console.log(req.body)
     connection
-        .query("INSERT INTO posts (title, content_post, user_id) VALUES (?, ?, ?)", [req.body.newPostTitle, req.body.newPostContent, req.params["userId"]])
+        .query("INSERT INTO posts (title, content_post, user_id) VALUES (?, ?, ?)", [req.body.newPostTitle, req.body.newPostContent, req.userId])
         .then((newPost) => {
             res.status(201).json(newPost);
-            // console.log(newPost)
         })
         .catch((error) => {
             res.status(400).json(error);
-            // console.log(error)
         });
 }
 
@@ -139,7 +137,7 @@ exports.modifyPost = (req, res) => {
 
 exports.deletePost = (req, res) => {
     connection
-        .query("DELETE FROM posts WHERE id = ? AND user_id = ?", [req.params["postId"], req.body.userId])
+        .query("DELETE FROM posts WHERE id = ? AND user_id = ?", [req.params["postId"], req.userId])
         .then((postDeleted) => {
             console.log(postDeleted)
             res.status(200).json(postDeleted);
