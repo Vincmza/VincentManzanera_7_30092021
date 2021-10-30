@@ -24,7 +24,7 @@ const CommentCard = (props) => {
             console.log(error)
         })
     })
-    const userVerify = ()=>{
+    const userVerifyDelete = ()=>{
         if(user.userId == props.comment.comment_user_id){
             return <FaTrashAlt onClick={handleDeleteComment}/>
         }
@@ -34,7 +34,7 @@ const CommentCard = (props) => {
             <div className="comment_username">{props.comment.comment_username}</div>
             <div className="oneComment">
                 <div className="comment_content">{props.comment.comment_content}</div>
-                <span className="comment_delete_icon">{userVerify()}</span>
+                <span className="comment_delete_icon">{userVerifyDelete()}</span>
             </div>
         </li>
     );

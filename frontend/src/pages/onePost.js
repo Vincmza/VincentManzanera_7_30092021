@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {useHistory} from "react-router-dom";
 import { BiUser } from "react-icons/bi";
-import { FaRegComment, FaTrashAlt } from "react-icons/fa";
+import { FaRegComment, FaTrashAlt, FaPencilAlt } from "react-icons/fa";
 import { useParams } from "react-router";
 import axios from "axios";
 
@@ -59,12 +59,16 @@ const OnePost = (props) => {
     }, []);
     
 
-    const userVerify = ()=>{
+    const userVerifyDelete = ()=>{
         if(user.userId == postData.post_user_id){
             return <FaTrashAlt onClick={handleDeletePost}/>
         }
     }
-
+    const userVerifyUpdate = ()=>{
+        if(user.userId == postData.post_user_id){
+            return <FaPencilAlt/>
+        }
+    }
     return (
         <div className="card_container" key={postData.post_id}>
             <div className="post_header">
@@ -72,6 +76,7 @@ const OnePost = (props) => {
                     <BiUser />
                 </div>
                 <div className="user_pseudo">{postData.post_user_username}</div>
+                <div className="update_post_container"><span className="update_post_icon">{userVerifyUpdate()}</span></div>
             </div>
             <div className="post_body">
                 <div className="post_title">{postData.post_title}</div>
@@ -89,7 +94,7 @@ const OnePost = (props) => {
                 </div>
                 <span className="comment_numbers">{commentsData.length}</span>
                 <div className="post_delete_icon">
-                   {userVerify()}
+                   {userVerifyDelete()}
                 </div>
             </div>
             <div className="create_new_comment">

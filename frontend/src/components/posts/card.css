@@ -13,6 +13,7 @@
 }
 .post_header {
     display: flex;
+    padding:0px 20px;
 }
 .user_pseudo {
     margin-left: 10px;
@@ -24,6 +25,20 @@
 .user_icon {
     color: rgb(253, 45, 1);
     font-size: 1.2em;
+}
+/*pen icon as update post button*/
+.update_post_container {
+    width:100%;
+    display: flex;
+    justify-content: end;
+}
+.update_post_icon {
+    display: flex;
+    align-items: center;
+    font-size: 0.8em;
+}
+.update_post_icon:hover{
+    color:rgb(253, 45, 1);
 }
 /*post_body includes title and content of the post*/
 .post_body {
@@ -82,6 +97,7 @@
 }
 /*trash icon */
 .post_delete_icon {
+    font-size:0.8em;
     display: flex;
     align-items: center;
     margin-left:auto;  

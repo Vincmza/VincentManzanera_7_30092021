@@ -1,6 +1,6 @@
 import { BiUser } from "react-icons/bi";
 import React, { useEffect, useState } from "react";
-import { FaSpinner, FaRegComment, FaTrashAlt } from "react-icons/fa";
+import { FaSpinner, FaRegComment, FaTrashAlt, FaPencilAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Like from "./likeButton";
 import "./card.css";
@@ -37,9 +37,14 @@ const Card = (props) => {
             setIsLoading(false);
         }
     }, []);
-    const userVerify = ()=>{
+    const userVerifyDelete = ()=>{
         if(user.userId == props.post.user_id){
             return <FaTrashAlt onClick={handleDeletePost}/>
+        }
+    }
+    const userVerifyUpdate = ()=>{
+        if(user.userId == props.post.user_id){
+            return <FaPencilAlt/>
         }
     }
     
@@ -55,6 +60,7 @@ const Card = (props) => {
                                 <BiUser />
                             </div>
                             <div className="user_pseudo">{props.post.username}</div>
+                            <div className="update_post_container"><span className="update_post_icon">{userVerifyUpdate()}</span></div>
                         </div>
                         <div className="post_body">
                             <div className="post_title">{props.post.post_title}</div>
@@ -72,7 +78,7 @@ const Card = (props) => {
                             </div>
                             <span className="comment_numbers">{props.post.listComment.length}</span>
                             <div className="post_delete_icon">
-                                {userVerify()}
+                                {userVerifyDelete()}
                             </div>
                         </div>
                     </Link>
