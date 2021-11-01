@@ -7,6 +7,7 @@ const userRoute = require("./routes/user");
 const cors = require("cors");
 const auth = require("./middlewares/auth");
 
+
 const app = express();
 
 app.use((req,res, next)=>{
