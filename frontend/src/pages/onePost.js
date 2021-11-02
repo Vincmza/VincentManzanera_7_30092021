@@ -7,7 +7,7 @@ import axios from "axios";
 
 /*Components*/
 import Like from "../components/posts/likeButton";
-import CommentCard from "../components/posts/commentCard";
+import CommentCard from "../components/comments/commentCard";
 import NewComment from "./new-comment";
 
 const OnePost = (props) => {
@@ -27,7 +27,7 @@ const OnePost = (props) => {
         e.preventDefault();
         axios({
             method: "delete",
-            headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
             url: `http://localhost:8081/api/posts/${postData.post_id}`,
             withCredentials: true,
             data: { userId: user.userId },
@@ -44,7 +44,7 @@ const OnePost = (props) => {
     useEffect(async () => {
         axios({
             method: "get",
-            headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
             url: `http://localhost:8081/api/posts/${postId}`,
             withCredentials: true,
         })

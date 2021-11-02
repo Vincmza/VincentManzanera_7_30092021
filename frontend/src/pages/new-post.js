@@ -1,5 +1,5 @@
 import React from "react";
-import UserPost from "../components/posts/userPost";
+import UserPost from "../components/posts/postCreation/userPost";
 
 const NewPost = () => {
     return (

@@ -8,7 +8,7 @@ import Home from "../../pages/home"
 import Profile from '../../pages/profile';
 import NewPost from '../../pages/new-post';
 import OnePost from '../../pages/onePost';
-import CommentCard from '../posts/commentCard';
+import CommentCard from "../../components/comments/commentCard";
 
 const index = () => {
     return (
