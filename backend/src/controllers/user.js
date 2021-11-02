@@ -22,3 +22,15 @@ exports.getAllUsers = (req, res) => {
             res.status(400).json(error);
         });
 };
+exports.userDisabled = (req, res) => {
+    connection
+        .query("UPDATE users SET isActive = ? WHERE id = ?", [req.body.isActive, req.userId])
+        .then((userDisabled)=>{
+            console.log(userDisabled)
+            res.status(200).json({message : "Utilisateur désactivé"})
+        })
+        .catch((error)=>{
+            console.log(error)
+            res.status(400).json({message : "Problème lors de la désactivation"})
+        })
+}

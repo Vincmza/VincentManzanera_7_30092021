@@ -51,11 +51,13 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
     const data = { ...req.body };
-    console.log(data);
     connection
         .query("SELECT * FROM users WHERE email = ?", [data.email])
         .then((userData) => {
             const user = userData[0];
+            if(user.isActive == false){
+                throw {erreur : "Compte désactivé !"}
+            }
             if (!user) {
                 return res.status(401).json({ error: "Utilisateur inconnu" });
             }

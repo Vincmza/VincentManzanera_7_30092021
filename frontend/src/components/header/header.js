@@ -2,11 +2,13 @@
 import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import {useHistory} from "react-router-dom";
 import logo from "../../images/header_logo.png";
 import axios from "axios";
 import "./header.css";
 
 function Header(props) {
+    const history = useHistory()
     /*if top right icon clicked so display user infos pannel*/
     const [iconClicked, setIconClicked] = useState(false);
     /*Storing connected user infos*/
@@ -19,20 +21,22 @@ function Header(props) {
     const logOut = () => {
         localStorage.clear();
         userInfosPannel.innerHTML = "";
-    };  
+    };
     useEffect(() => {
-
         /*Get data from localstorage about connected user*/
 
         if (localStorage.getItem("connectedUser") != null) {
             const user = JSON.parse(localStorage.getItem("connectedUser"));
-            const token = user.token
+            const token = user.token;
 
-             /*Get user data from API*/
+            /*Get user data from API*/
             const getInfos = async () => {
                 axios({
                     method: "get",
-                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`},
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
                     url: `http://localhost:8081/api/users/${user.userId}`,
                     withCredentials: true,
                 })
@@ -46,6 +50,30 @@ function Header(props) {
             getInfos();
         }
     }, []);
+
+    const deleteAccount = () => {
+        const user = JSON.parse(localStorage.getItem("connectedUser"));
+        const token = user.token;
+
+        axios({
+            method: "put",
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+            url: `http://localhost:8081/api/users/delete-account`,
+            withCredentials: true,
+            data: { isActive: false },
+        })
+            .then((res) => {
+                console.log(res, "Compte désactivé");
+                logOut();
+                history.push("/profile")
+                alert("Compte supprimé")
+
+            })
+            .catch((error) => {
+                console.log(error, "Problème lors de la désactivation");
+            });
+    };
+
     /*Return Header including connected user infos*/
     return (
         <header className="head">
@@ -79,6 +107,9 @@ function Header(props) {
                                 </span>
                             </NavLink>
                         </p>
+                        <div className="delete_account" onClick={deleteAccount}>
+                            Supprimer mon compte
+                        </div>
                     </div>
                 ) : (
                     <div></div>

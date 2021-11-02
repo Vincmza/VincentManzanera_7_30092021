@@ -45,6 +45,10 @@ function Login(props) {
                 emailError.innerHTML = `<p>Identifiant incorrect ou mot de passe inccorect</p>`;
                 passwordError.innerHTML = `<p>Identifiant incorrect ou mot de passe inccorect</p>`;
             }
+            if(error.response.data.erreur === "Compte désactivé !"){
+                emailError.innerHTML = `<p>Identifiant inconnu</p>`;
+                passwordError.innerHTML = `<p>Mot de passe inconnu</p>`;
+            }
         })
     }
 

@@ -68,6 +68,21 @@
     margin-top: 15px;
     font-size: 0.9em;
 }
+.delete_account {
+    border-top: 1px solid rgb(253, 45, 1);
+    font-size: 0.8em;
+    color: black;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+}
+.delete_account:hover {
+    border-radius: 20px;
+    background-color: rgb(237, 95, 85);
+    color: white;
+    cursor:pointer;
+}
 .logout_logo {
     font-size: 1.6em;
     display: block;
