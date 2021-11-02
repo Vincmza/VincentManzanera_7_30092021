@@ -13,12 +13,14 @@ exports.createComment = (req, res) => {
 
 exports.modifyComment = (req, res) => {
     connection
-        .query("UPDATE commentaires SET ? WHERE id = ?", [req.body, req.params['commentId']])
-        .then((comment) => {
-            res.json(comment);
+        .query("UPDATE commentaires SET content_comment = ? WHERE id = ? AND user_id = ?", [req.body.updateCommentContent, req.params['commentId'], req.userId])
+        .then((modifiedComment) => {
+            console.log(modifiedComment)
+            res.status(200).json("Commentaire modifié !");
         })
-        .catch((err) => {
-            console.log(err);
+        .catch((error) => {
+            console.log(error)
+            res.status(400).json("Echec lors de la modification du commentaire");
         });
 }
 

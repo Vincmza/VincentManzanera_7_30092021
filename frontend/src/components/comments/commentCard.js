@@ -2,6 +2,9 @@ import React from 'react'
 import {FaTrashAlt, FaPencilAlt} from "react-icons/fa"
 import axios from "axios"
 
+/*components*/
+import { Link } from 'react-router-dom';
+
 const CommentCard = (props) => {
     /*Getting back userId and token*/
     const user = JSON.parse(localStorage.getItem("connectedUser"));
@@ -31,7 +34,7 @@ const CommentCard = (props) => {
     }
     const userVerifyUpdate = ()=>{
         if(user.userId == props.comment.comment_user_id){
-            return <FaPencilAlt/>
+            return <Link className="update_comment_icon_color" to="/update-comment"><FaPencilAlt/></Link>
         }
     }
     return (

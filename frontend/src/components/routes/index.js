@@ -9,6 +9,7 @@ import Profile from '../../pages/profile';
 import NewPost from '../../pages/new-post';
 import OnePost from '../../pages/onePost';
 import CommentCard from "../../components/comments/commentCard";
+import UpdateComment from '../comments/updateComment/updateComment';
 
 const index = () => {
     return (
@@ -19,6 +20,7 @@ const index = () => {
                     <Route path="/" exact component={Home}></Route>                  
                     <Route path="/profile" exact component={Profile}></Route>
                     <Route exact path="/new-post" component={NewPost} />
+                    <Route exact path="/update-comment" component={UpdateComment}/>
                     <Route exact path="/posts/:postId" component={OnePost}/>
                     <Route exact path="/commentaires/:commentId" component={CommentCard}/>
                     <Redirect to="/profile"></Redirect>

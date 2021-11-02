@@ -138,7 +138,10 @@
     align-items: center;
     font-size:0.8em;
 }
-.comment_update_icon:hover {
+.update_comment_icon_color {
+    color: black;
+}
+.update_comment_icon_color:hover {
     color:rgb(253, 45, 1);
     cursor: pointer;
 }
