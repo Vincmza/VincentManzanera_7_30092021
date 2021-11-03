@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import {BsArrowLeftSquareFill} from "react-icons/bs"
 import "./updateComment.css";
 
 const UpdateComment = () => {
@@ -12,7 +13,6 @@ const UpdateComment = () => {
     const token = user.token;
     /*Stored form data*/
     const [updateCommentContent, setUpdateCommentContent] = useState("");
-
     const [comment, setComment] = useState([]);
 
     useEffect (()=>{
@@ -48,20 +48,25 @@ const UpdateComment = () => {
                 console.log(error);
             });
     };
+    console.log(comment)
     return (
         <div>
             <form className="update_comment">
+                <div className="back_button">
+                   <Link to={`/posts/${comment.post_id}`}><BsArrowLeftSquareFill/></Link>
+                </div>
                 <div className="comment_updated">
                     <label for="comment_updated"></label>
                     <textarea
                         id="comment_updated"
+                        name="comment_updated"
                         type="text"
                         minLength="1"
                         maxLength="1600"
                         aria-describedby="comment_content"
                         onChange={(e) => setUpdateCommentContent(e.target.value)}
                         value={updateCommentContent}
-                        placeholder="Actualisez votre commentaire"
+                        placeholder={`${comment.content_comment}`}
                         required
                     ></textarea>
                 </div>
