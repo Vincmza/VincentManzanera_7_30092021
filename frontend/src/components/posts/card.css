@@ -37,9 +37,12 @@
     align-items: center;
     font-size: 0.8em;
 }
-.update_post_icon:hover{
+.update_post_icon > a:hover{
     color:rgb(253, 45, 1);
     cursor: pointer;
+}
+.update_post_icon > a {
+    color: black;
 }
 /*post_body includes title and content of the post*/
 .post_body {

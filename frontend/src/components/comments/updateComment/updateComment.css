@@ -33,7 +33,7 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 #comment_updated::placeholder{
-    color:black;
+    color:rgb(22, 91, 201);
     font-size: 0.9em;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

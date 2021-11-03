@@ -52,7 +52,7 @@ const UpdateComment = () => {
     return (
         <div>
             <form className="update_comment">
-                <div className="back_button">
+                <div className="back_button" title="Retour sur le post">
                    <Link to={`/posts/${comment.post_id}`}><BsArrowLeftSquareFill/></Link>
                 </div>
                 <div className="comment_updated">

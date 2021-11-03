@@ -44,7 +44,7 @@ const Card = (props) => {
     };
     const userVerifyUpdate = () => {
         if (user.userId == props.post.user_id) {
-            return <FaPencilAlt />;
+            return <Link to={`update-post/${props.post.post_id}`}><FaPencilAlt /></Link>;
         }
     };
 

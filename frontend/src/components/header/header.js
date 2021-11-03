@@ -35,9 +35,9 @@ function Header(props) {
                     method: "get",
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
+                        "Authorization": `Bearer ${token}`,
                     },
-                    url: `http://localhost:8081/api/users/${user.userId}`,
+                    url: `http://localhost:8081/api/users/connected-user`,
                     withCredentials: true,
                 })
                     .then((userData) => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { BiUser } from "react-icons/bi";
 import { FaRegComment, FaTrashAlt, FaPencilAlt } from "react-icons/fa";
 import { useParams } from "react-router";
@@ -65,7 +65,7 @@ const OnePost = (props) => {
     };
     const userVerifyUpdate = () => {
         if (user.userId == postData.post_user_id) {
-            return <FaPencilAlt />;
+            return <Link to={`/update-post/${postId}`}><FaPencilAlt /></Link>;
         }
     };
     return (

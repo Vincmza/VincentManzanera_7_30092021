@@ -4,7 +4,7 @@
     border:1px solid rgb(47, 1, 120);
     width:50%;
     margin: auto;
-    margin-top:30px;
+    margin-top:50px;
     padding: 15px;
     border-radius: 30px;
     background-color: rgb(252, 232, 172);
@@ -46,7 +46,7 @@
 .create_post textarea {
     resize: none;
     width:100%;
-    height: 100px;
+    height: 150px;
     margin-top: 10px;
     border-radius: 10px;
     padding:8px;
@@ -68,6 +68,7 @@ textarea:focus {
     font-size: 1.4em;
     display: flex;
     align-items: center;
+    padding-left:0px;
     border:none;
     background-color: rgb(252, 232, 172);
 }
