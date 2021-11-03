@@ -126,12 +126,14 @@ exports.getOnePost = (req, res) => {
 
 exports.modifyPost = (req, res) => {
     connection
-        .query("UPDATE posts SET ? WHERE id = ?", [req.body, req.params['postId']])
-        .then((post) => {
-            res.json(post);
+        .query("UPDATE posts SET title = ?, content_post = ? WHERE id = ? AND user_id = ?", [req.body.updatedPostTitle, req.body.updatedPostContent, req.params['postId'], req.userId])
+        .then((modifiedPost) => {
+            console.log(modifiedPost)
+            res.status(200).json(modifiedPost)
         })
-        .catch((err) => {
-            console.log(err);
+        .catch((error) => {
+            console.log(error)
+            res.status(400).json(error);
         });
 }
 
