@@ -7,7 +7,6 @@ function routeSecure (table){
                 .query(`SELECT count(*) as Result from ${table} WHERE user_id = ? AND id = ?`, [req.userId, id ])
                 .then((userVerified)=>{
                     const verification = {...userVerified[0]}
-                    console.log(verification)
                     if(verification.Result == 1){
                         res.status(200).json("Permission accordée")
                     }
