@@ -76,8 +76,7 @@ exports.createPost = (req, res) => {
 exports.getOnePost = (req, res) => {
     connection
         .query("SELECT posts.id, posts.title, posts.content_post, posts.user_id as post_user_id, commentaires.id AS comment_id, commentaires.user_id as comment_user_id, commentaires.content_comment AS comment_content, users.username, likes.id as like_id, likes.user_id AS like_user_id, likes.liked, comment_user.username AS comment_username FROM posts LEFT JOIN users ON posts.user_id = users.id LEFT JOIN commentaires ON posts.id = commentaires.post_id LEFT JOIN likes ON posts.id = likes.post_id LEFT JOIN users AS comment_user ON commentaires.user_id = comment_user.id WHERE posts.id = ? ORDER BY commentaires.id DESC", req.params['postId'])
-        .then((post) => {
-            console.log(post)          
+        .then((post) => {        
                 const onePost = {
                     post_id : post[0].id,
                     post_user_id : post[0].post_user_id,
@@ -115,7 +114,6 @@ exports.getOnePost = (req, res) => {
                 }
             })            
             res.status(200).json(onePost);
-            console.log(onePost)
             
         })
         .catch((error) => {
@@ -128,7 +126,6 @@ exports.modifyPost = (req, res) => {
     connection
         .query("UPDATE posts SET title = ?, content_post = ? WHERE id = ? AND user_id = ?", [req.body.updatedPostTitle, req.body.updatedPostContent, req.params['postId'], req.userId])
         .then((modifiedPost) => {
-            console.log(modifiedPost)
             res.status(200).json(modifiedPost)
         })
         .catch((error) => {
@@ -141,7 +138,6 @@ exports.deletePost = (req, res) => {
     connection
         .query("DELETE FROM posts WHERE id = ? AND user_id = ?", [req.params["postId"], req.userId])
         .then((postDeleted) => {
-            console.log(postDeleted)
             res.status(200).json(postDeleted);
         })
         .catch((error) => {

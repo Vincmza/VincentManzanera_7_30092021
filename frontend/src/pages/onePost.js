@@ -89,7 +89,7 @@ const OnePost = (props) => {
             {/*like button and number of likes*/}
             <div className="like_tab__button">
                 <button className="like_post" type="submit">
-                    <Like />
+                    <Like postId={postData.post_id}/>
                 </button>
                 <span className="like_number">{likesData.length}</span>
             </div>

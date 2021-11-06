@@ -2,7 +2,7 @@ const connection = require('../service/database');
 
 function routeSecure (table){
         return function (req, res, next){
-            const id = req.params["postId"] || req.params["commentId"]
+            const id = req.params["postId"] || req.params["commentId"] || req.params["likeId"]
             connection
                 .query(`SELECT count(*) as Result from ${table} WHERE user_id = ? AND id = ?`, [req.userId, id ])
                 .then((userVerified)=>{

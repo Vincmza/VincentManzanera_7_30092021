@@ -55,12 +55,13 @@ exports.login = (req, res, next) => {
         .query("SELECT * FROM users WHERE email = ?", [data.email])
         .then((userData) => {
             const user = userData[0];
-            if(user.isActive == false){
-                throw {erreur : "Compte désactivé !"}
-            }
             if (!user) {
                 return res.status(401).json({ error: "Utilisateur inconnu" });
             }
+            if(user.isActive == false){
+                throw {erreur : "Compte désactivé !"}
+            }
+            
             bcrypt
                 .compare(data.password, user.password)
                 .then((valid) => {

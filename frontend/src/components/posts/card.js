@@ -74,7 +74,7 @@ const Card = (props) => {
                         {/*like button and number of likes*/}
                         <div className="like_tab__button">
                             <button className="like_post" type="submit">
-                                <Like />
+                                <Like postId={props.post.post_id}/>
                             </button>
                             <span className="like_number">{props.post.listLikes.length}</span>
                         </div>
