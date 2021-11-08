@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlineLike, AiFillTrophy} from "react-icons/ai";
+import { AiOutlineLike, AiFillLike} from "react-icons/ai";
 import axios from "axios";
 
 const Like = (props) => {
@@ -71,7 +71,7 @@ const Like = (props) => {
         if(likeState == false){
             return <AiOutlineLike onClick={like_post}/>
         } else {
-            return <AiFillTrophy onClick={unlike_post}/>
+            return <AiFillLike onClick={unlike_post}/>
         }
     }
     return (

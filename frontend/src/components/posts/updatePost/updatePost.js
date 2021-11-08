@@ -49,14 +49,14 @@ const UpdatePost = () => {
             withCredentials: true,
         })
             .then((currentPost) => {
-                setCurrentPost(currentPost.data);
+                setUpdatedPostContent(currentPost.data.post_content);
+                setUpdatedPostTitle(currentPost.data.post_title);
                 
             })
             .catch((error) => {
                 console.log(error);
             });
     }, []);
-    console.log(currentPost)
 
     /*Function to update an existing post*/
     const handleUpdatedPost = async (e) => {
@@ -104,7 +104,7 @@ const UpdatePost = () => {
                             aria-describedby="post_title"
                             onChange={(e) => setUpdatedPostTitle(e.target.value)}
                             value={updatedPostTitle}
-                            placeholder={`${currentPost.post_title}`}
+                            placeholder="Actualisez le titre de votre post"
                             required
                         ></input>
                     </div>
@@ -120,7 +120,7 @@ const UpdatePost = () => {
                             autoFocus
                             onChange={(e) => setUpdatedPostContent(e.target.value)}
                             value={updatedPostContent}
-                            placeholder={`${currentPost.post_content}`}
+                            placeholder="Actualisez le contenu de votre post"
                             required
                         ></textarea>
                         <div className="new_post_image"></div>

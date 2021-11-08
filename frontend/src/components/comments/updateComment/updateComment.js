@@ -24,6 +24,7 @@ const UpdateComment = () => {
         })
             .then((comment) => {
                 setComment(comment.data);
+                setUpdateCommentContent(comment.data.content_comment)
             })
             .catch((error) => {
                 console.log(error);
@@ -66,7 +67,7 @@ const UpdateComment = () => {
                         aria-describedby="comment_content"
                         onChange={(e) => setUpdateCommentContent(e.target.value)}
                         value={updateCommentContent}
-                        placeholder={`${comment.content_comment}`}
+                        placeholder="Actualisez votre commentaire"
                         required
                     ></textarea>
                 </div>

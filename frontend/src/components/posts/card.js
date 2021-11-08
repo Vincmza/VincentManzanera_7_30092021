@@ -20,8 +20,7 @@ const Card = (props) => {
             method: "delete",
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
             url: `http://localhost:8081/api/posts/${props.post.post_id}`,
-            withCredentials: true,
-            data: { userId: user.userId },
+            withCredentials: true
         })
             .then((res) => {
                 window.location.reload();

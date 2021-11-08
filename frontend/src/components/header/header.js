@@ -66,7 +66,7 @@ function Header(props) {
                 console.log(res, "Compte désactivé");
                 logOut();
                 history.push("/profile")
-                alert("Compte supprimé")
+                window.confirm("Voulez-vous vraiment supprimer votre compte ?")
 
             })
             .catch((error) => {

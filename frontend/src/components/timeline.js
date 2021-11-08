@@ -16,7 +16,7 @@ const Timeline = () => {
         axios({
             method: "get",
             headers: { "Content-Type": "application/json", "authorization": `Bearer ${token}` },
-            url: "http://localhost:8081/api/posts",
+            url: process.env.REACT_APP_API_URL+"api/posts",
             withCredentials: true,
         })
             .then((posts) => {
