@@ -42,6 +42,7 @@ function Header(props) {
                 })
                     .then((userData) => {
                         setUserData(userData.data);
+                        localStorage.setItem("userRole", JSON.stringify(userData.data.role_id));
                     })
                     .catch((error) => {
                         console.log(error);
@@ -50,6 +51,7 @@ function Header(props) {
             getInfos();
         }
     }, []);
+    console.log(userData)
 
     const deleteAccount = () => {
         const user = JSON.parse(localStorage.getItem("connectedUser"));

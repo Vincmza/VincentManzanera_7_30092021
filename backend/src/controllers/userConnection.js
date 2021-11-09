@@ -65,28 +65,24 @@ exports.login = (req, res, next) => {
             bcrypt
                 .compare(data.password, user.password)
                 .then((valid) => {
-                    console.log(valid);
                     if (!valid) {
                         return res
                             .status(401)
                             .json({ error: "Mot de passe incorrect" });
                     }
-                    console.log(process.env.tokenExpiration)
                     res.status(200).json({
                         userId: user.id,
-                        token: jwt.sign({ userId: user.id }, process.env.secretToken, {
+                        token: jwt.sign({ userId: user.id, roleId: user.role_id }, process.env.secretToken, {
                             expiresIn: process.env.tokenExpiration
                         }),
                     });
-                    console.log(res);
                 })
-                .catch((error) => {
-                    console.log(error)
+                .catch((error) => {                   
                     res.status(500).json(error);
                 });
+            // res.status(200).json(user)
         })
         .catch((error) => {
-            console.log(error)
             res.status(500).json(error);
         });
 };

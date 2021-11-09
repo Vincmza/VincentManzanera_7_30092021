@@ -9,6 +9,7 @@ import axios from "axios";
 const Card = (props) => {
     /*Getting back userId and token*/
     const user = JSON.parse(localStorage.getItem("connectedUser"));
+    const userRole = JSON.parse(localStorage.getItem("userRole"));
     const token = user.token;
     /*Hook displaying loading logo if data retrieve is too long*/
     const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +24,7 @@ const Card = (props) => {
             withCredentials: true
         })
             .then((res) => {
-                window.location.reload();
+                // window.location.reload();
                 console.log(res);
             })
             .catch((error) => {
@@ -37,12 +38,12 @@ const Card = (props) => {
         }
     }, []);
     const userVerifyDelete = () => {
-        if (user.userId == props.post.user_id) {
+        if (user.userId == props.post.user_id || userRole == 2) {
             return <FaTrashAlt onClick={handleDeletePost} />;
         }
     };
     const userVerifyUpdate = () => {
-        if (user.userId == props.post.user_id) {
+        if (user.userId == props.post.user_id || userRole == 2) {
             return <Link to={`update-post/${props.post.post_id}`}><FaPencilAlt /></Link>;
         }
     };

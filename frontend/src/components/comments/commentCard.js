@@ -9,6 +9,8 @@ const CommentCard = (props) => {
     /*Getting back userId and token*/
     const user = JSON.parse(localStorage.getItem("connectedUser"));
     const token = user.token;
+    /*Getting back user role from local storage*/
+    const userRole = JSON.parse(localStorage.getItem("userRole"));
 
     const handleDeleteComment = ((e)=>{
         e.preventDefault()
@@ -28,12 +30,12 @@ const CommentCard = (props) => {
         })
     })
     const userVerifyDelete = ()=>{
-        if(user.userId == props.comment.comment_user_id){
+        if(user.userId == props.comment.comment_user_id || userRole == 2){
             return <FaTrashAlt onClick={handleDeleteComment}/>
         }
     }
     const userVerifyUpdate = ()=>{
-        if(user.userId == props.comment.comment_user_id){
+        if(user.userId == props.comment.comment_user_id || userRole == 2){
             return <Link className="update_comment_icon_color" to={`/update-comment/${props.comment.comment_id}`}><FaPencilAlt/></Link>
         }
     }

@@ -31,8 +31,8 @@ function Login(props) {
         /*Storing userId and token in local storage*/
 
         .then((userData)=>{
-            localStorage.setItem("connectedUser", JSON.stringify(userData.data));
             console.log(userData)
+            localStorage.setItem("connectedUser", JSON.stringify(userData.data));      
             window.location = "/";
         })
         .catch((error)=>{

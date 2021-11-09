@@ -2,9 +2,8 @@ const connection = require('../service/database');
 
 exports.getOneComment = (req, res)=>{
     connection
-        .query("SELECT * FROM commentaires WHERE id = ? AND user_id = ?",[req.params["commentId"], req.userId])
+        .query("SELECT * FROM commentaires WHERE id = ?",[req.params["commentId"]])
         .then((oneComment)=>{
-            console.log(oneComment)
             res.status(200).json(oneComment[0])
         })
         .catch((error)=>{
@@ -26,9 +25,8 @@ exports.createComment = (req, res) => {
 
 exports.modifyComment = (req, res) => {
     connection
-        .query("UPDATE commentaires SET content_comment = ? WHERE id = ? AND user_id = ?", [req.body.updateCommentContent, req.params['commentId'], req.userId])
+        .query("UPDATE commentaires SET content_comment = ? WHERE id = ?", [req.body.updateCommentContent, req.params['commentId']])
         .then((modifiedComment) => {
-            console.log(modifiedComment)
             res.status(200).json("Commentaire modifié !");
         })
         .catch((error) => {
@@ -40,9 +38,8 @@ exports.modifyComment = (req, res) => {
 exports.deleteComment = (req, res) => {
     console.log(req.userId)
     connection
-        .query("DELETE FROM commentaires WHERE id = ? AND user_id = ?", [req.params['commentId'], req.userId])
+        .query("DELETE FROM commentaires WHERE id = ?", [req.params['commentId']])
         .then((commentDeleted) => {
-            console.log(commentDeleted)
             res.status(200).json(commentDeleted);
         })
         .catch((error) => {

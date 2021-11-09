@@ -26,12 +26,10 @@ exports.unlike_post = (req, res) => {
     connection
         .query("DELETE from likes WHERE id = ? AND user_id = ?", [req.params["likeId"], req.userId])
         .then((unlike_post) => {
-            console.log(unlike_post)
             res.status(200).json(unlike_post);
         })
         .catch((error) => {
             res.status(400).json(error)
-            console.log(error);
         });
 };
 

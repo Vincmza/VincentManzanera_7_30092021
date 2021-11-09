@@ -61,7 +61,6 @@ exports.getAllPosts = (req, res) => {
 }
 /*Create a post*/
 exports.createPost = (req, res) => {
-    console.log(req.body)
     connection
         .query("INSERT INTO posts (title, content_post, user_id) VALUES (?, ?, ?)", [req.body.newPostTitle, req.body.newPostContent, req.userId])
         .then((newPost) => {
@@ -118,30 +117,27 @@ exports.getOnePost = (req, res) => {
         })
         .catch((error) => {
             res.status(400).json(error)
-            console.log(error)
         });
 }
 
 exports.modifyPost = (req, res) => {
     connection
-        .query("UPDATE posts SET title = ?, content_post = ? WHERE id = ? AND user_id = ?", [req.body.updatedPostTitle, req.body.updatedPostContent, req.params['postId'], req.userId])
+        .query("UPDATE posts SET title = ?, content_post = ? WHERE id = ?", [req.body.updatedPostTitle, req.body.updatedPostContent, req.params['postId']])
         .then((modifiedPost) => {
             res.status(200).json(modifiedPost)
         })
         .catch((error) => {
-            console.log(error)
             res.status(400).json(error);
         });
 }
 
 exports.deletePost = (req, res) => {
     connection
-        .query("DELETE FROM posts WHERE id = ? AND user_id = ?", [req.params["postId"], req.userId])
+        .query("DELETE FROM posts WHERE id = ?", [req.params["postId"]])
         .then((postDeleted) => {
             res.status(200).json(postDeleted);
         })
         .catch((error) => {
-            console.log(error)
             res.status(400).json(error);
         });
 }

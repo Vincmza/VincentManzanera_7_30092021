@@ -14,6 +14,8 @@ const OnePost = (props) => {
     const history = useHistory();
     /*Getting back userId and token*/
     const user = JSON.parse(localStorage.getItem("connectedUser"));
+    /*Getting back role of the user from local storage*/
+    const userRole = JSON.parse(localStorage.getItem("userRole"));
     const token = user.token;
     /*Post id stored*/
     let { postId } = useParams();
@@ -59,12 +61,12 @@ const OnePost = (props) => {
     }, []);
 
     const userVerifyDelete = () => {
-        if (user.userId == postData.post_user_id) {
+        if (user.userId == postData.post_user_id || userRole == 2) {
             return <FaTrashAlt onClick={handleDeletePost} />;
         }
     };
     const userVerifyUpdate = () => {
-        if (user.userId == postData.post_user_id) {
+        if (user.userId == postData.post_user_id || userRole == 2) {
             return <Link to={`/update-post/${postId}`}><FaPencilAlt /></Link>;
         }
     };

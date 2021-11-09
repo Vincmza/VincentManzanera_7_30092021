@@ -23,13 +23,15 @@ const UpdateComment = () => {
             withCredentials: true,
         })
             .then((comment) => {
+                console.log(comment) 
                 setComment(comment.data);
                 setUpdateCommentContent(comment.data.content_comment)
             })
             .catch((error) => {
                 console.log(error);
             });
-    }, [])        
+    }, [])
+    console.log(updateCommentContent)   
     const handleUpdateComment = async (e) => {
         e.preventDefault();
         axios({
@@ -49,7 +51,6 @@ const UpdateComment = () => {
                 console.log(error);
             });
     };
-    console.log(comment)
     return (
         <div>
             <form className="update_comment">
