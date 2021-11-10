@@ -144,7 +144,7 @@ exports.modifyPost = (req, res) => {
         if(!req.body.updatedPostTitle){
             throw "La mise à jour du post ne contient aucun titre"
         }
-        if(!req.body.updatedContent){
+        if(!req.body.updatedPostContent){
             throw "La mise à jour du post ne contient aucun contenu"
         }
         connection
@@ -157,7 +157,7 @@ exports.modifyPost = (req, res) => {
         });
     }
     catch(error){
-        res.satuts(400).json(error)
+        res.status(400).json(error)
     }  
 }
 

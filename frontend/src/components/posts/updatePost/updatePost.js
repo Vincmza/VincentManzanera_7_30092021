@@ -2,7 +2,6 @@ import React, { useState, useEffect} from "react";
 import {useParams, useHistory, Link} from "react-router-dom";
 import { BiUser } from "react-icons/bi";
 import {BsArrowLeftSquareFill} from "react-icons/bs"
-import { MdOutlineImage } from "react-icons/md";
 import axios from "axios";
 import "./updatePost.css"
 
@@ -143,15 +142,10 @@ const UpdatePost = () => {
                         <div className="new_post_image"></div>
                     </div>
                     <div className="error_post_content"></div>
-                    <div className="form_footer">
-                        {/* <button className="add_img_button" type="submit">
-                            <a href="#" title="Ajouter une image">
-                                <MdOutlineImage />
-                            </a>
-                        </button>*/}
-                            <button className="send_user_post" type="submit" onClick={handleUpdatedPost}>
-                                Publier
-                            </button>                 
+                    <div className="form_footer">   
+                        <button className="send_user_post" type="submit" onClick={handleUpdatedPost}>
+                            Publier
+                        </button>                 
                     </div>
                 </form>
             </div>

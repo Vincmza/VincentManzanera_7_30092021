@@ -34,7 +34,7 @@ exports.createComment = (req, res) => {
 
 exports.modifyComment = (req, res) => {
     try {
-        if(!req.body.newCommentContent){
+        if(!req.body.updateCommentContent){
             throw "Commentaire sans contenu"
         }
         connection
@@ -49,8 +49,7 @@ exports.modifyComment = (req, res) => {
     }
     catch(error){
         res.status(400).json(error)
-    }
-    
+    }   
 }
 
 exports.deleteComment = (req, res) => {
