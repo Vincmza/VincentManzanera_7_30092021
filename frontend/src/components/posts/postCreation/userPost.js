@@ -74,6 +74,7 @@ const UserPost = (props) => {
                 console.log(error);
             });
     };
+    console.log(newPostImage)
     return (
         <div>
             <div className="connected_user_pseudo">

@@ -61,6 +61,10 @@ textarea:focus {
 /*class related to the post image*/
 .new_post_image {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 /*input id*/
 #new_post_image {
