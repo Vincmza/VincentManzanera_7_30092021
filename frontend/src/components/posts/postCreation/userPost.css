@@ -5,6 +5,7 @@
     width:50%;
     margin: auto;
     margin-top:50px;
+    margin-bottom: 50px;
     padding: 15px;
     border-radius: 30px;
     background-color: rgb(252, 232, 172);
@@ -57,32 +58,43 @@ textarea:focus {
     outline: none;
     border:2px solid rgb(253, 45, 1);
 }
+/*class related to the post image*/
+.new_post_image {
+    margin-top: 20px;
+}
+/*input id*/
+#new_post_image {
+    font-size: 0.8em;
+    padding-top: 10px;
+    padding-left: 10px;
+    border: none
+}
+#new_post_image:focus {
+    border:none
+}
+/*image preview*/
+#preview {
+    object-fit: cover;
+}
+/*button to delete image from the input*/
+.delete_image {
+    margin-top: 10px;
+}
+.delete_image:hover {
+    cursor:pointer;
+    color:rgb(253, 45, 1);
+}
 /*footer settings*/
 .form_footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-top: 10px;
-}
-/*button to add an image*/
-.add_img_button {
-    font-size: 1.4em;
-    display: flex;
-    align-items: center;
-    padding-left:0px;
-    border:none;
-    background-color: rgb(252, 232, 172);
-}
-.add_img_button > a {
-    color:black;
-}
-.add_img_button > a:hover {
-    cursor: pointer;
-    color:rgb(253, 45, 1);
 }
 /*button to send the whole form*/
 .send_user_post {
-    border-radius: 10px;
+    border-radius: 20px;
     border:1px solid grey;
+    padding: 5px 10px;
 }
 .send_user_post:hover {
     cursor: pointer;

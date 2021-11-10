@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import {useHistory} from "react-router-dom";
 import { BiUser } from "react-icons/bi";
-import { MdOutlineImage } from "react-icons/md";
+import {BsTrash} from "react-icons/bs";
 import axios from "axios";
 import "./userPost.css";
 
@@ -15,8 +15,8 @@ const UserPost = (props) => {
     /*Required informations to add a new post*/
     const [newPostTitle, setNewPostTitle] = useState("");
     const [newPostContent, setNewPostContent] = useState("");
-   
-    // const [newPostImage, setNewPostImage]=useState(false);
+    /*State in relation to img preview*/
+    const [newPostImage, setNewPostImage]=useState("");
 
     useEffect(async () => {
         /*user connected pseudo*/
@@ -34,8 +34,25 @@ const UserPost = (props) => {
                 console.log(error);
             });
     }, []);
-    console.log(connectedUserInfos)
 
+    function readURL(e) {
+        console.log(e)
+        const input = e.target
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();            
+            reader.onload = function(e) {
+                setNewPostImage(e.target.result)
+            }           
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    /*delete image preview from the input*/
+    const clearImage = ()=>{
+        setNewPostImage(null)
+        const inputImage = document.getElementById("new_post_image")
+        inputImage.value = null
+        console.log(inputImage.files)
+    }
     /*Function to add a new post*/
     const handleNewPost = async (e) => {
         e.preventDefault();
@@ -96,17 +113,23 @@ const UserPost = (props) => {
                         placeholder="Exprimez-vous..."
                         required
                     ></textarea>
-                    <div className="new_post_image"></div>
+                    <div className="new_post_image">
+                        <label for="new_post_image"></label>
+                        <input
+                        id="new_post_image"
+                        name="new_post_image"
+                        type="file"
+                        accept="image/jpeg, image/jpg, image/png"
+                        onChange={readURL}
+                        ></input>
+                        <img src={newPostImage} id="preview" alt=""/>
+                        <div title="Supprimer l'image" className="delete_image"><BsTrash onClick={clearImage} /></div>
+                    </div>
                 </div>
                 <div className="form_footer">
-                    <button className="add_img_button" type="submit">
-                        <a href="#" title="Ajouter une image">
-                            <MdOutlineImage />
-                        </a>
-                    </button>                   
-                        <button className="send_user_post" type="submit" onClick={handleNewPost}>
-                            Publier
-                        </button>                 
+                    <button className="send_user_post" type="submit" onClick={handleNewPost}>
+                        Publier
+                    </button>                 
                 </div>
             </form>
         </div>
