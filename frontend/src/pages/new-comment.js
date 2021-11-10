@@ -10,6 +10,8 @@ const NewComment = () => {
      const token = user.token;
      /*Stored form data*/
      const[newCommentContent, setNewCommentContent]=useState("")
+     /*handling error about creating a comment*/
+     const errorComment = document.querySelector(".error_comment")
      const handleNewComment = async (e)=>{
          e.preventDefault();
          axios({
@@ -28,6 +30,9 @@ const NewComment = () => {
          })
          .catch((error)=>{
              console.log(error)
+             if(error.response.data == "Commentaire sans contenu"){
+                errorComment.innerHTML = `<p>Vous ne pouvez pas publier un commentaire vide</p>`
+             }
          })
      }
     return (
@@ -47,6 +52,7 @@ const NewComment = () => {
                         required
                     >
                     </textarea>
+                    <div className="error_comment"></div>
                 </div>
                 <button className="send_user_comment" type="submit" onClick={handleNewComment}>Publier</button>
             </form>

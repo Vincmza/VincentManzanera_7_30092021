@@ -179,6 +179,10 @@
     font-size: 0.9em;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+.error_comment {
+    color: red;
+    font-size: 0.8em;
+}
 #comment_content:hover {
     resize: none;
 }

@@ -30,8 +30,7 @@ const UpdateComment = () => {
             .catch((error) => {
                 console.log(error);
             });
-    }, [])
-    console.log(updateCommentContent)   
+    }, [])   
     const handleUpdateComment = async (e) => {
         e.preventDefault();
         axios({
@@ -51,6 +50,7 @@ const UpdateComment = () => {
                 console.log(error);
             });
     };
+    console.log(updateCommentContent)
     return (
         <div>
             <form className="update_comment">
@@ -71,6 +71,7 @@ const UpdateComment = () => {
                         placeholder="Actualisez votre commentaire"
                         required
                     ></textarea>
+                    <div className=""></div>
                 </div>
                 <button
                     className="send_updated_comment"

@@ -16,6 +16,9 @@ exports.createComment = (req, res) => {
     connection
         .query("INSERT INTO commentaires (content_comment, user_id, post_id) VALUES (?,?,?)", [req.body.newCommentContent, req.userId, req.params["postId"]])
         .then((comment) => {
+            if(!req.body.newCommentContent){
+                throw "Commentaire sans contenu"
+            }           
             res.status(201).json(comment);
         })
         .catch((error) => {
