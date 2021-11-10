@@ -14,6 +14,10 @@ const UpdateComment = () => {
     /*Stored form data*/
     const [updateCommentContent, setUpdateCommentContent] = useState("");
     const [comment, setComment] = useState([]);
+    /*handling error comment*/
+    const errorComment = document.querySelector(".error_comment")
+    /*handling update comment form*/
+    const updateCommentForm = document.getElementById("update_comment_form");
 
     useEffect (()=>{
         axios({
@@ -33,27 +37,31 @@ const UpdateComment = () => {
     }, [])   
     const handleUpdateComment = async (e) => {
         e.preventDefault();
-        axios({
-            method: "put",
-            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-            url: `http://localhost:8081/api/commentaires/${commentId}`,
-            withCredentials: true,
-            data: {
-                updateCommentContent,
-            },
-        })
-            .then((updatedComment) => {
-                history.push(`/posts/${comment.post_id}`);
-                console.log(updatedComment);
+        if(updateCommentForm.reportValidity()){       
+            axios({
+                method: "put",
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                url: `http://localhost:8081/api/commentaires/${commentId}`,
+                withCredentials: true,
+                data: {
+                    updateCommentContent,
+                },
             })
-            .catch((error) => {
-                console.log(error);
-            });
+                .then((updatedComment) => {
+                    history.push(`/posts/${comment.post_id}`);
+                    console.log(updatedComment);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    if(error.response.data == "Commentaire sans contenu"){
+                        errorComment.innerHTML = `<p>Vous ne pouvez pas publier un commentaire vide</p>`
+                    }
+                });
+        }      
     };
-    console.log(updateCommentContent)
     return (
         <div>
-            <form className="update_comment">
+            <form className="update_comment" id="update_comment_form">
                 <div className="back_button" title="Retour sur le post">
                    <Link to={`/posts/${comment.post_id}`}><BsArrowLeftSquareFill/></Link>
                 </div>
@@ -71,8 +79,8 @@ const UpdateComment = () => {
                         placeholder="Actualisez votre commentaire"
                         required
                     ></textarea>
-                    <div className=""></div>
                 </div>
+                <div className="error_comment"></div>
                 <button
                     className="send_updated_comment"
                     type="submit"

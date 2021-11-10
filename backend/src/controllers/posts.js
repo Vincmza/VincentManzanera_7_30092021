@@ -61,14 +61,30 @@ exports.getAllPosts = (req, res) => {
 }
 /*Create a post*/
 exports.createPost = (req, res) => {
-    connection
-        .query("INSERT INTO posts (title, content_post, user_id) VALUES (?, ?, ?)", [req.body.newPostTitle, req.body.newPostContent, req.userId])
-        .then((newPost) => {
-            res.status(201).json(newPost);
-        })
-        .catch((error) => {
-            res.status(400).json(error);
-        });
+    try {
+        if(!req.body.newPostTitle && !req.body.newPostContent){
+            throw "Ce post ne contient ni titre ni contenu"
+        }
+        if(!req.body.newPostTitle){
+            throw "Ce post n'a pas de titre"
+        }
+        if(!req.body.newPostContent){
+            throw "Ce post n'a pas de contenu"
+        }
+        connection
+            .query("INSERT INTO posts (title, content_post, user_id) VALUES (?, ?, ?)", [req.body.newPostTitle, req.body.newPostContent, req.userId])
+            .then((newPost) => {  
+                res.status(201).json(newPost)
+            })
+            
+            .catch((error) => {
+                res.status(400).json(error);
+            });
+    }
+    catch(error){
+        res.status(400).json(error)
+    }
+        
 }
 
 //Get one post and all comments about it
@@ -121,7 +137,17 @@ exports.getOnePost = (req, res) => {
 }
 
 exports.modifyPost = (req, res) => {
-    connection
+    try {
+        if(!req.body.updatedPostTitle && !req.body.updatedPostContent){
+            throw "La mise à jour du post ne contient ni titre ni contenu"
+        }
+        if(!req.body.updatedPostTitle){
+            throw "La mise à jour du post ne contient aucun titre"
+        }
+        if(!req.body.updatedContent){
+            throw "La mise à jour du post ne contient aucun contenu"
+        }
+        connection
         .query("UPDATE posts SET title = ?, content_post = ? WHERE id = ?", [req.body.updatedPostTitle, req.body.updatedPostContent, req.params['postId']])
         .then((modifiedPost) => {
             res.status(200).json(modifiedPost)
@@ -129,6 +155,10 @@ exports.modifyPost = (req, res) => {
         .catch((error) => {
             res.status(400).json(error);
         });
+    }
+    catch(error){
+        res.satuts(400).json(error)
+    }  
 }
 
 exports.deletePost = (req, res) => {
@@ -138,6 +168,7 @@ exports.deletePost = (req, res) => {
             res.status(200).json(postDeleted);
         })
         .catch((error) => {
+            console.log(error)
             res.status(400).json(error);
         });
 }

@@ -26,7 +26,6 @@ const Timeline = () => {
                 console.log(error);
             });
     }, []);
-    console.log(allPosts)
     return (
         <div className="timeline_container">
            <span className="create_post_direction"><Link to="/new-post">Créer un post</Link></span>

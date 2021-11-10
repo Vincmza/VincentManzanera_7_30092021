@@ -58,6 +58,11 @@ textarea:focus {
     outline: none;
     border:2px solid rgb(253, 45, 1);
 }
+/*errors about post */
+.error_post_title, .error_post_content {
+    font-size: 0.8em;
+    color:red;
+}
 /*class related to the post image*/
 .new_post_image {
     margin-top: 20px;

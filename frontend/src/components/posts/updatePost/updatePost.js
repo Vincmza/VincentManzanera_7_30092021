@@ -20,6 +20,11 @@ const UpdatePost = () => {
     /*Required informations to add a new post*/
     const [updatedPostTitle, setUpdatedPostTitle] = useState("");
     const [updatedPostContent, setUpdatedPostContent] = useState("");
+    /*stored update post form*/
+    const updatePostForm = document.getElementById("update_post_form");
+    /*handling errors*/
+    const postTitleError = document.querySelector(".error_post_title")
+    const postContentError = document.querySelector(".error_post_content")
 
     // const [newPostImage, setNewPostImage]=useState(false);
 
@@ -61,25 +66,36 @@ const UpdatePost = () => {
     /*Function to update an existing post*/
     const handleUpdatedPost = async (e) => {
         e.preventDefault();
-        axios({
-            method: "put",
-            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-            url: `http://localhost:8081/api/posts/update-post/${postId}`,
-            withCredentials: true,
-            data: {
-                updatedPostTitle,
-                updatedPostContent,
-            },
-        })
-            .then((updatedPost) => {
-                console.log(updatedPost);
-                history.push(`/posts/${postId}`);
+        if(updatePostForm.reportValidity()){
+            axios({
+                method: "put",
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                url: `http://localhost:8081/api/posts/update-post/${postId}`,
+                withCredentials: true,
+                data: {
+                    updatedPostTitle,
+                    updatedPostContent,
+                },
             })
-            .catch((error) => {
-                console.log(error);
-            });
+                .then((updatedPost) => {
+                    console.log(updatedPost);
+                    history.push(`/posts/${postId}`);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    if(error.response.data == "La mise à jour du post ne contient ni titre ni contenu"){
+                        postTitleError.innerHTML = `<p>Votre post ne contient pas de titre</p>`
+                        postContentError.innerHTML = `<p>Votre post n'a pas de contenu</p>`
+                    }
+                    if(error.response.data == "La mise à jour du post ne contient aucun titre"){
+                        postTitleError.innerHTML = `<p>Votre post ne contient pas de titre</p>`
+                    }
+                    if(error.response.data == "La mise à jour du post ne contient aucun contenu"){
+                        postContentError.innerHTML = `<p>Votre post n'a pas de contenu</p>`
+                    }
+                });
+        }        
     };
-
     return (
         <div>
             <div className="updated_post">
@@ -93,7 +109,7 @@ const UpdatePost = () => {
                     <span className="updated_post_user_pseudo">{connectedUserInfos.username}</span>
                 </div>
                 <div className="new_post-error"></div>
-                <form className="update_post">
+                <form className="update_post" id="update_post_form">
                     <div className="updated_post_title">
                         <label for="updated_post_title"></label>
                         <input
@@ -108,6 +124,7 @@ const UpdatePost = () => {
                             required
                         ></input>
                     </div>
+                    <div className="error_post_title"></div>
                     <div className="updated_post_content">
                         <label for="updated_post"></label>
                         <textarea
@@ -125,12 +142,13 @@ const UpdatePost = () => {
                         ></textarea>
                         <div className="new_post_image"></div>
                     </div>
+                    <div className="error_post_content"></div>
                     <div className="form_footer">
-                        <button className="add_img_button" type="submit">
+                        {/* <button className="add_img_button" type="submit">
                             <a href="#" title="Ajouter une image">
                                 <MdOutlineImage />
                             </a>
-                        </button>                   
+                        </button>*/}
                             <button className="send_user_post" type="submit" onClick={handleUpdatedPost}>
                                 Publier
                             </button>                 

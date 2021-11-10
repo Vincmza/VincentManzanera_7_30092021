@@ -10,6 +10,9 @@ const UserPost = (props) => {
     /*Getting back userId and token*/
     const user = JSON.parse(localStorage.getItem("connectedUser"));
     const token = user.token;
+    /*handling errors*/
+    const postTitleError = document.querySelector(".error_post_title")
+    const postContentError = document.querySelector(".error_post_content")
     /*Getting back connected user data in order to display username*/
     const [connectedUserInfos, setConnectedUserInfos] = useState([]);
     /*Required informations to add a new post*/
@@ -32,6 +35,7 @@ const UserPost = (props) => {
             })
             .catch((error) => {
                 console.log(error);
+                
             });
     }, []);
 
@@ -72,9 +76,18 @@ const UserPost = (props) => {
             })
             .catch((error) => {
                 console.log(error);
+                if(error.response.data == "Ce post ne contient ni titre ni contenu"){
+                    postTitleError.innerHTML = `<p>Ce post doit contenir un titre</p>`
+                    postContentError.innerHTML = `<p>Ce post doit avoir du contenu</p>`
+                }
+                if(error.response.data == "Ce post n'a pas de titre"){
+                    postTitleError.innerHTML = `<p>Ce post doit contenir un titre</p>`
+                }
+                if(error.response.data == "Ce post n'a pas de contenu"){
+                    postContentError.innerHTML = `<p>Ce post doit avoir du contenu</p>`
+                }
             });
     };
-    console.log(newPostImage)
     return (
         <div>
             <div className="connected_user_pseudo">
@@ -99,6 +112,7 @@ const UserPost = (props) => {
                         required
                     ></input>
                 </div>
+                <div className="error_post_title"></div>
                 <div className="new_post_content">
                     <label for="user_post"></label>
                     <textarea
@@ -114,6 +128,7 @@ const UserPost = (props) => {
                         placeholder="Exprimez-vous..."
                         required
                     ></textarea>
+                    <div className="error_post_content"></div>
                     <div className="new_post_image">
                         <label for="new_post_image"></label>
                         <input

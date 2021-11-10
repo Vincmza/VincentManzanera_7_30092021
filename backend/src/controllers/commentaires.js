@@ -13,29 +13,44 @@ exports.getOneComment = (req, res)=>{
 }
 
 exports.createComment = (req, res) => {
-    connection
+    try {
+        if(!req.body.newCommentContent){
+            throw "Commentaire sans contenu"
+        }
+        connection
         .query("INSERT INTO commentaires (content_comment, user_id, post_id) VALUES (?,?,?)", [req.body.newCommentContent, req.userId, req.params["postId"]])
         .then((comment) => {
-            if(!req.body.newCommentContent){
-                throw "Commentaire sans contenu"
-            }           
+                       
             res.status(201).json(comment);
         })
         .catch((error) => {
             res.status(400).json(error);
         });
+    }
+    catch (error){
+        res.status(400).json(error)
+    }   
 }
 
 exports.modifyComment = (req, res) => {
-    connection
+    try {
+        if(!req.body.newCommentContent){
+            throw "Commentaire sans contenu"
+        }
+        connection
         .query("UPDATE commentaires SET content_comment = ? WHERE id = ?", [req.body.updateCommentContent, req.params['commentId']])
         .then((modifiedComment) => {
-            res.status(200).json("Commentaire modifié !");
+            res.status(200).json(modifiedComment);
         })
         .catch((error) => {
             console.log(error)
             res.status(400).json("Echec lors de la modification du commentaire");
         });
+    }
+    catch(error){
+        res.status(400).json(error)
+    }
+    
 }
 
 exports.deleteComment = (req, res) => {

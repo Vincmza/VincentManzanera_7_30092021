@@ -24,7 +24,7 @@ const Card = (props) => {
             withCredentials: true
         })
             .then((res) => {
-                // window.location.reload();
+                window.location.reload();
                 console.log(res);
             })
             .catch((error) => {
