@@ -4,8 +4,10 @@ const commentsRoutes = require("./routes/commentaires");
 const likesRoutes = require("./routes/likes");
 const connectionRoutes = require("./routes/userConnection");
 const userRoute = require("./routes/user");
-const cors = require("cors");
 const auth = require("./middlewares/auth");
+
+const cors = require("cors");
+const path = require("path");
 
 const app = express();
 
@@ -20,6 +22,7 @@ app.use(cors({ origin: true }));
 
 app.use(express.json());
 
+app.use("/images", express.static(path.join(__dirname, "../images")));
 app.use("/api/posts", auth, postsRelatedRoutes);
 app.use("/api/commentaires", auth, commentsRoutes);
 app.use("/api/likes", auth, likesRoutes);

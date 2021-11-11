@@ -1,8 +1,12 @@
 const connection = require('../service/database');
+const fs = require("fs");
+const { post } = require('../routes/posts');
+
+
 
 exports.getAllPosts = (req, res) => {
     connection
-        .query("SELECT posts.id, posts.title, posts.content_post, posts.user_id as post_user_id, commentaires.id as commentaires_id, commentaires.content_comment, commentaires.user_id, user_post.username, user_comment.username as comment_username, likes.id as likes_id, likes.user_id as likes_user_id, likes.post_id as likes_post_id, likes.liked FROM posts LEFT JOIN commentaires ON posts.id = commentaires.post_id LEFT JOIN users as user_post ON user_post.id = posts.user_id LEFT JOIN users as user_comment ON user_comment.id = commentaires.user_id LEFT JOIN likes ON likes.post_id = posts.id ORDER BY posts.id DESC")
+        .query("SELECT posts.id, posts.title, posts.content_post, posts.user_id as post_user_id, posts.imageUrl as imageUrl, commentaires.id as commentaires_id, commentaires.content_comment, commentaires.user_id, user_post.username, user_comment.username as comment_username, likes.id as likes_id, likes.user_id as likes_user_id, likes.post_id as likes_post_id, likes.liked FROM posts LEFT JOIN commentaires ON posts.id = commentaires.post_id LEFT JOIN users as user_post ON user_post.id = posts.user_id LEFT JOIN users as user_comment ON user_comment.id = commentaires.user_id LEFT JOIN likes ON likes.post_id = posts.id ORDER BY posts.id DESC")
         .then((postList) => {
             const listOfAllPosts = []
             postList.forEach(postData => {
@@ -12,6 +16,7 @@ exports.getAllPosts = (req, res) => {
                     post_content : postData.content_post,
                     user_id : postData.post_user_id,
                     username : postData.username,
+                    imageUrl : postData.imageUrl,
                     listComment : [],
                     listLikes : []
                 }
@@ -61,19 +66,21 @@ exports.getAllPosts = (req, res) => {
 }
 /*Create a post*/
 exports.createPost = (req, res) => {
+    console.log(req.file.filename)
+    const postImage = req.file ? "http://localhost:8081/images/" + req.file.filename : null ;
     try {
-        if(!req.body.newPostTitle && !req.body.newPostContent){
+        if(!req.body.postTitle && !req.body.postContent){
             throw "Ce post ne contient ni titre ni contenu"
         }
-        if(!req.body.newPostTitle){
+        if(!req.body.postTitle){
             throw "Ce post n'a pas de titre"
         }
-        if(!req.body.newPostContent){
+        if(!req.body.postContent){
             throw "Ce post n'a pas de contenu"
         }
         connection
-            .query("INSERT INTO posts (title, content_post, user_id) VALUES (?, ?, ?)", [req.body.newPostTitle, req.body.newPostContent, req.userId])
-            .then((newPost) => {  
+            .query("INSERT INTO posts (title, content_post, imageUrl, user_id) VALUES (?, ?, ?, ?)", [req.body.postTitle, req.body.postContent, postImage, req.userId])
+            .then((newPost) => {
                 res.status(201).json(newPost)
             })
             

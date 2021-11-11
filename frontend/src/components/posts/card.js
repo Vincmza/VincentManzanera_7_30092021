@@ -69,7 +69,12 @@ const Card = (props) => {
                         {/*body of the post*/}
                         <div className="post_body">
                             <div className="post_title">{props.post.post_title}</div>
-                            <div className="post_content">{props.post.post_content}</div>
+                            <div className="post_content">
+                                <div>{props.post.post_content}</div>
+                                <div className="post_image">
+                                    <img src={props.post.imageUrl}/>                              
+                                </div>                                
+                            </div>                                                       
                         </div>
                         {/*like button and number of likes*/}
                         <div className="like_tab__button">

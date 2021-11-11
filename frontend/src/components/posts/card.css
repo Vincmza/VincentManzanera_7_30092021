@@ -60,6 +60,11 @@
     padding:15px;
     background-color: rgb(232, 223, 197);
 }
+.post_image {
+    display: flex;
+    justify-content: center;
+    margin-top:10px;
+}
 /*settings about like and dislike*/
 .like_tab__button {
     display: flex;
