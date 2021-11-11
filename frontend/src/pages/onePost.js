@@ -86,7 +86,12 @@ const OnePost = (props) => {
             {/*body of the post*/}
             <div className="post_body">
                 <div className="post_title">{postData.post_title}</div>
-                <div className="post_content">{postData.post_content}</div>
+                <div className="post_content">
+                    <div>{postData.post_content}</div>
+                    <div className="post_image">
+                        <img src={postData.imageUrl}/>                              
+                    </div>                                
+                </div>
             </div>
             {/*like button and number of likes*/}
             <div className="like_tab__button">

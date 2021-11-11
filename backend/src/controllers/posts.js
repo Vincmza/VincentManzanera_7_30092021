@@ -97,7 +97,7 @@ exports.createPost = (req, res) => {
 //Get one post and all comments about it
 exports.getOnePost = (req, res) => {
     connection
-        .query("SELECT posts.id, posts.title, posts.content_post, posts.user_id as post_user_id, commentaires.id AS comment_id, commentaires.user_id as comment_user_id, commentaires.content_comment AS comment_content, users.username, likes.id as like_id, likes.user_id AS like_user_id, likes.liked, comment_user.username AS comment_username FROM posts LEFT JOIN users ON posts.user_id = users.id LEFT JOIN commentaires ON posts.id = commentaires.post_id LEFT JOIN likes ON posts.id = likes.post_id LEFT JOIN users AS comment_user ON commentaires.user_id = comment_user.id WHERE posts.id = ? ORDER BY commentaires.id DESC", req.params['postId'])
+        .query("SELECT posts.id, posts.title, posts.content_post, posts.user_id as post_user_id, posts.imageUrl as imageUrl, commentaires.id AS comment_id, commentaires.user_id as comment_user_id, commentaires.content_comment AS comment_content, users.username, likes.id as like_id, likes.user_id AS like_user_id, likes.liked, comment_user.username AS comment_username FROM posts LEFT JOIN users ON posts.user_id = users.id LEFT JOIN commentaires ON posts.id = commentaires.post_id LEFT JOIN likes ON posts.id = likes.post_id LEFT JOIN users AS comment_user ON commentaires.user_id = comment_user.id WHERE posts.id = ? ORDER BY commentaires.id DESC", req.params['postId'])
         .then((post) => {        
                 const onePost = {
                     post_id : post[0].id,
@@ -105,6 +105,7 @@ exports.getOnePost = (req, res) => {
                     post_user_username : post[0].username,
                     post_title : post[0].title,
                     post_content : post[0].content_post,
+                    imageUrl : post[0].imageUrl,
                     comments : [],
                     likes : []
                 }                           
