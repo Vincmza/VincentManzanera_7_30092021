@@ -37,7 +37,7 @@ const UserPost = (props) => {
                 console.log(error);
             });
     }, []);
-
+    /*allow to have a preview of the image*/
     function readURL(e) {
         const input = e.target;
         if (input.files && input.files[0]) {
