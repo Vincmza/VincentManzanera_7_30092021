@@ -1,6 +1,6 @@
 const connection = require('../service/database');
 const fs = require("fs");
-const { post } = require('../routes/posts');
+const path = require("path");
 
 
 
@@ -66,7 +66,6 @@ exports.getAllPosts = (req, res) => {
 }
 /*Create a post*/
 exports.createPost = (req, res) => {
-    console.log(req.file.filename)
     const postImage = req.file ? "http://localhost:8081/images/" + req.file.filename : null ;
     try {
         if(!req.body.postTitle && !req.body.postContent){
@@ -144,7 +143,8 @@ exports.getOnePost = (req, res) => {
         });
 }
 
-exports.modifyPost = (req, res) => {
+exports.modifyPost = async (req, res) => {
+    // console.log("voilà le body", req.body)
     try {
         if(!req.body.updatedPostTitle && !req.body.updatedPostContent){
             throw "La mise à jour du post ne contient ni titre ni contenu"
@@ -155,8 +155,23 @@ exports.modifyPost = (req, res) => {
         if(!req.body.updatedPostContent){
             throw "La mise à jour du post ne contient aucun contenu"
         }
+        const row = (await connection.query("SELECT * FROM posts WHERE id = ?", [req.params["postId"]]))[0]
+
+        if(req.file && row.imageUrl != null){
+            const filePath = row.imageUrl.replace("http://localhost:8081/images/", __dirname + "/../../images/");
+            console.log(filePath)
+            fs.unlinkSync(filePath);
+        }
+
+        let imageUrl = ""
+        if(req.file){
+            imageUrl = "http://localhost:8081/images/" + req.file.filename;
+        }
+        else {
+            imageUrl = row.imageUrl
+        }
         connection
-        .query("UPDATE posts SET title = ?, content_post = ? WHERE id = ?", [req.body.updatedPostTitle, req.body.updatedPostContent, req.params['postId']])
+        .query("UPDATE posts SET title = ?, content_post = ?, imageUrl = ? WHERE id = ?", [req.body.updatedPostTitle, req.body.updatedPostContent, imageUrl, req.params['postId']])
         .then((modifiedPost) => {
             res.status(200).json(modifiedPost)
         })

@@ -26,7 +26,7 @@ const UserPost = (props) => {
         /*user connected pseudo*/
         axios({
             method: "get",
-            headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
             url: `http://localhost:8081/api/users/connected-user`,
             withCredentials: true,
         })
@@ -39,7 +39,6 @@ const UserPost = (props) => {
     }, []);
 
     function readURL(e) {
-        console.log(e);
         const input = e.target;
         if (input.files && input.files[0]) {
             const reader = new FileReader();

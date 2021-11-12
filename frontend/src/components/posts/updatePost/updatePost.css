@@ -61,6 +61,28 @@
     font-size: 0.9em;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+/*class related to the post image*/
+.new_post_image {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/*input id*/
+#new_post_image {
+    font-size: 0.8em;
+    padding-top: 10px;
+    padding-left: 10px;
+    border: none
+}
+#new_post_image:focus {
+    border:none
+}
+/*image preview*/
+#preview {
+    object-fit: cover;
+}
 @media screen and (max-width: 1000px){
     .updated_post{
         width:75%;

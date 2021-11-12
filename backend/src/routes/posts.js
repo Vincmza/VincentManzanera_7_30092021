@@ -8,7 +8,7 @@ const multer = require("../middlewares/multer-config");
 router.get('/', ctrlPostsInfos.getAllPosts);
 router.get('/:postId', ctrlPostsInfos.getOnePost);
 router.post('/create-post', multer, ctrlPostsInfos.createPost);
-router.put('/update-post/:postId',renforcedAuth.routeSecure("posts"), ctrlPostsInfos.modifyPost);
+router.put('/update-post/:postId',renforcedAuth.routeSecure("posts"), multer, ctrlPostsInfos.modifyPost);
 router.delete('/:postId',renforcedAuth.routeSecure("posts"), ctrlPostsInfos.deletePost);
 
 module.exports = router;
