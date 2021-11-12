@@ -194,8 +194,15 @@ exports.modifyPost = async (req, res) => {
     }  
 }
 
-exports.deletePost = (req, res) => {
-    connection
+exports.deletePost = async (req, res) => {
+    try {
+        const row = (await connection.query("SELECT * FROM posts WHERE id = ?", [req.params["postId"]]))[0]
+        if(row.imageUrl != null){
+            const filePath = row.imageUrl.replace("http://localhost:8081/images/", __dirname + "/../../images/");
+            console.log(filePath)
+            fs.unlinkSync(filePath);
+        }
+        connection
         .query("DELETE FROM posts WHERE id = ?", [req.params["postId"]])
         .then((postDeleted) => {
             res.status(200).json(postDeleted);
@@ -204,4 +211,9 @@ exports.deletePost = (req, res) => {
             console.log(error)
             res.status(400).json(error);
         });
+    }
+    catch (error) {
+        res.status(400).json(error)
+    }
+    
 }
