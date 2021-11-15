@@ -150,16 +150,14 @@ exports.getOnePost = (req, res) => {
 }
 
 exports.modifyPost = async (req, res) => {
+    console.log(req.body)
     /*le post doit contenir au moins un titre et du texte*/
     try {
-        if(!req.body.updatedPostTitle && !req.body.updatedPostContent){
-            throw "La mise à jour du post ne contient ni titre ni contenu"
+        if(req.body.postImage == "undefined" && req.body.updatedPostContent == ""){
+            throw "La mise à jour du post ne contient aucun contenu"
         }
         if(!req.body.updatedPostTitle){
             throw "La mise à jour du post ne contient aucun titre"
-        }
-        if(!req.body.updatedPostContent){
-            throw "La mise à jour du post ne contient aucun contenu"
         }
         /*requête SQL permettant de seléctionner les infos relative au post*/
         const row = (await connection.query("SELECT * FROM posts WHERE id = ?", [req.params["postId"]]))[0]

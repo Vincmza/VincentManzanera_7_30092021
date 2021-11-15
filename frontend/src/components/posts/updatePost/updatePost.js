@@ -57,6 +57,7 @@ const UpdatePost = () => {
                 console.log(error);
             });
     }, []);
+    console.log(updatedPostImage);
 
     function readURL(e) {
         const input = e.target;
@@ -71,135 +72,121 @@ const UpdatePost = () => {
     /*delete image preview from the input*/
     const clearImage = () => {
         const inputImage = document.getElementById("new_post_image");
-        setUpdatedPostImage(null);
+        setUpdatedPostImage("");
         inputImage.value = null;
-    }
+    };
 
-        /*Function to update an existing post*/
-        const handleUpdatedPost = async (e) => {
-            e.preventDefault();
-            const inputImage = document.getElementById("new_post_image");
-            if (updatePostForm.reportValidity()) {
-                /*Storing data including image before Post request*/
-                let bodyFormData = new FormData();
-                bodyFormData.append("updatedPostTitle", updatedPostTitle);
-                bodyFormData.append("updatedPostContent", updatedPostContent);
-                bodyFormData.append("postImage", inputImage.files ? inputImage.files[0] : null);
-                axios({
-                    method: "put",
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        "Accept": "application/json",
-                        "Authorization": `Bearer ${token}`,
-                    },
-                    url: process.env.REACT_APP_API_URL+`api/posts/update-post/${postId}`,
-                    withCredentials: true,
-                    data: bodyFormData,
+    /*Function to update an existing post*/
+    const handleUpdatedPost = async (e) => {
+        e.preventDefault();
+        const inputImage = document.getElementById("new_post_image");
+        if (updatePostForm.reportValidity()) {
+            /*Storing data including image before Post request*/
+            let bodyFormData = new FormData();
+            bodyFormData.append("updatedPostTitle", updatedPostTitle);
+            bodyFormData.append("updatedPostContent", updatedPostContent);
+            bodyFormData.append("postImage", inputImage.files ? inputImage.files[0] : null);
+            axios({
+                method: "put",
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                url: process.env.REACT_APP_API_URL + `api/posts/update-post/${postId}`,
+                withCredentials: true,
+                data: bodyFormData,
+            })
+                .then((updatedPost) => {
+                    console.log(updatedPost);
+                    history.push(`/posts/${postId}`);
                 })
-                    .then((updatedPost) => {
-                        console.log(updatedPost);
-                        history.push(`/posts/${postId}`);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                        if (
-                            error.response.data ==
-                            "La mise à jour du post ne contient ni titre ni contenu"
-                        ) {
-                            postTitleError.innerHTML = `<p>Votre post ne contient pas de titre</p>`;
-                            postContentError.innerHTML = `<p>Votre post n'a pas de contenu</p>`;
-                        }
-                        if (
-                            error.response.data == "La mise à jour du post ne contient aucun titre"
-                        ) {
-                            postTitleError.innerHTML = `<p>Votre post ne contient pas de titre</p>`;
-                        }
-                        if (
-                            error.response.data ==
-                            "La mise à jour du post ne contient aucun contenu"
-                        ) {
-                            postContentError.innerHTML = `<p>Votre post n'a pas de contenu</p>`;
-                        }
-                    });
-            }
-        };
-        return (
-            <div>
-                <div className="updated_post">
-                    <div className="previous_button" title="Retour sur le post">
-                        <Link to={`/posts/${postId}`}>
-                            <BsArrowLeftSquareFill />
-                        </Link>
+                .catch((error) => {
+                    console.log(error);
+                    if (error.response.data == "La mise à jour du post ne contient aucun contenu") {
+                        postContentError.innerHTML = `<p>Votre post n'a pas de contenu</p>`;
+                    }
+                    if (error.response.data == "La mise à jour du post ne contient aucun titre") {
+                        postTitleError.innerHTML = `<p>Votre post ne contient pas de titre</p>`;
+                    }
+                });
+        }
+    };
+    return (
+        <div>
+            <div className="updated_post">
+                <div className="previous_button" title="Retour sur le post">
+                    <Link to={`/posts/${postId}`}>
+                        <BsArrowLeftSquareFill />
+                    </Link>
+                </div>
+                <div className="connected_user_pseudo">
+                    <span className="user_icon">
+                        <BiUser />
+                    </span>
+                    <span className="updated_post_user_pseudo">{connectedUserInfos.username}</span>
+                </div>
+                <div className="new_post-error"></div>
+                <form className="update_post" id="update_post_form">
+                    <div className="updated_post_title">
+                        <label for="updated_post_title"></label>
+                        <input
+                            id="updated_post_title"
+                            type="text"
+                            minLength="1"
+                            maxLength="50"
+                            aria-describedby="post_title"
+                            onChange={(e) => setUpdatedPostTitle(e.target.value)}
+                            value={updatedPostTitle}
+                            placeholder="Actualisez le titre de votre post"
+                            required
+                        ></input>
                     </div>
-                    <div className="connected_user_pseudo">
-                        <span className="user_icon">
-                            <BiUser />
-                        </span>
-                        <span className="updated_post_user_pseudo">
-                            {connectedUserInfos.username}
-                        </span>
-                    </div>
-                    <div className="new_post-error"></div>
-                    <form className="update_post" id="update_post_form">
-                        <div className="updated_post_title">
-                            <label for="updated_post_title"></label>
+                    <div className="error_post_title"></div>
+                    <div className="updated_post_content">
+                        <label for="updated_post"></label>
+                        <textarea
+                            id="updated_post_content"
+                            name="user_post"
+                            aria-describedby="user_story"
+                            minLength="1"
+                            maxLength="1600"
+                            sentences
+                            autoFocus
+                            onChange={(e) => setUpdatedPostContent(e.target.value)}
+                            value={updatedPostContent}
+                            placeholder="Actualisez le contenu de votre post"
+                        ></textarea>
+                        <div className="error_post_content"></div>
+                        <div className="new_post_image">
+                            <label for="new_post_image"></label>
                             <input
-                                id="updated_post_title"
-                                type="text"
-                                minLength="1"
-                                maxLength="50"
-                                aria-describedby="post_title"
-                                onChange={(e) => setUpdatedPostTitle(e.target.value)}
-                                value={updatedPostTitle}
-                                placeholder="Actualisez le titre de votre post"
-                                required
+                                id="new_post_image"
+                                name="new_post_image"
+                                type="file"
+                                accept="image/jpeg, image/jpg, image/png"
+                                onChange={readURL}
                             ></input>
-                        </div>
-                        <div className="error_post_title"></div>
-                        <div className="updated_post_content">
-                            <label for="updated_post"></label>
-                            <textarea
-                                id="updated_post_content"
-                                name="user_post"
-                                aria-describedby="user_story"
-                                minLength="1"
-                                maxLength="1600"
-                                sentences
-                                autoFocus
-                                onChange={(e) => setUpdatedPostContent(e.target.value)}
-                                value={updatedPostContent}
-                                placeholder="Actualisez le contenu de votre post"
-                                required
-                            ></textarea>
-                            <div className="error_post_content"></div>
-                            <div className="new_post_image">
-                                <label for="new_post_image"></label>
-                                <input
-                                    id="new_post_image"
-                                    name="new_post_image"
-                                    type="file"
-                                    accept="image/jpeg, image/jpg, image/png"
-                                    onChange={readURL}
-                                ></input>
-                                <img src={updatedPostImage} id="preview" alt="" />
-                                <div title="Supprimer l'image" className="delete_image">
-                                    <BsTrash onClick={clearImage} />
-                                </div>
+                            <img src={updatedPostImage} id="preview" alt="" />
+                            <div className="error_post_title"></div>
+                            <div title="Supprimer l'image" className="delete_image">
+                                <BsTrash onClick={clearImage} />
                             </div>
                         </div>
-                        <div className="form_footer">
-                            <button
-                                className="send_user_post"
-                                type="submit"
-                                onClick={handleUpdatedPost}
-                            >
-                                Publier
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div className="form_footer">
+                        <button
+                            className="send_user_post"
+                            type="submit"
+                            onClick={handleUpdatedPost}
+                        >
+                            Publier
+                        </button>
+                    </div>
+                </form>
             </div>
-        );
-    };
+        </div>
+    );
+};
 
 export default UpdatePost;
