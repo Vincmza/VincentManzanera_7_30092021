@@ -50,11 +50,17 @@ input:focus {
 }
 .loginButton {
     margin-top: 20px;
+    padding: 10px;
     margin-bottom: 20px;
-    font-size: 1.3em;
+    font-size: 1.1em;
+    border:none;
+    border-radius: 15px;
+    background-color: rgb(237, 215, 202);
 }
 .loginButton:hover {
-    color: rgb(253, 45, 1);  
+    background-color: rgb(253, 45, 1);
+    color:white;
+    cursor: pointer; 
 }
 
 @media screen and (max-width: 1000px){
