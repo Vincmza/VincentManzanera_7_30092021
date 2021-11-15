@@ -20,9 +20,11 @@ const UpdatePost = () => {
     const [updatedPostImage, setUpdatedPostImage] = useState("");
     /*stored update post form*/
     const updatePostForm = document.getElementById("update_post_form");
+    /*if image is deleted*/
+    const[imgDeleted, setImgDeleted]=useState(false)
     /*handling errors*/
     const postTitleError = document.querySelector(".error_post_title");
-    const postContentError = document.querySelector(".error_post_content");
+    const postContentError = document.querySelectorAll(".error_post_content");
 
     useEffect(async () => {
         /*get user connected pseudo*/
@@ -57,14 +59,14 @@ const UpdatePost = () => {
                 console.log(error);
             });
     }, []);
-    console.log(updatedPostImage);
-
+    
     function readURL(e) {
         const input = e.target;
         if (input.files && input.files[0]) {
             const reader = new FileReader();
             reader.onload = function (e) {
                 setUpdatedPostImage(e.target.result);
+                setImgDeleted(false)
             };
             reader.readAsDataURL(input.files[0]);
         }
@@ -73,6 +75,7 @@ const UpdatePost = () => {
     const clearImage = () => {
         const inputImage = document.getElementById("new_post_image");
         setUpdatedPostImage("");
+        setImgDeleted(true)
         inputImage.value = null;
     };
 
@@ -86,12 +89,13 @@ const UpdatePost = () => {
             bodyFormData.append("updatedPostTitle", updatedPostTitle);
             bodyFormData.append("updatedPostContent", updatedPostContent);
             bodyFormData.append("postImage", inputImage.files ? inputImage.files[0] : null);
+            bodyFormData.append("imgDeleted", imgDeleted)
             axios({
                 method: "put",
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    Accept: "application/json",
-                    Authorization: `Bearer ${token}`,
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
                 },
                 url: process.env.REACT_APP_API_URL + `api/posts/update-post/${postId}`,
                 withCredentials: true,
@@ -104,7 +108,8 @@ const UpdatePost = () => {
                 .catch((error) => {
                     console.log(error);
                     if (error.response.data == "La mise à jour du post ne contient aucun contenu") {
-                        postContentError.innerHTML = `<p>Votre post n'a pas de contenu</p>`;
+                        postContentError[0].innerHTML = `<p>Votre post n'a pas de contenu</p>`;
+                        postContentError[1].innerHTML = `<p>Votre post n'a pas de contenu</p>`
                     }
                     if (error.response.data == "La mise à jour du post ne contient aucun titre") {
                         postTitleError.innerHTML = `<p>Votre post ne contient pas de titre</p>`;
@@ -112,6 +117,7 @@ const UpdatePost = () => {
                 });
         }
     };
+    console.log(postContentError);
     return (
         <div>
             <div className="updated_post">
@@ -168,7 +174,7 @@ const UpdatePost = () => {
                                 onChange={readURL}
                             ></input>
                             <img src={updatedPostImage} id="preview" alt="" />
-                            <div className="error_post_title"></div>
+                            <div className="error_post_content"></div>
                             <div title="Supprimer l'image" className="delete_image">
                                 <BsTrash onClick={clearImage} />
                             </div>

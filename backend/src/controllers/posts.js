@@ -153,7 +153,7 @@ exports.modifyPost = async (req, res) => {
     console.log(req.body)
     /*le post doit contenir au moins un titre et du texte*/
     try {
-        if(req.body.postImage == "undefined" && req.body.updatedPostContent == ""){
+        if(req.body.imgDeleted == "true" && req.body.updatedPostContent == ""){
             throw "La mise à jour du post ne contient aucun contenu"
         }
         if(!req.body.updatedPostTitle){
@@ -162,7 +162,7 @@ exports.modifyPost = async (req, res) => {
         /*requête SQL permettant de seléctionner les infos relative au post*/
         const row = (await connection.query("SELECT * FROM posts WHERE id = ?", [req.params["postId"]]))[0]
         /*si il y a un fichier dans la requête*/
-        /* et si la base de donnée contient un url vers un ficher*/
+        /*et si la base de donnée contient un url vers un ficher*/
         /*effacement du fichier dans le dossier images*/
         if(req.file && row.imageUrl != null){
             const filePath = row.imageUrl.replace("http://localhost:8081/images/", __dirname + "/../../images/");
