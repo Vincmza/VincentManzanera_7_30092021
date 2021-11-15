@@ -81,15 +81,12 @@ const UserPost = (props) => {
                 })
                 .catch((error) => {
                     console.log(error);
-                    if (error.response.data == "Ce post ne contient ni titre ni contenu") {
+                    if (error.response.data == "Ce post ne contient aucun contenu") {
                         postTitleError.innerHTML = `<p>Ce post doit contenir un titre</p>`;
                         postContentError.innerHTML = `<p>Ce post doit avoir du contenu</p>`;
                     }
                     if (error.response.data == "Ce post n'a pas de titre") {
                         postTitleError.innerHTML = `<p>Ce post doit contenir un titre</p>`;
-                    }
-                    if (error.response.data == "Ce post n'a pas de contenu") {
-                        postContentError.innerHTML = `<p>Ce post doit avoir du contenu</p>`;
                     }
                 });
         }
@@ -132,7 +129,6 @@ const UserPost = (props) => {
                         onChange={(e) => setNewPostContent(e.target.value)}
                         value={newPostContent}
                         placeholder="Exprimez-vous..."
-                        required
                     ></textarea>
                     <div className="error_post_content"></div>
                     <div className="new_post_image">
@@ -145,6 +141,7 @@ const UserPost = (props) => {
                             onChange={readURL}
                         ></input>
                         <img src={newPostImage} id="preview" alt="" />
+                        <div className="error_post_content"></div>
                         <div title="Supprimer l'image" className="delete_image">
                             <BsTrash onClick={clearImage} />
                         </div>

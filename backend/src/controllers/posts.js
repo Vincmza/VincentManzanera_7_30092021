@@ -70,18 +70,16 @@ exports.getAllPosts = (req, res) => {
 }
 /*Create a post*/
 exports.createPost = (req, res) => {
+    console.log(req.body)
     /*variable qui contient l'adresse vers le fichier si il y en a un, sinon renvoie null*/
     const postImage = req.file ? "http://localhost:8081/images/" + req.file.filename : null ;
     try {
         /*le post doit contenir au moins un titre et du texte*/
-        if(!req.body.postTitle && !req.body.postContent){
-            throw "Ce post ne contient ni titre ni contenu"
+        if(postImage == null && req.body.postContent == ""){
+            throw "Ce post ne contient aucun contenu"
         }
         if(!req.body.postTitle){
             throw "Ce post n'a pas de titre"
-        }
-        if(!req.body.postContent){
-            throw "Ce post n'a pas de contenu"
         }
         connection
             .query("INSERT INTO posts (title, content_post, imageUrl, user_id) VALUES (?, ?, ?, ?)", [req.body.postTitle, req.body.postContent, postImage, req.userId])
