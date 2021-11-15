@@ -16,7 +16,7 @@ const Like = (props) => {
         axios({
             method: "get",
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-            url: `http://localhost:8081/api/likes/${postId}`,
+            url: process.env.REACT_APP_API_URL+`api/likes/${postId}`,
             withCredentials: true
         })
         .then((userLike)=>{
@@ -36,7 +36,7 @@ const Like = (props) => {
             axios({
                 method: "post",
                 headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-                url: `http://localhost:8081/api/likes/like-post/${postId}`,
+                url: process.env.REACT_APP_API_URL+`api/likes/like-post/${postId}`,
                 withCredentials: true,
                 data : { liked : true}
             })
@@ -55,7 +55,7 @@ const Like = (props) => {
             axios({
                 method: "delete",
                 headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-                url: `http://localhost:8081/api/likes/unlike-post/${userLike.id}`,
+                url: process.env.REACT_APP_API_URL+`api/likes/unlike-post/${userLike.id}`,
                 withCredentials: true
             })
             .then((likesArray)=>{

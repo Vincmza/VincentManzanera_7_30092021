@@ -20,7 +20,7 @@ function Login(props) {
         axios({
             method: "post",
             headers: { 'Content-Type': 'application/json'},
-            url: `http://localhost:8081/api/auth/login`,
+            url: process.env.REACT_APP_API_URL+`api/auth/login`,
             withCredentials: true,
             data: {
                 email,

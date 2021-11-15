@@ -71,7 +71,7 @@ const UserPost = (props) => {
                     "Accept": "application/json",
                     "Authorization": `Bearer ${token}`,
                 },
-                url: `http://localhost:8081/api/posts/create-post`,
+                url: process.env.REACT_APP_API_URL+`api/posts/create-post`,
                 withCredentials: true,
                 data: bodyFormData,
             })

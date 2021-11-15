@@ -92,7 +92,7 @@ const UpdatePost = () => {
                         "Accept": "application/json",
                         "Authorization": `Bearer ${token}`,
                     },
-                    url: `http://localhost:8081/api/posts/update-post/${postId}`,
+                    url: process.env.REACT_APP_API_URL+`api/posts/update-post/${postId}`,
                     withCredentials: true,
                     data: bodyFormData,
                 })

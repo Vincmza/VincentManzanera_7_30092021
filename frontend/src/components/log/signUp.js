@@ -28,7 +28,7 @@ const SignUp = (props) => {
             axios({
                 method: "post",
                 headers: { "Content-Type": "application/json" },
-                url: `http://localhost:8081/api/auth/signup`,
+                url: process.env.REACT_APP_API_URL+`api/auth/signup`,
                 withCredentials: true,
                 data: {
                     email,

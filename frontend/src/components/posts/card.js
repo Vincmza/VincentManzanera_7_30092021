@@ -20,7 +20,7 @@ const Card = (props) => {
         axios({
             method: "delete",
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-            url: `http://localhost:8081/api/posts/${props.post.post_id}`,
+            url: process.env.REACT_APP_API_URL+`api/posts/${props.post.post_id}`,
             withCredentials: true
         })
             .then((res) => {

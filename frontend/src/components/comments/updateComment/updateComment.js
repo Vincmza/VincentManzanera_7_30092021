@@ -23,7 +23,7 @@ const UpdateComment = () => {
         axios({
             method: "get",
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-            url: `http://localhost:8081/api/commentaires/get-one-comment/${commentId}`,
+            url: process.env.REACT_APP_API_URL+`api/commentaires/get-one-comment/${commentId}`,
             withCredentials: true,
         })
             .then((comment) => {
@@ -41,7 +41,7 @@ const UpdateComment = () => {
             axios({
                 method: "put",
                 headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-                url: `http://localhost:8081/api/commentaires/${commentId}`,
+                url: process.env.REACT_APP_API_URL+`api/commentaires/${commentId}`,
                 withCredentials: true,
                 data: {
                     updateCommentContent,

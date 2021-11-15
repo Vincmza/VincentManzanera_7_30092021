@@ -17,7 +17,7 @@ const CommentCard = (props) => {
         axios({
             method: "delete",
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-            url: `http://localhost:8081/api/commentaires/${props.comment.comment_id}`,
+            url: process.env.REACT_APP_API_URL+`api/commentaires/${props.comment.comment_id}`,
             withCredentials: true,
         })
         .then((res)=>{

@@ -37,7 +37,7 @@ function Header(props) {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`,
                     },
-                    url: `http://localhost:8081/api/users/connected-user`,
+                    url: process.env.REACT_APP_API_URL+`api/users/connected-user`,
                     withCredentials: true,
                 })
                     .then((userData) => {
@@ -60,7 +60,7 @@ function Header(props) {
         axios({
             method: "put",
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-            url: `http://localhost:8081/api/users/delete-account`,
+            url: process.env.REACT_APP_API_URL+`api/users/delete-account`,
             withCredentials: true,
             data: { isActive: false },
         })
