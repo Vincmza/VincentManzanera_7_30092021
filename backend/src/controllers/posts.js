@@ -74,10 +74,11 @@ exports.createPost = (req, res) => {
     /*variable qui contient l'adresse vers le fichier si il y en a un, sinon renvoie null*/
     const postImage = req.file ? "http://localhost:8081/images/" + req.file.filename : null ;
     try {
-        /*le post doit contenir au moins un titre et du texte*/
+        /*le post doit contenir au moins une image ou du texte*/
         if(postImage == null && req.body.postContent == ""){
             throw "Ce post ne contient aucun contenu"
         }
+        /*le post doit contenir obligatoriement un titre*/
         if(!req.body.postTitle){
             throw "Ce post n'a pas de titre"
         }
