@@ -1,6 +1,7 @@
 const connection = require('../service/database');
 const fs = require("fs");
 const path = require("path");
+const { nextTick } = require('process');
 
 
 
@@ -194,12 +195,11 @@ exports.modifyPost = async (req, res) => {
     }  
 }
 
-exports.deletePost = async (req, res) => {
+exports.deletePost = async (req, res, next) => {
     try {
         const row = (await connection.query("SELECT * FROM posts WHERE id = ?", [req.params["postId"]]))[0]
-        if(row.imageUrl != null){
+        if(row.imageUrl){
             const filePath = row.imageUrl.replace("http://localhost:8081/images/", __dirname + "/../../images/");
-            console.log(filePath)
             fs.unlinkSync(filePath);
         }
         connection
