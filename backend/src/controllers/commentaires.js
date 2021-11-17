@@ -1,4 +1,5 @@
 const connection = require('../service/database');
+const xss = require("xss");
 
 exports.getOneComment = (req, res)=>{
     connection
@@ -13,6 +14,7 @@ exports.getOneComment = (req, res)=>{
 }
 
 exports.createComment = (req, res) => {
+    for (let comment in req.body) req.body[comment] = xss(req.body[comment]);
     try {
         if(!req.body.newCommentContent){
             throw "Commentaire sans contenu"
@@ -33,6 +35,7 @@ exports.createComment = (req, res) => {
 }
 
 exports.modifyComment = (req, res) => {
+    for (let comment in req.body) req.body[comment] = xss(req.body[comment]);
     try {
         if(!req.body.updateCommentContent){
             throw "Commentaire sans contenu"

@@ -66,7 +66,7 @@ const OnePost = (props) => {
         }
     };
     const userVerifyUpdate = () => {
-        if (user.userId == postData.post_user_id || userRole == 2) {
+        if (user.userId == postData.post_user_id) {
             return <Link to={`/update-post/${postId}`}><FaPencilAlt /></Link>;
         }
     };

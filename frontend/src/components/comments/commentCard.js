@@ -35,7 +35,7 @@ const CommentCard = (props) => {
         }
     }
     const userVerifyUpdate = ()=>{
-        if(user.userId == props.comment.comment_user_id || userRole == 2){
+        if(user.userId == props.comment.comment_user_id){
             return <Link className="update_comment_icon_color" to={`/update-comment/${props.comment.comment_id}`}><FaPencilAlt/></Link>
         }
     }

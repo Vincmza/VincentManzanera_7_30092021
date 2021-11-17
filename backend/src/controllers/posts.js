@@ -1,9 +1,6 @@
 const connection = require('../service/database');
+const xss = require("xss");
 const fs = require("fs");
-const path = require("path");
-const { nextTick } = require('process');
-
-
 
 exports.getAllPosts = (req, res) => {
     connection
@@ -70,7 +67,7 @@ exports.getAllPosts = (req, res) => {
 }
 /*Create a post*/
 exports.createPost = (req, res) => {
-    console.log(req.body)
+    for (let post in req.body) req.body[post] = xss(req.body[post]);
     /*variable qui contient l'adresse vers le fichier si il y en a un, sinon renvoie null*/
     const postImage = req.file ? "http://localhost:8081/images/" + req.file.filename : null ;
     try {
@@ -150,12 +147,14 @@ exports.getOnePost = (req, res) => {
 }
 
 exports.modifyPost = async (req, res) => {
-    console.log(req.body)
+    for (let post in req.body) req.body[post] = xss(req.body[post]);
     /*le post doit contenir au moins un titre et du texte*/
     try {
+        /*si l'image est effacé et que le post ne contient pas de texte = erreur*/
         if(req.body.imgDeleted == "true" && req.body.updatedPostContent == ""){
             throw "La mise à jour du post ne contient aucun contenu"
         }
+        /*si le post ne contient pas de titre*/
         if(!req.body.updatedPostTitle){
             throw "La mise à jour du post ne contient aucun titre"
         }
