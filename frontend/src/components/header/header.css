@@ -43,8 +43,11 @@
 }
 /*user infos pannel*/
 .set_username {
-    font-size: 1.3em;
+    font-size: 1.2em;
     margin-right: 10px;
+    background-color: rgb(203, 240, 187);
+    border-radius: 30px;
+    padding: 10px 15px;
 }
 .userInfos {
     border: 1px solid rgb(253, 45, 1);

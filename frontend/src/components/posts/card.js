@@ -24,6 +24,7 @@ const Card = (props) => {
             withCredentials: true
         })
             .then((res) => {
+                window.confirm("Souhaitez vous supprimer votre publication ?")
                 window.location.reload();
                 console.log(res);
             })

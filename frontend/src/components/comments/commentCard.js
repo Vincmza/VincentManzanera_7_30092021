@@ -21,6 +21,7 @@ const CommentCard = (props) => {
             withCredentials: true,
         })
         .then((res)=>{
+            window.confirm("Souhaitez vous supprimer votre commentaire ?")
             window.location.reload()
             console.log(res)
         })

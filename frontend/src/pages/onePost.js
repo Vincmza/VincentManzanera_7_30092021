@@ -35,6 +35,7 @@ const OnePost = (props) => {
             data: { userId: user.userId },
         })
             .then((res) => {
+                window.confirm("Souhaitez vous supprimer votre publication ?")
                 history.push("/");
                 console.log(res);
             })
