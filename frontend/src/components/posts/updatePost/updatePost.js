@@ -59,7 +59,7 @@ const UpdatePost = () => {
                 console.log(error);
             });
     }, []);
-    
+    /*preview of the image in the input*/
     function readURL(e) {
         const input = e.target;
         if (input.files && input.files[0]) {
@@ -78,7 +78,6 @@ const UpdatePost = () => {
         setImgDeleted(true)
         inputImage.value = null;
     };
-
     /*Function to update an existing post*/
     const handleUpdatedPost = async (e) => {
         e.preventDefault();
@@ -117,7 +116,6 @@ const UpdatePost = () => {
                 });
         }
     };
-    console.log(postContentError);
     return (
         <div>
             <div className="updated_post">
