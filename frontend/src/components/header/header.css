@@ -49,6 +49,11 @@
     border-radius: 30px;
     padding: 10px 15px;
 }
+@media screen and (max-width:500px){
+    .set_username{
+        display: none;
+    }
+}
 .userInfos {
     border: 1px solid rgb(253, 45, 1);
     border-radius: 30px;
