@@ -228,4 +228,7 @@
     .card_container {
         width:90%;
     }
+    .user_pseudo{
+        font-size: 0.8em;
+    }
 }
