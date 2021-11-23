@@ -23,10 +23,9 @@ app.use((req,res, next)=>{
 })
 app.use(express.json());
 app.use(helmet());
-
 app.use(cors({ origin: true }));
-app.use("/images", express.static(path.join(__dirname, "../images")));
 
+app.use("/images", express.static(path.join(__dirname, "../images")));
 
 app.use("/api/posts", auth, postsRelatedRoutes);
 app.use("/api/commentaires", auth, commentsRoutes);

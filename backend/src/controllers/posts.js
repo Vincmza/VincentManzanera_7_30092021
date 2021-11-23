@@ -148,33 +148,34 @@ exports.getOnePost = (req, res) => {
 
 exports.modifyPost = async (req, res) => {
     for (let post in req.body) req.body[post] = xss(req.body[post]);
-    /*le post doit contenir au moins un titre et du texte*/
     try {
-        /*si l'image est effacé et que le post ne contient pas de texte = erreur*/
-        if(req.body.imgDeleted == "true" && req.body.updatedPostContent == ""){
-            throw "La mise à jour du post ne contient aucun contenu"
-        }
         /*si le post ne contient pas de titre*/
         if(!req.body.updatedPostTitle){
             throw "La mise à jour du post ne contient aucun titre"
         }
+        if(!req.file && req.body.imgDeleted == "true" && req.body.updatedPostContent == ""){
+            throw "La mise à jour du post ne contient aucun contenu"
+        } 
         /*requête SQL permettant de seléctionner les infos relative au post*/
         const row = (await connection.query("SELECT * FROM posts WHERE id = ?", [req.params["postId"]]))[0]
         /*si il y a un fichier dans la requête*/
         /*et si la base de donnée contient un url vers un ficher*/
         /*effacement du fichier dans le dossier images*/
-        if(req.file && row.imageUrl != null){
+
+        if(req.body.imgDeleted == "true" && row.imageUrl !=null){
             const filePath = row.imageUrl.replace("http://localhost:8081/images/", __dirname + "/../../images/");
             console.log(filePath)
             fs.unlinkSync(filePath);
         }
-        let imageUrl = ""
+
+        let imageUrl = null
+
         /*si il y a un fichier dans la requête*/
         if(req.file){
             imageUrl = "http://localhost:8081/images/" + req.file.filename;
         }
         /*si il y en a pas on garde l'url présent tel quel dans la bdd si le champ en contient déjà un*/
-        else {
+        else if(req.body.imgDeleted == "false") {
             imageUrl = row.imageUrl
         }
         connection
