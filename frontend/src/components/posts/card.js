@@ -48,7 +48,7 @@ const Card = (props) => {
             return <Link to={`update-post/${props.post.post_id}`}><FaPencilAlt /></Link>;
         }
     };
-
+    console.log(props.post)
     return (
         <li className="card_container" key={props.post.post_id}>
             {isLoading ? (
@@ -73,7 +73,7 @@ const Card = (props) => {
                             <div className="post_content">
                                 <div>{props.post.post_content}</div>
                                 <div className="post_image">
-                                    <img src={props.post.imageUrl}/>                              
+                                    {props.post.imageUrl !== null ? (<img src={props.post.imageUrl}/>):(<></>)}                              
                                 </div>                                
                             </div>                                                       
                         </div>

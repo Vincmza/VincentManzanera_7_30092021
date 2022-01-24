@@ -7,7 +7,7 @@
     margin-top:30px;
     margin-bottom: 30px;
     padding: 15px;
-    border-radius: 30px;
+    border-radius: 10px;
     background-color: rgb(245, 244, 240);
     box-shadow: 10px 5px 5px rgb(219, 217, 211);
 }
@@ -56,7 +56,7 @@
     text-align: center;
 }
 .post_content {
-    border-radius: 30px;
+    border-radius: 10px;
     padding:15px;
     background-color: rgb(232, 223, 197);
 }
@@ -64,6 +64,11 @@
     display: flex;
     justify-content: center;
     margin-top:10px;
+}
+.post_image > img {
+    width:450px;
+    height:450px;
+    object-fit:contain;
 }
 /*settings about like and dislike*/
 .like_tab__button {
@@ -218,14 +223,36 @@
     .card_container {
         width:75%;
     }
+    .post_image > img {
+        width:300px;
+        height:300px;
+        object-fit:contain;
+    }
+}
+@media screen and (max-width:500px){
+    .post_image > img {
+        width:250px;
+        height:250px;
+        object-fit:contain;
+    } 
 }
 @media screen and (max-width:450px){
     .card_container {
         width:80%;
     }
+    .post_image > img {
+        width:200px;
+        height:200px;
+        object-fit:contain;
+    }
 }
 @media screen and (max-width:350px){
     .card_container {
         width:90%;
+    }
+    .post_image > img {
+        width:170px;
+        height:170px;
+        object-fit:contain;
     }
 }
